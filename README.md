@@ -1,6 +1,6 @@
 # INNOVATORS
 Team Members:  
 nisweesi  
-mortonwi
-LitchDoctor
-reedyai
+mortonwi  
+LitchDoctor  
+reedyai  
