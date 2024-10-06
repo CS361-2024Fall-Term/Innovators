@@ -1,4 +1,4 @@
-# README
-Team Members:
-    nisweesi
-    mortonwi
+# INNOVATORS README
+Team Members:  
+nisweesi  
+mortonwi
