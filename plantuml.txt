@@ -24,6 +24,18 @@ class Category{
 class Preferences{
     Boolean push_notifications
     Boolean colorblind
+    String theme
+}
+
+class Search {
+    String tasks
+    String events
+    Boolean filter
+}
+
+class Notification {
+
+    
 }
 @enduml
 
