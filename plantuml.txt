@@ -1,0 +1,30 @@
+generate plantuml.png using command
+:   java -jar .\plantuml.jar .\plantuml.txt
+@startuml
+
+class User{
+    String username
+    -String password
+    Preferences preferences
+}
+
+class Task{
+    String name
+    Int priority_level
+    String date
+    void complete()
+}
+Task --{ Category : has
+
+class Category{
+    String name
+    String color
+}
+
+class Preferences{
+    Boolean push_notifications
+    Boolean colorblind
+}
+@enduml
+
+
