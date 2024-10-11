@@ -3,21 +3,25 @@ generate plantuml.png using command
 @startuml
 
 package "User Interface" {
-    component "Calendar Frontend"
+    [Calendar Frontend]
+    [Preferences Menu]
+    [Task Manipulation Options]
 }
 
 package "Data Management Layer"{
-    component "Calendar Backend"
-
+    [Calendar Backend]
+    [History Manager]
+    [Task Management]
 }
 
 package "Utilities and Servies"{
-    component "Productivity Analysis"
+    [Productivity Analysis] ... [Data Management Layer]
+    [Notifications System]
 }
 
 package "External Integration"{
-    component "Cloud Storage"
-    component "External Application"
+    [Cloud Storage]
+    [External Application Integration] ... [Calendar Backend]
 }
 
 
