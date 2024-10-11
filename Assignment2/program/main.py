@@ -1,6 +1,7 @@
 from services.calendar import CalendarService
 from services.daily_overview import DailyOverview
 from services.notification import NotificationService
+from services.daily_overview import DailyOverview
 from config.preferences import Preferences
 from utils.search import Search
 from models.events import Events

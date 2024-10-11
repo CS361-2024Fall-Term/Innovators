@@ -5,3 +5,12 @@ class Events:
         self.start_time = start_time
         self.end_time = end_time
         self.location = location
+
+    def set_name(self, name):
+        self.name = name
+
+    def set_description(self, description):
+        self.description = description
+
+    def set_locaiton(self, location):
+        self.location = location
