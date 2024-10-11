@@ -1,4 +1,4 @@
 class CalendarService:
-    def __init__(self, tasks, events):
-        self.tasks = {}
-        self.events = {}
+    def __init__(self):
+        self.tasks = []
+        self.events = []
