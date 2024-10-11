@@ -2,41 +2,25 @@ generate plantuml.png using command
 :   java -jar .\plantuml.jar .\plantuml.txt
 @startuml
 
-class User{
-    String username
-    -String password
-    Preferences preferences
+package "User Interface" {
+    component "Calendar Frontend"
 }
 
-class Task{
-    String name
-    Int priority_level
-    String date
-    void complete()
-}
-Task --{ Category : has
+package "Data Management Layer"{
+    component "Calendar Backend"
 
-class Category{
-    String name
-    String color
 }
 
-class Preferences{
-    Boolean push_notifications
-    Boolean colorblind
-    String theme
+package "Utilities and Servies"{
+    component "Productivity Analysis"
 }
 
-class Search {
-    String tasks
-    String events
-    Boolean filter
+package "External Integration"{
+    component "Cloud Storage"
+    component "External Application"
 }
 
-class Notification {
 
-    
-}
 @enduml
 
 
