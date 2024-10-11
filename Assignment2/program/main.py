@@ -1,4 +1,5 @@
 from services.calendar import CalendarService
+from services.daily_overview import DailyOverview
 from services.notification import NotificationService
 from config.preferences import Preferences
 from utils.search import Search
