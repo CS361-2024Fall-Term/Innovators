@@ -1,4 +1,4 @@
-# INNOVATORS
+# The INNOVATORS
 Team Members:  
 nisweesi  
 mortonwi  
