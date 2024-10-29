@@ -1,0 +1,14 @@
+@startuml
+skinparam actorStyle awesome
+actor User
+
+package "Task Management" {
+    (Add Task) as AddTask
+    (Track Progress) as Track_progress
+    (Assign Due Date) as due_date
+}
+
+User --> (AddTask) : " Initiates Task"
+(AddTask) --> (Track_progress) : "Track Progress"
+(AddTask) --> (due_date) : "Due Date"
+@enduml
