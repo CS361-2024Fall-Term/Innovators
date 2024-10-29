@@ -1,0 +1,15 @@
+@startuml
+skinparam actorStyle awesome
+actor User
+
+package "Daily overview" {
+    (Today's tasks)
+    (Today's events)
+}
+
+User --> (Display) : "views"
+(Display) <-- (Daily overview) : "prompts"
+(calendar) --> (Today's events) : "gets"
+(calendar) ->> (Today's tasks) : "gets"
+
+@enduml
