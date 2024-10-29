@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+actor User as u
+rectangle Calendar {
+  usecase "Schedule Event" as event
+  usecase "Schedule Task" as task
+  usecase "Reschedule Task/Event" as reschedule
+
+}
+
+u --> event : "creates event"
+u --> task : "creates task"
+event --> reschedule : <<extend>>
+task --> reschedule : <<extend>>
+
+
+@enduml
