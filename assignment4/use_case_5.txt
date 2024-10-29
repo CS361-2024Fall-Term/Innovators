@@ -1,0 +1,20 @@
+generate plantuml.png using command
+:   java -jar .\plantuml.jar .\plantuml.txt
+
+@startuml
+actor StudentUser as s <<Operator>>
+
+package "Task Management" {
+    usecase "Track Task Progress" as track
+    usecase "Analyze Task Status" as analyze
+    usecase "Provide Analytical Data" as data
+}
+
+s --> track : "Initiate"
+s --> analyze : "Participate"
+s --> data : "View Analysis"
+
+track --> analyze : "<<include>>"
+analyze --> data : "<<include>>"
+
+@enduml
