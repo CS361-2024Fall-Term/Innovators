@@ -4,6 +4,6 @@ from services.notification import NotificationService
 from services.daily_overview import DailyOverview
 from config.preferences import Preferences
 from utils.search import Search
-from models.events import Events
+from models.event import Event
 from models.tasks import Tasks
 from models.user import User

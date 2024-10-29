@@ -1,4 +1,6 @@
-class Events:
+from datetime import datetime, timedelta
+
+class Event:
     def __init__(self, name, description, start_time, end_time, location):
         self.name = name
         self.description = description
@@ -14,3 +16,8 @@ class Events:
 
     def set_locaiton(self, location):
         self.location = location
+
+    def get_location(self):
+        return self.location
+  
+
