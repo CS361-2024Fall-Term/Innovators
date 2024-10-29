@@ -1,0 +1,18 @@
+@startuml
+skinparam actorStyle awesome
+actor User
+
+package "Reminders" {
+    (Category Color)
+    (Category Name)
+    (Tasks Under Category)
+}
+
+User --> (Display) : "views"
+(Display) <-- (Category Color) : "sends"
+
+User --> (Settings) : "interacts"
+(Settings) --> (Category Color) : "customizes"
+(Settings) --> (Category Name) : "customizes"
+(Settings) --> (Tasks Under Category) : "customizes"
+@enduml

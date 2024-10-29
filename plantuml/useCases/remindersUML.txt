@@ -1,0 +1,17 @@
+@startuml
+skinparam actorStyle awesome
+actor User
+
+package "Reminders" {
+    (Notification)
+    (Reminder Timing)
+    (Enable Task Reminder)
+}
+
+User --> (Display) : "views"
+(Display) <-- (Notification) : "pushes"
+
+User --> (Settings) : "interacts"
+(Settings) --> (Reminder Timing) : "customizes"
+(Settings) --> (Enable Task Reminder) : "customizes"
+@enduml
