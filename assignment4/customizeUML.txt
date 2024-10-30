@@ -1,0 +1,17 @@
+Use case diagram for the customize UI user story
+
+@startuml
+skinparam actorStyle awesome
+actor User
+
+package "UI Customization" {
+    (Change Theme)
+    (Adjust Font Size)
+    (Enable Dark Mode)
+}
+
+User --> (Settings) : "interacts"
+(Settings) --> (Adjust Font Size) : "customizes"
+(Settings) --> (Enable Dark Mode) : "customizes"
+(Settings) --> (Change Theme) : "customizes"
+@enduml

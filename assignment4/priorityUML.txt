@@ -1,0 +1,20 @@
+Use case diagram for the task priority user story
+
+@startuml
+skinparam actorStyle awesome
+actor User
+
+package "Task Priority System" {
+    (Manage Tasks)
+    (Set Task Priority)
+    (Retrieve Priority Tasks)
+}
+
+User --> (Manage Tasks) : "interacts"
+User --> (Create Task) : "interacts"
+(Manage Tasks) --> (Set Task Priority) : "includes"
+(Manage Tasks) --> (Retrieve Priority Tasks) : "includes"
+(Set Task Priority) --> (Task) : "alters"
+(Retrieve Priority Tasks) <-- (Task) : "gets"
+(Create Task) --> (Task) : "creates"
+@enduml
