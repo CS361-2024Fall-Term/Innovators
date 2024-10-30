@@ -1,0 +1,16 @@
+@startuml
+skinparam actorStyle awesome
+actor User
+
+package "Daily Overview" {
+    (Daily Tasks)
+    (Relevant Events)
+    (Daily Overview Interface)
+}
+
+User --> (Daily Overview Interface) : "interacts"
+(Daily Overview Interface) --> (Daily Tasks) : "lists"
+(Daily Overview Interface) --> (Relevant Events) : "lists"
+(Task Management System) --> (Daily Tasks) : "returns"
+(Event Management System) --> (Relevant Events) : "returns"
+@enduml

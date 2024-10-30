@@ -1,0 +1,15 @@
+@startuml
+skinparam actorStyle awesome
+actor User
+
+package "Calendar Exporting System" {
+    (Export Settings)
+    (Date Range)
+    (Export Calendar)
+}
+
+User --> (Export Settings) : "interacts"
+(Export Settings) --> (Date Range) : "selects"
+(Date Range) --> (Export Calendar) : "determines"
+(Export Calendar) --> (External Application) : "exports"
+@enduml
