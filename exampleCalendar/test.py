@@ -4,7 +4,7 @@ from datetime import datetime
 
 def show_date():
     # Display the current date in a label
-    current_date = datetime.now().strftime("%Y-%m-%d")
+    current_date = datetime.now().strftime("%m/%d/%y")
     date_label.config(text=f"Current Date: {current_date}")
 
 def update_time():
@@ -20,10 +20,28 @@ def save_selected_date():
     selected_date = cal.get_date()  # This gets the selected date as a string (format: 'MM/DD/YYYY')
     selected_date_label.config(text=f"Date: {selected_date}")
 
+# Initial root window to get screen size
+root = tk.Tk()
+root.withdraw()  # Hide the root window initially
+
+# Get the screen width and height
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+
+# Calculate window size (for example, 80% of the screen size)
+window_width = int(screen_width * 0.8)
+window_height = int(screen_height * 0.8)
+
+# Calculate position to center the window
+position_right = int(screen_width / 2 - window_width / 2)
+position_down = int(screen_height / 2 - window_height / 2)
+
+root.destroy()  # Close the hidden root window
+
 # Set up the main application window
 root = tk.Tk()
-root.title("Modern Calendar Display with Time and Selected Date")
-root.geometry("400x500")
+root.title("EasyCal")
+root.geometry(f"{window_width}x{window_height}+{position_right}+{position_down}")
 
 # Create and customize the calendar widget
 cal = Calendar(
