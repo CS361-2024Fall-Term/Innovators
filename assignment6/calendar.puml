@@ -1,0 +1,32 @@
+@startuml
+
+class Calendar {
+  +uniqueID: int  
+  +taskAmount: int
+  +eventAmount: int
+  -tasks: List <Task>
+  -events: List <Event>
+  +addTask(param: task): void
+  +removeTask(param: int): void
+  +editTask(param: int): void
+  +addEvent(param: event): void
+  +removeEvent(param: int): void
+  +editEvent(param: int): void
+  +getTasksByDate(date: Date): List<Task>
+  +getEventsByDate(date: Date): List<Event>
+}
+
+class Task {
+  +uniqueID: int
+  +createTask()
+}
+
+class Event {
+  +uniqueID: int
+  +createEvent()
+}
+
+Calendar "1" *-- "0 *" Task
+Calendar "1" *-- "0 *" Event
+
+@enduml
