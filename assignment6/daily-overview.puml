@@ -1,0 +1,22 @@
+@startuml
+
+class DailyOverview {
+    +uniqueID: int
+    +date: Date
+    +tasksForToday: List<Task>
+    +overviewPrompt: String
+
+    +displayOverviewPrompt(): void
+    +getTasksForToday(): List<Task>
+    +sortTasksByPriority(): void
+    +sortTasksByDueTime(): void
+    +addRelevantInfo(param: String): void
+}
+
+class Calendar {
+    +uniqueID: int
+}
+
+Calendar "1" *-- "0 *" DailyOverview
+
+@enduml
