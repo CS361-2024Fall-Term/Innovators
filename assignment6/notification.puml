@@ -1,0 +1,30 @@
+@startuml
+
+left to right direction
+
+
+class Notification {
+  +uniqueID: int  
+  +date: Date
+  +alert: string
+  
+  +set_reminder_time(param: Date): void
+  +set_alert(param: string): void
+  +get_tasks_by_date(): List<Task>
+  +get_task_name(param: Task): void
+  +get_task_status(param: Task): void
+  +create_feedback(param: Task): void
+  +display_notification(): void
+}
+
+
+class Task {
+  +uniqueID: int
+  +createTask()
+}
+
+
+Task ..> Notification: uses
+
+
+@enduml
