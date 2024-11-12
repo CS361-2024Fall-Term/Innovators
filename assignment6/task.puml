@@ -1,0 +1,30 @@
+@startuml
+
+class Task {
+  +uniqueID: int
+  +title: String
+  +description: String
+  +dueDate: Date
+  +priority: int
+  +status: int
+  +category: <Category>
+  +createTask(params: int, String, String, Date, <Category>)
+  +setTitle(param: String): void
+  +setDate(param: Date): void
+  +setDescription(param: String): void
+  +setPriority(param: int): void
+  +complete(): void
+  +getStatus(): int
+  +getDueDate(): Date
+}
+
+class Category{
+  +title: String
+  +color: String
+}
+
+Task "0" *-- "1*" Category
+
+
+
+@enduml
