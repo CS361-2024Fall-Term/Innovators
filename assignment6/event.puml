@@ -1,0 +1,20 @@
+@startuml
+
+class Events {
+  +unique_id: int  
+  +name: string
+  +description: string
+  +start_time: int
+  +end_time: int
+  +location: string
+  +set_name(param: string): void
+  +set_description(param: string): void
+  +set_location(param: string): void
+  +set_start_time(param: Date): void
+  +set_end_time(param: Date): void
+  +get_events_by_name(date: String): List<Event>
+  +get_events_by_date(date: Date): List<Event>
+  +get_events_by_location(date: String): List<Event>
+}
+
+@enduml
