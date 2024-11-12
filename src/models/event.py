@@ -14,7 +14,7 @@ class Event:
     def set_description(self, description):
         self.description = description
 
-    def set_locaiton(self, location):
+    def set_location(self, location):
         self.location = location
 
     def get_location(self):
