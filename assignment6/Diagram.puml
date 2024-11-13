@@ -120,12 +120,12 @@ class Management {
 Management -- User
 Management -- Calendar
 Management -- Task
-Management -- Events
+Management -- Event
 Management -- Notification
 
 Calendar "1" -- "1" User
 Calendar "1" *-- "0 *" Task
-Calendar "1" *-- "0 *" Events
+Calendar "1" *-- "0 *" Event
 Calendar "1" -- "1" DailyOverview
 
 
