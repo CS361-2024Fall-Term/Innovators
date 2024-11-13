@@ -2,13 +2,12 @@
 
 class Task {
   +uniqueID: int
-  +title: String
-  +description: String
+  +title: string
+  +description: string
   +dueDate: Date
   +priority: int
   +status: int
-  +category: <Category>
-  +createTask(params: int, String, String, Date, <Category>)
+  +createTask(params: int, string, string, Date): int
   +setTitle(param: String): void
   +setDate(param: Date): void
   +setDescription(param: String): void
@@ -18,13 +17,11 @@ class Task {
   +getDueDate(): Date
 }
 
-class Category{
+class Category {
   +title: String
   +color: String
 }
 
 Task "0" *-- "1*" Category
-
-
 
 @enduml

@@ -4,26 +4,22 @@ class Calendar {
   +uniqueID: int  
   +taskAmount: int
   +eventAmount: int
-  -tasks: List <Task>
-  -events: List <Event>
-  +addTask(param: task): void
-  +removeTask(param: int): void
-  +editTask(param: int): void
-  +addEvent(param: event): void
-  +removeEvent(param: int): void
-  +editEvent(param: int): void
-  +getTasksByDate(date: Date): List<Task>
-  +getEventsByDate(date: Date): List<Event>
+  +addTask(): createTask()
+  +removeTask(param: taskID): void
+  +editTask(param: eventID): void
+  +addEvent(): create_event()
+  +removeEvent(param: eventID): void
+  +editEvent(param: eventID): void
+  +getTasksByDate(date: Date): List <Tasks>
+  +getEventsByDate(): get_events_by_date()
+  +getEventsByName(): get_events_by_name()
+  +getEventsByLocation(): get_events_by_location()
 }
 
 class Task {
-  +uniqueID: int
-  +createTask()
 }
 
 class Event {
-  +uniqueID: int
-  +createEvent()
 }
 
 Calendar "1" *-- "0 *" Task
