@@ -126,8 +126,8 @@ Management -- Notification
 Calendar "1" -- "1" User
 Calendar "1" *-- "0 *" Task
 Calendar "1" *-- "0 *" Events
-Task ..> Notification: uses
-Event ..> Notification: uses
+Task ..> Management: uses
+Event ..> Management: uses
 Calendar "1" -- "1" DailyOverview
 
 
