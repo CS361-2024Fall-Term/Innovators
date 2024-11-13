@@ -66,6 +66,9 @@ class Notification {
   +get_tasks_by_date(): List<Task>
   +get_task_name(param: Task): void
   +get_task_status(param: Task): void
+  +get_events_by_date(): List<Task>
+  +get_event_name(param: Task): void
+  +get_event_status(param: Task): void
   +create_feedback(param: Task): void
   +display_notification(): void
 }
@@ -99,6 +102,20 @@ class DailyOverview {
     +sortTasksByDueTime(): void
     +addRelevantInfo(param: String): void
 }
+
+class Management {
+  +manageUser(): void
+  +manageCalendar(): void
+  +CreateTasks(): void
+  +CreateEvents(): void
+  +sendNotifications(): void
+}
+
+Management -- User
+Management -- Calendar
+Management -- Task
+Management -- Events
+Management -- Notification
 
 Calendar "1" -- "1" User
 Calendar "1" *-- "0 *" Task
