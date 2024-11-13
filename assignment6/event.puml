@@ -17,6 +17,6 @@ class Events {
   +get_events_by_location(): List<Event>
 }
 
-Task "1" *-- "0 *" Event
+Event ..> Notification: uses
 
 @enduml
