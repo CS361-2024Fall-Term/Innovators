@@ -81,6 +81,7 @@ class Event {
   +start_time: Date
   +end_time: Date
   +location: string
+  +create_event(string, string, string, string, Date, Date): int
   +set_name(param: string): void
   +set_description(param: string): void
   +set_location(param: string): void
