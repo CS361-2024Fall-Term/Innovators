@@ -126,7 +126,8 @@ Management -- Notification
 Calendar "1" -- "1" User
 Calendar "1" *-- "0 *" Task
 Calendar "1" *-- "0 *" Events
-Calendar "1" -- "1" DailyOverview
+Calendar "1" <.. "1" DailyOverview : uses
+
 
 
 @enduml
