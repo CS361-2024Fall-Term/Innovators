@@ -1,0 +1,111 @@
+@startuml
+
+class User {
+  +Name: String
+  +University: String
+  +Age: int
+  +Major: String
+  +Dark_mode: Boolean
+  +Font_size: int
+  +setName(params:String): void
+  +setUni(param: String): void
+  +setAge(param: int): void
+  +setMajor(param: String): void
+  +setFsize(param: int): void
+  +setMode(param: boolean): void
+  +getName(): String
+  +getUni(): String
+  +getAge(): int
+  +getMajor(): String
+  +getFsize(): int
+  +getMode(): Boolean
+ 
+}
+
+class Calendar{
+  +uniqueID: int  
+  +taskAmount: int
+  +eventAmount: int
+  -tasks: List <Task>
+  -events: List <Event>
+  +addTask(param: task): void
+  +removeTask(param: int): void
+  +editTask(param: int): void
+  +addEvent(param: event): void
+  +removeEvent(param: int): void
+  +editEvent(param: int): void
+  +getTasksByDate(date: Date): List<Task>
+  +getEventsByDate(date: Date): List<Event>
+}
+
+class Task {
+  +uniqueID: int
+  +title: String
+  +description: String
+  +dueDate: Date
+  +priority: int
+  +status: int
+  +category: <Category>
+  +createTask(params: int, String, String, Date, <Category>)
+  +setTitle(param: String): void
+  +setDate(param: Date): void
+  +setDescription(param: String): void
+  +setPriority(param: int): void
+  +complete(): void
+  +getStatus(): int
+  +getDueDate(): Date
+}
+
+class Notification {
+  +uniqueID: int  
+  +date: Date
+  +alert: string
+  
+  +set_reminder_time(param: Date): void
+  +set_alert(param: string): void
+  +get_tasks_by_date(): List<Task>
+  +get_task_name(param: Task): void
+  +get_task_status(param: Task): void
+  +create_feedback(param: Task): void
+  +display_notification(): void
+}
+
+class Events {
+  +unique_id: int  
+  +name: string
+  +description: string
+  +start_time: Date
+  +end_time: Date
+  +location: string
+  +set_name(param: string): void
+  +set_description(param: string): void
+  +set_location(param: string): void
+  +set_start_time(param: Date): void
+  +set_end_time(param: Date): void
+  +get_events_by_name(): List<Event>
+  +get_events_by_date(): List<Event>
+  +get_events_by_location(): List<Event>
+}
+
+class DailyOverview {
+    +uniqueID: int
+    +date: Date
+    +tasksForToday: List<Task>
+    +overviewPrompt: String
+
+    +displayOverviewPrompt(): void
+    +getTasksForToday(): List<Task>
+    +sortTasksByPriority(): void
+    +sortTasksByDueTime(): void
+    +addRelevantInfo(param: String): void
+}
+
+Calendar "1" -- "1" User
+Calendar "1" *-- "0 *" Task
+Calendar "1" *-- "0 *" Events
+Task ..> Notification: uses
+Events ..> Notification: uses
+Calendar "1" *-- "1" DailyOverview
+
+
+@enduml
