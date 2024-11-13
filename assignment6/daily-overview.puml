@@ -13,4 +13,6 @@ class DailyOverview {
     +addRelevantInfo(param: String): void
 }
 
+Calendar "1" -- "1" DailyOverview
+
 @enduml
