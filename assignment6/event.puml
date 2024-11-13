@@ -1,13 +1,13 @@
+
 @startuml
 
-class Event {
+class Events {
   +unique_id: int  
   +name: string
   +description: string
   +start_time: Date
   +end_time: Date
   +location: string
-  +create_event(string, string, string, string, Date, Date): int
   +set_name(param: string): void
   +set_description(param: string): void
   +set_location(param: string): void
@@ -17,5 +17,7 @@ class Event {
   +get_events_by_date(): List<Event>
   +get_events_by_location(): List<Event>
 }
+
+Event ..> Management: uses
 
 @enduml
