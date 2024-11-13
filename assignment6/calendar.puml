@@ -11,6 +11,7 @@ class Calendar {
   +removeEvent(param: eventID): void
   +editEvent(param: eventID): void
   +getTasksByDate(date: Date): List <Tasks>
+  +getTasksByName(string: Name): List <Tasks>
   +getEventsByDate(): get_events_by_date()
   +getEventsByName(): get_events_by_name()
   +getEventsByLocation(): get_events_by_location()
