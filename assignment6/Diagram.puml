@@ -106,8 +106,8 @@ class DailyOverview {
 class Management {
   +manageUser(): void
   +manageCalendar(): void
-  +CreateTasks(): void
-  +CreateEvents(): void
+  +CreateTasks(param: Task): void
+  +CreateEvents(param: Event): void
   +sendNotifications(): void
 }
 
