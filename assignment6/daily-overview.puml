@@ -7,16 +7,10 @@ class DailyOverview {
     +overviewPrompt: String
 
     +displayOverviewPrompt(): void
-    +getTasksForToday(): List<Task>
+    +getTasksForToday(calendar: Calendar): List<Task>
     +sortTasksByPriority(): void
     +sortTasksByDueTime(): void
     +addRelevantInfo(param: String): void
 }
-
-class Calendar {
-    +uniqueID: int
-}
-
-Calendar "1" *-- "1" DailyOverview
 
 @enduml

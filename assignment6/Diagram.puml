@@ -94,7 +94,7 @@ class DailyOverview {
     +overviewPrompt: String
 
     +displayOverviewPrompt(): void
-    +getTasksForToday(): List<Task>
+    +getTasksForToday(calendar: Calendar): List<Task>
     +sortTasksByPriority(): void
     +sortTasksByDueTime(): void
     +addRelevantInfo(param: String): void
@@ -105,7 +105,7 @@ Calendar "1" *-- "0 *" Task
 Calendar "1" *-- "0 *" Events
 Task ..> Notification: uses
 Events ..> Notification: uses
-Calendar "1" *-- "1" DailyOverview
+Calendar "1" -- "1" DailyOverview
 
 
 @enduml
