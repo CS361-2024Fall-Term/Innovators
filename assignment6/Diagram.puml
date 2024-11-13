@@ -41,13 +41,12 @@ class Calendar {
 
 class Task {
   +uniqueID: int
-  +title: String
-  +description: String
+  +title: string
+  +description: string
   +dueDate: Date
   +priority: int
   +status: int
-  +category: <Category>
-  +createTask(params: int, String, String, Date, <Category>)
+  +createTask(params: int, string, string, Date): int
   +setTitle(param: String): void
   +setDate(param: Date): void
   +setDescription(param: String): void
@@ -55,6 +54,11 @@ class Task {
   +complete(): void
   +getStatus(): int
   +getDueDate(): Date
+}
+
+class Category {
+  +title: String
+  +color: String
 }
 
 class Notification {
@@ -123,6 +127,7 @@ Calendar "1" -- "1" User
 Calendar "1" *-- "0 *" Task
 Calendar "1" *-- "0 *" Events
 Task ..> Notification: uses
+Task "0" *-- "1*" Category
 Events ..> Notification: uses
 Calendar "1" -- "1" DailyOverview
 
