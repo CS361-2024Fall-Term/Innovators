@@ -17,6 +17,6 @@ class Calendar {
     +uniqueID: int
 }
 
-Calendar "1" *-- "0 *" DailyOverview
+Calendar "1" *-- "1" DailyOverview
 
 @enduml
