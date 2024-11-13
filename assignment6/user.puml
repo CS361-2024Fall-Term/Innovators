@@ -7,7 +7,6 @@ class User {
   +Major: String
   +Dark_mode: Boolean
   +Font_size: int
-  -Calendar: <Calendar>
   +setName(params:String): void
   +setUni(param: String): void
   +setAge(param: int): void
