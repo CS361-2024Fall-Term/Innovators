@@ -2,12 +2,13 @@
 
 class Task {
   +uniqueID: int
-  +title: string
-  +description: string
+  +title: String
+  +description: String
   +dueDate: Date
   +priority: int
   +status: int
-  +createTask(params: int, string, string, Date): int
+  +category: <Category>
+  +createTask(params: int, String, String, Date, <Category>)
   +setTitle(param: String): void
   +setDate(param: Date): void
   +setDescription(param: String): void
@@ -17,11 +18,6 @@ class Task {
   +getDueDate(): Date
 }
 
-class Category {
-  +title: String
-  +color: String
-}
-
-Task "0" *-- "1*" Category
+Event ..> Management: uses
 
 @enduml
