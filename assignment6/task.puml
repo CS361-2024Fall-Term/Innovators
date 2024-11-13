@@ -1,23 +1,23 @@
 @startuml
 
-class Task {
-  +uniqueID: int
-  +title: String
-  +description: String
-  +dueDate: Date
-  +priority: int
-  +status: int
-  +category: <Category>
-  +createTask(params: int, String, String, Date, <Category>)
-  +setTitle(param: String): void
-  +setDate(param: Date): void
-  +setDescription(param: String): void
-  +setPriority(param: int): void
-  +complete(): void
-  +getStatus(): int
-  +getDueDate(): Date
+class Notification {
+  +uniqueID: int  
+  +date: Date
+  +alert: string
+  
+  +set_reminder_time(param: Date): void
+  +set_alert(param: string): void
+  +get_tasks_by_date(): List<Task>
+  +get_task_name(param: Task): void
+  +get_task_status(param: Task): void
+  +get_events_by_date(): List<Task>
+  +get_event_name(param: Task): void
+  +get_event_status(param: Task): void
+  +create_feedback(param: Task): void
+  +display_notification(): void
 }
 
-Event ..> Management: uses
+Notification ..> Management: uses
+
 
 @enduml

@@ -1,7 +1,7 @@
 
 @startuml
 
-class Events {
+class Event {
   +unique_id: int  
   +name: string
   +description: string

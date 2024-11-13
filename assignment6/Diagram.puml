@@ -73,7 +73,7 @@ class Notification {
   +display_notification(): void
 }
 
-class Events {
+class Event {
   +unique_id: int  
   +name: string
   +description: string
