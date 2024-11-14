@@ -16,16 +16,7 @@ class Notification {
   +display_notification(): void
 }
 
-
-class Task {
-  -unique_id: int
-}
-
-class Event {
-  -unique_id: int
-}
-
-Task <.. Notification: uses
-Event <.. Notification: uses
+Notification ..> Calendar : "get event"
+Notification ..> Calendar : "get task"
 
 @enduml
