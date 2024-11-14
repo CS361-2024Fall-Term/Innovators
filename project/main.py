@@ -1,6 +1,6 @@
 import tkinter as tk
-from classes.welcomeScreen import WelcomeScreen
-from classes.calendarClass import Cal
+from classes.welcome_screen import WelcomeScreen
+from classes.calendar_class import Cal
 
 # Function that defines the continue function
 def continue_to_calendar():
