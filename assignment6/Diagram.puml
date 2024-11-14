@@ -7,36 +7,36 @@ class User {
   +Major: String
   +Dark_mode: Boolean
   +Font_size: int
-  +setName(params:String): void
-  +setUni(param: String): void
-  +setAge(param: int): void
-  +setMajor(param: String): void
-  +setFsize(param: int): void
-  +setMode(param: boolean): void
-  +getName(): String
-  +getUni(): String
-  +getAge(): int
-  +getMajor(): String
-  +getFsize(): int
-  +getMode(): Boolean
+  +set_name(params:String): void
+  +set_uni(param: String): void
+  +set_age(param: int): void
+  +set_major(param: String): void
+  +set_fsize(param: int): void
+  +set_mode(param: boolean): void
+  +get_name(): String
+  +get_uni(): String
+  +get_age(): int
+  +get_major(): String
+  +get_fsize(): int
+  +get_mode(): Boolean
  
 }
 
 class Calendar {
-  +uniqueID: int  
-  +taskAmount: int
-  +eventAmount: int
-  +addTask(): createTask()
-  +removeTask(param: taskID): void
-  +editTask(param: eventID): void
-  +addEvent(): create_event()
-  +removeEvent(param: eventID): void
-  +editEvent(param: eventID): void
-  +getTasksByDate(date: Date): List <Tasks>
-  +getTasksByName(string: Name): List <Tasks>
-  +getEventsByDate(): get_events_by_date()
-  +getEventsByName(): get_events_by_name()
-  +getEventsByLocation(): get_events_by_location()
+  +unique_id: int  
+  +task_amount: int
+  +event_amount: int
+  +add_task(): createTask()
+  +remove_task(param: taskID): void
+  +editT_task(param: eventID): void
+  +add_event(): create_event()
+  +remove_event(param: eventID): void
+  +edit_event(param: eventID): void
+  +get_tasks_by_date(date: Date): List <Tasks>
+  +get_tasks_by_name(string: Name): List <Tasks>
+  +get_events_by_date(): get_events_by_date()
+  +get_events_by_name(): get_events_by_name()
+  +get_events_by_location(): get_events_by_location()
 }
 
 class Task {
@@ -110,11 +110,11 @@ class Daily_Overview {
 }
 
 class Management {
-  +manageUser(): void
-  +manageCalendar(): void
-  +CreateTasks(param: Task): void
-  +CreateEvents(param: Event): void
-  +sendNotifications(): void
+  +manage_user(): void
+  +manage_calendar(): void
+  +create_tasks(param: Task): void
+  +create_events(param: Event): void
+  +send_notifications(): void
 }
 
 Management -- User
