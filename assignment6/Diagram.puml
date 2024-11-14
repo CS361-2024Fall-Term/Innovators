@@ -115,7 +115,7 @@ class Daily_Overview {
     +add_relevant_info(param: String): void
 }
 
-class Manager {
+class Main_App {
   +manage_user(): void
   +manage_calendar(): void
   +create_tasks(param: Task): void
@@ -123,16 +123,16 @@ class Manager {
   +send_notifications(): void
 }
 
-note right of Manager
+note right of Main_App
   Needs better connections
   and descriptions to each
   class
 end note
-Manager -- User
-Manager -- Calendar
-Manager -- Task
-Manager -- Event
-Manager -- Notification
+Main_App -- User
+Main_App -- Calendar
+Main_App -- Task
+Main_App -- Event
+Main_App -- Notification
 
 Calendar --> User
 Calendar "1" *-- "0 *" Task : "has"
