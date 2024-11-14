@@ -1,6 +1,6 @@
 @startuml
 
-class Application_UI {
+class Application_Display {
   -user: User
   -calendar: Calendar
   -notifications: List<Notification>
@@ -15,8 +15,8 @@ class Application_UI {
   +send_notifications(): void
 }
 
-Application_UI ..> Calendar : "displays"
-Application_UI ..> Notification : "displays"
-Application_UI ..> User : "interacts with"
+Application_Display ..> Calendar : "displays"
+Application_Display ..> Notification : "displays"
+Application_Display ..> User : "interacts with"
 
 @enduml
