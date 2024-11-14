@@ -7,7 +7,7 @@ class Task {
   -due_date: Date
   -priority: int
   -status: int
-  +create_task(params: int, string, string, Date): int
+  +create_task(unique_id: int, name: String, description: String, due_date: Date, priority: String, status: String): void
   +set_title(param: String): void
   +set_date(param: Date): void
   +set_description(param: String): void
