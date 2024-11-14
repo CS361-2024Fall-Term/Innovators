@@ -40,20 +40,20 @@ class Calendar {
 }
 
 class Task {
-  +uniqueID: int
+  +unique_id: int
   +title: string
   +description: string
-  +dueDate: Date
+  +due_date: Date
   +priority: int
   +status: int
-  +createTask(params: int, string, string, Date): int
-  +setTitle(param: String): void
-  +setDate(param: Date): void
-  +setDescription(param: String): void
-  +setPriority(param: int): void
+  +create_task(params: int, string, string, Date): int
+  +set_title(param: String): void
+  +set_date(param: Date): void
+  +set_description(param: String): void
+  +set_priority(param: int): void
   +complete(): void
-  +getStatus(): int
-  +getDueDate(): Date
+  +get_status(): int
+  +get_due_date(): Date
 }
 
 class Category {
@@ -62,7 +62,7 @@ class Category {
 }
 
 class Notification {
-  +uniqueID: int  
+  +unique_id: int  
   +date: Date
   +alert: string
   
