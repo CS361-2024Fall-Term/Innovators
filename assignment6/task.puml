@@ -17,6 +17,14 @@ class Task {
   +get_due_date(): Date
 }
 
-Task "1" *-- "1" Category : "has"
+enum Category {
+  WORK
+  SCHOOL
+  HOME
+  PERSONAL
+  OTHER
+}
+
+Task --> Category : "has single select"
 
 @enduml

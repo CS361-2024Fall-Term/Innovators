@@ -44,12 +44,12 @@ class Calendar {
 }
 
 class Task {
-  +unique_id: int
-  +title: string
-  +description: string
-  +due_date: Date
-  +priority: int
-  +status: int
+  -unique_id: int
+  -title: string
+  -description: string
+  -due_date: Date
+  -priority: int
+  -status: int
   +create_task(params: int, string, string, Date): int
   +set_title(param: String): void
   +set_date(param: Date): void
@@ -60,9 +60,12 @@ class Task {
   +get_due_date(): Date
 }
 
-class Category {
-  +title: String
-  +color: String
+enum Category {
+  WORK
+  SCHOOL
+  HOME
+  PERSONAL
+  OTHER
 }
 
 class Notification {
@@ -131,7 +134,7 @@ Calendar "1" -- "1" User
 Calendar "1" *-- "0 *" Task : "has"
 Calendar "1" *-- "0 *" Event : "has"
 Calendar "1" o-- "1" Daily_Overview : "generates"
-Task "1" *-- "1" Category : "has"
+Task --> Category : "has single select"
 
 
 @enduml
