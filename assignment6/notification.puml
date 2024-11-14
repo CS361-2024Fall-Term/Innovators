@@ -3,9 +3,9 @@
 left to right direction
 
 class Notification {
-  +unique_id: int  
-  +date: Date
-  +alert: string
+  -unique_id: int  
+  -date: Date
+  -alert: string
   
   +set_reminder_time(param: Date): void
   +set_alert(param: string): void
@@ -18,11 +18,11 @@ class Notification {
 
 
 class Task {
-  +unique_id: int
+  -unique_id: int
 }
 
 class Event {
-  +unique_id: int
+  -unique_id: int
 }
 
 Task <.. Notification: uses
