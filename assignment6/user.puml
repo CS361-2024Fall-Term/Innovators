@@ -1,12 +1,12 @@
 @startuml
 
 class User {
-  +Name: String
-  +University: String
-  +Age: int
-  +Major: String
-  +Dark_mode: Boolean
-  +Font_size: int
+  -Name: String
+  -University: String
+  -Age: int
+  -Major: String
+  -Dark_mode: Boolean
+  -Font_size: int
   +set_name(params:String): void
   +set_uni(param: String): void
   +set_age(param: int): void
