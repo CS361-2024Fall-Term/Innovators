@@ -26,7 +26,7 @@ class Calendar {
   -unique_id: int  
   -task_amount: int
   -event_amount: int
-  +add_task(unique_id: int, name: String, description: String, due_date: Date): void
+  +add_task(unique_id: int, name: String, description: String, due_date: Date, priority: String, status: String): void
   +remove_task(task_id): void
   +edit_task(event_id): void
   +add_event(unique_id: int, name: String, description: String, start_time: Date, end_time: Date, location: String): void
