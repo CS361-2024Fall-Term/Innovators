@@ -19,7 +19,6 @@ class User {
   +get_major(): String
   +get_fsize(): int
   +get_mode(): Boolean
- 
 }
 
 class Calendar {
@@ -116,7 +115,7 @@ class Daily_Overview {
     +add_relevant_info(param: String): void
 }
 
-class Management {
+class Manager {
   +manage_user(): void
   +manage_calendar(): void
   +create_tasks(param: Task): void
@@ -124,11 +123,16 @@ class Management {
   +send_notifications(): void
 }
 
-Management -- User
-Management -- Calendar
-Management -- Task
-Management -- Event
-Management -- Notification
+note right of Manager
+  Needs better connections
+  and descriptions to each
+  class
+end note
+Manager -- User
+Manager -- Calendar
+Manager -- Task
+Manager -- Event
+Manager -- Notification
 
 Calendar --> User
 Calendar "1" *-- "0 *" Task : "has"
