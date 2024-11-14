@@ -3,7 +3,7 @@
 left to right direction
 
 class Notification {
-  +uniqueID: int  
+  +unique_id: int  
   +date: Date
   +alert: string
   
@@ -18,11 +18,11 @@ class Notification {
 
 
 class Task {
-  +uniqueID: int
+  +unique_id: int
 }
 
 class Event {
-  +uniqueID: int
+  +unique_id: int
 }
 
 Task <.. Notification: uses
