@@ -1,18 +1,18 @@
 @startuml
 
-class DailyOverview {
-    +uniqueID: int
-    +date: Date
-    +tasksForToday: List<Task>
-    +overviewPrompt: String
+class Daily_Overview {
+    -unique_id: int
+    -date: Date
+    -tasks_for_today: list<tasks>
+    -overview_prompt: String
 
-    +displayOverviewPrompt(): void
-    +getTasksForToday(calendar: Calendar): List<Task>
-    +sortTasksByPriority(): void
-    +sortTasksByDueTime(): void
-    +addRelevantInfo(param: String): void
+    +display_overview_prompt(): void
+    +get_tasks_for_today(calendar: get_tasks_by_date()): List<Task>
+    +sort_tasks_by_priority(): void
+    +sort_tasks_by_due_time(): void
+    +add_relevant_info(param: String): void
 }
 
-Calendar "1" -- "1" DailyOverview
+Calendar "1" o-- "1" Daily_Overview : "generates"
 
 @enduml
