@@ -23,7 +23,11 @@ class Task {
 class Event {
 }
 
+class Daily_Overview {
+}
+
 Calendar "1" *-- "0 *" Task : "has"
 Calendar "1" *-- "0 *" Event : "has"
+Calendar "1" o-- "1" Daily_Overview : "generates"
 
 @enduml
