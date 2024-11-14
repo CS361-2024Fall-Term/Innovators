@@ -159,6 +159,7 @@ Task ..> Persistent_Storage : "uses"
 
 Event ..> Persistent_Storage : "uses"
 
-Notification ..> Calendar : "gets events/tasks"
+Notification ..> Calendar : "get event"
+Notification ..> Calendar : "get task"
 
 @enduml
