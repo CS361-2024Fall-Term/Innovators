@@ -115,19 +115,20 @@ class Daily_Overview {
     +add_relevant_info(param: String): void
 }
 
-class Main_App {
+class Application_UI {
+  -user: User
+  -calendar: Calendar
+  -notifications: List<Notification>
+  +display_calendar_view(): void
+  +show_task_manager(): void
+  +create_event_interface(): void
+  +show_notifications(): void
   +manage_user(): void
   +manage_calendar(): void
-  +create_tasks(param: Task): void
-  +create_events(param: Event): void
+  +create_task(task: Task): void
+  +create_event(event: Event): void
   +send_notifications(): void
 }
-
-note right of Main_App
-  Needs better connections
-  and descriptions to each
-  class
-end note
 
 class Persistent_Storage {
   -storage_path: String
@@ -140,18 +141,19 @@ class Persistent_Storage {
   +load_event(event_id: int): Event
 }
 
-Main_App -- User
-Main_App -- Calendar
-Main_App -- Task
-Main_App -- Event
-Main_App -- Notification
+Application_UI ..> Calendar : "displays"
+Application_UI ..> Notification : "displays"
+Application_UI ..> Daily_Overview : "displays"
+Application_UI <.. User : "interacts with"
 
 Calendar "1" *-- "0 *" Task : "has"
 Calendar "1" *-- "0 *" Event : "has"
 Calendar "1" o-- "1" Daily_Overview : "generates"
-Task --> Category : "has single select"
 Calendar ..> Persistent_Storage : "uses"
+
+Task --> Category : "has single select"
 Task ..> Persistent_Storage : "uses"
+
 Event ..> Persistent_Storage : "uses"
 
 @enduml
