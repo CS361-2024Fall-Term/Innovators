@@ -131,7 +131,7 @@ Calendar "1" -- "1" User
 Calendar "1" *-- "0 *" Task : "has"
 Calendar "1" *-- "0 *" Event : "has"
 Calendar "1" o-- "1" Daily_Overview : "generates"
-Task "0" *-- "1" Category
+Task "1" *-- "1" Category : "has"
 
 
 @enduml
