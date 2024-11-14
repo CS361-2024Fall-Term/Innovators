@@ -4,8 +4,8 @@ from tkcalendar import Calendar
 from datetime import datetime
 
 class Cal:
-    taskNum = 0
-    eventNum = 0
+    task_num = 0
+    event_num = 0
 
     # Initalizer
     def __init__(self, root, tasks, events):
@@ -90,13 +90,13 @@ class Cal:
     def add_task(self, task):
         # Call task creation
         self.tasks.append(task)
-        Cal.taskNum += 1
+        Cal.task_num += 1
 
     # Add a new event
     def add_event(self, event):
         # Call event creation
         self.events.append(event)
-        Cal.eventNum += 1
+        Cal.event_num += 1
 
     # Show calendar
     def show(self):
