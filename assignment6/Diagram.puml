@@ -1,12 +1,12 @@
 @startuml
 
 class User {
-  +Name: String
-  +University: String
-  +Age: int
-  +Major: String
-  +Dark_mode: Boolean
-  +Font_size: int
+  -Name: String
+  -University: String
+  -Age: int
+  -Major: String
+  -Dark_mode: Boolean
+  -Font_size: int
   +set_name(params:String): void
   +set_uni(param: String): void
   +set_age(param: int): void
@@ -68,9 +68,9 @@ enum Category {
 }
 
 class Notification {
-  +unique_id: int  
-  +date: Date
-  +alert: string
+  -unique_id: int  
+  -date: Date
+  -alert: string
   
   +set_reminder_time(param: Date): void
   +set_alert(param: string): void
@@ -85,12 +85,12 @@ class Notification {
 }
 
 class Event {
-  +unique_id: int  
-  +name: string
-  +description: string
-  +start_time: Date
-  +end_time: Date
-  +location: string
+  -unique_id: int  
+  -name: string
+  -description: string
+  -start_time: Date
+  -end_time: Date
+  -location: string
   +create_event(string, string, string, string, Date, Date): int
   +set_name(param: string): void
   +set_description(param: string): void
