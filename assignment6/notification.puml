@@ -10,8 +10,11 @@ class Notification {
   +set_reminder_time(param: Date): void
   +set_alert(param: string): void
   +get_tasks_by_date(): List<Task>
-  +get_task_name(param: Task): string
+  +get_task_name(param: Task): void
   +get_task_status(param: Task): void
+  +get_events_by_date(): List<Task>
+  +get_event_name(param: Task): void
+  +get_event_status(param: Task): void
   +create_feedback(param: Task): void
   +display_notification(): void
 }
