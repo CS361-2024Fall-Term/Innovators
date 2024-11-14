@@ -23,20 +23,24 @@ class User {
 }
 
 class Calendar {
-  +uniqueID: int  
-  +taskAmount: int
-  +eventAmount: int
-  +addTask(): createTask()
-  +removeTask(param: taskID): void
-  +editTask(param: eventID): void
-  +addEvent(): create_event()
-  +removeEvent(param: eventID): void
-  +editEvent(param: eventID): void
-  +getTasksByDate(date: Date): List <Tasks>
-  +getTasksByName(string: Name): List <Tasks>
-  +getEventsByDate(): get_events_by_date()
-  +getEventsByName(): get_events_by_name()
-  +getEventsByLocation(): get_events_by_location()
+  -unique_id: int  
+  -task_amount: int
+  -event_amount: int
+  +add_task(unique_id: int, name: String, description: String, due_date: Date): void
+  +remove_task(task_id): void
+  +edit_task(event_id): void
+  +add_event(unique_id: int, name: String, description: String, start_time: Date, end_time: Date, location: String): void
+  +remove_event(param: event_id): void
+  +edit_event(param: event_id): void
+  +get_tasks_by_date(date: Date): List <Task>
+  +get_tasks_by_name(string: Name): List <Task>
+  +get_events_by_date(): list <Event>
+  +get_events_by_name(): list <Event>
+  +get_events_by_location(): list <Event>
+  +set_task_num(int): void
+  +set_event_num(int): void
+  +get_task_num(): int
+  +get_event_num(): int
 }
 
 class Task {
@@ -124,9 +128,9 @@ Management -- Event
 Management -- Notification
 
 Calendar "1" -- "1" User
-Calendar "1" *-- "0 *" Task
-Calendar "1" <.. "1" DailyOverview : uses
-Calendar "1" *-- "0 *" Event
+Calendar "1" *-- "0 *" Task : "has"
+Calendar "1" *-- "0 *" Event : "has"
+Calendar "1" o-- "1" Daily_Overview : "generates"
 Task "0" *-- "1" Category
 
 
