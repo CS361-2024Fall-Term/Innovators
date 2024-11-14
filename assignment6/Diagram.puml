@@ -7,18 +7,21 @@ class User {
   -Major: String
   -Dark_mode: Boolean
   -Font_size: int
+  -credit_hours: int
   +set_name(params:String): void
   +set_uni(param: String): void
   +set_age(param: int): void
   +set_major(param: String): void
   +set_fsize(param: int): void
   +set_mode(param: boolean): void
+  +set_credits(param: int): void
   +get_name(): String
   +get_uni(): String
   +get_age(): int
   +get_major(): String
   +get_fsize(): int
   +get_mode(): Boolean
+  +get_credits(): int
 }
 
 class Calendar {
