@@ -2,8 +2,10 @@
 
 class Notification {
   +uniqueID: int  
-  +date: Date
-  +alert: string
+  +name: string
+  +due_date: Date
+  +description: String
+  +alert: String
   
   +set_reminder_time(param: Date): void
   +set_alert(param: string): void

@@ -98,6 +98,12 @@ class Cal:
         self.events.append(event)
         Cal.event_num += 1
 
+    def get_task_num(self):
+        return self.task_num
+
+    def get_event_num(self):
+        return self.event_num
+
     # Show calendar
     def show(self):
         self.frame.pack(fill="both", expand=True)

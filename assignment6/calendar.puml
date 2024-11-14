@@ -4,17 +4,21 @@ class Calendar {
   -unique_id: int  
   -task_amount: int
   -event_amount: int
-  +addTask(): createTask()
-  +removeTask(param: taskID): void
-  +editTask(param: eventID): void
-  +addEvent(): create_event()
-  +removeEvent(param: eventID): void
-  +editEvent(param: eventID): void
-  +getTasksByDate(date: Date): List <Tasks>
-  +getTasksByName(string: Name): List <Tasks>
-  +getEventsByDate(): get_events_by_date()
-  +getEventsByName(): get_events_by_name()
-  +getEventsByLocation(): get_events_by_location()
+  +add_task(name: String, description: String, due_date: Date): void
+  +remove_task(task_id): void
+  +edit_task(event_id): void
+  +add_event(name: String, description: String, start_time: Date, end_time: Date, location: String): void
+  +remove_event(param: event_id): void
+  +edit_event(param: event_id): void
+  +get_tasks_by_date(date: Date): List <Task>
+  +get_tasks_by_name(string: Name): List <Task>
+  +get_events_by_date(): list <Event>
+  +get_events_by_name(): list <Event>
+  +get_events_by_location(): list <Event>
+  +set_task_num(int): void
+  +set_event_num(int): void
+  +get_task_num(): int
+  +get_event_num(): int
 }
 
 class Task {
