@@ -128,6 +128,18 @@ note right of Main_App
   and descriptions to each
   class
 end note
+
+class Persistent_Storage {
+  -storage_path: String
+  -format_type: String
+  +save_calendar(calendar: Calendar): void
+  +load_calendar(): Calendar
+  +save_task(task: Task): void
+  +load_task(task_id: int): Task
+  +save_event(event: Event): void
+  +load_event(event_id: int): Event
+}
+
 Main_App -- User
 Main_App -- Calendar
 Main_App -- Task
@@ -139,5 +151,8 @@ Calendar "1" *-- "0 *" Task : "has"
 Calendar "1" *-- "0 *" Event : "has"
 Calendar "1" o-- "1" Daily_Overview : "generates"
 Task --> Category : "has single select"
+Calendar ..> Persistent_Storage : "uses"
+Task ..> Persistent_Storage : "uses"
+Event ..> Persistent_Storage : "uses"
 
 @enduml
