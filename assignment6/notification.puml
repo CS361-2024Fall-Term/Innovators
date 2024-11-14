@@ -16,6 +16,7 @@ class Notification {
   +display_notification(): void
 }
 
+Application_Display ..> Notification : "displays"
 Notification ..> Calendar : "get event"
 Notification ..> Calendar : "get task"
 
