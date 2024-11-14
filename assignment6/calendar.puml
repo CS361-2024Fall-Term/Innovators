@@ -1,9 +1,9 @@
 @startuml
 
 class Calendar {
-  +uniqueID: int  
-  +taskAmount: int
-  +eventAmount: int
+  -unique_id: int  
+  -task_amount: int
+  -event_amount: int
   +addTask(): createTask()
   +removeTask(param: taskID): void
   +editTask(param: eventID): void
@@ -23,7 +23,7 @@ class Task {
 class Event {
 }
 
-Calendar "1" *-- "0 *" Task
-Calendar "1" *-- "0 *" Event
+Calendar "1" o-- "0 *" Task : "has"
+Calendar "1" o-- "0 *" Event : "has"
 
 @enduml
