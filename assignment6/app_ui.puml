@@ -1,0 +1,22 @@
+@startuml
+
+class Application_UI {
+  -user: User
+  -calendar: Calendar
+  -notifications: List<Notification>
+  +display_calendar_view(): void
+  +show_task_manager(): void
+  +create_event_interface(): void
+  +show_notifications(): void
+  +manage_user(): void
+  +manage_calendar(): void
+  +create_task(task: Task): void
+  +create_event(event: Event): void
+  +send_notifications(): void
+}
+
+Application_UI ..> Calendar : "displays"
+Application_UI ..> Notification : "displays"
+Application_UI ..> User : "interacts with"
+
+@enduml
