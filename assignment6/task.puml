@@ -17,7 +17,6 @@ class Task {
   +get_due_date(): Date
 }
 
-Notification ..> Management: uses
 Task "0" *-- "1" Category
 
 @enduml
