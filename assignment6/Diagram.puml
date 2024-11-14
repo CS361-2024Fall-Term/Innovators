@@ -130,11 +130,10 @@ Management -- Task
 Management -- Event
 Management -- Notification
 
-Calendar "1" -- "1" User
+Calendar --> User
 Calendar "1" *-- "0 *" Task : "has"
 Calendar "1" *-- "0 *" Event : "has"
 Calendar "1" o-- "1" Daily_Overview : "generates"
 Task --> Category : "has single select"
-
 
 @enduml
