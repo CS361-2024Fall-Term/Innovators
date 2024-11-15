@@ -1,6 +1,7 @@
 # calendar class
 import tkinter as tk
 from tkcalendar import Calendar
+from tkinter import ttk
 from datetime import datetime
 from models import tasks, event
 import json
@@ -115,7 +116,8 @@ class Cal:
         description_entry.pack()
 
         tk.Label(task_window, text="Priority (High, Medium, Low):").pack()
-        priority_entry = tk.Entry(task_window)
+        priority_entry = ttk.Combobox(task_window, values=["High", "Medium", "Low"])
+        priority_entry.set("Medium")  # Set a default value
         priority_entry.pack()
 
         tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
@@ -136,6 +138,8 @@ class Cal:
                                     due_date_entry.get()
                                 ))
         submit_button.pack()
+        
+        # increase number of tasks
         Cal.task_num += 1
 
     def open_event_creation_form(self):
