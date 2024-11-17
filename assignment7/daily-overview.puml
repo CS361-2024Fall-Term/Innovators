@@ -1,16 +1,58 @@
 @startuml Daily_Overview
+|User|
 start
-
 :Open the app;
-:Navigate to main screen;
+
+|System|
+:Ensure the program is installed;
+:Load user data and settings;
+
+|User|
+:Navigate to the main screen;
 :Select "DAILY OVERVIEW";
 
-if (Tasks scheduled for today?) then (Yes)
-  :Display tasks for today;
-  :Sort by priority and due time;
+|System|
+:Fetch tasks for the current day;
+if (Are tasks scheduled for today?) then (Yes)
+  :Sort tasks by priority and due time;
+  :Prepare the list of tasks;
 else (No)
   :Display "No tasks scheduled for today";
+  stop
 endif
+
+:Display the daily tasks list;
+
+|User|
+:Review the tasks for today;
+
+|System|
+if (User selects a task?) then (Yes)
+  :Display task details;
+else (No)
+endif
+
+if (Task details displayed correctly?) then (Yes)
+  :Allow editing or marking task as completed;
+else (No)
+  :Show error message;
+endif
+
+|User|
+if (Mark task as completed?) then (Yes)
+  :Select "Complete Task";
+  |System|
+  :Update task status to "Completed";
+else (No)
+endif
+
+|System|
+:Save task changes;
+:Update analytics data;
+
+|User|
+:Close the daily overview;
 
 stop
 @enduml
+
