@@ -45,12 +45,12 @@ endif
 :Select "GET DATE";
 
 |System|
-if (Select search type?) then (Date)
-  :Get all tasks with matching Date
-elseif (Select search type?) then (Category)
-  :Get all tasks with matching Category
-elseif (Select search type?) then (Name)
-  :Get all tasks with matching Name
+if (Search type?) then (Date)
+  :Get all tasks with matching Date;
+elseif (Search type?) then (Category)
+  :Get all tasks with matching Category;
+elseif (Search type?) then (Name)
+  :Get all tasks with matching Name;
 endif
 :Display tasks in the list;
 
