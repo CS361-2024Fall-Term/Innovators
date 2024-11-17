@@ -7,6 +7,7 @@ from models import tasks, event
 import json
 
 class Cal:
+    # fix
     task_num = 0
     event_num = 0
 
@@ -135,7 +136,8 @@ class Cal:
                                     description_entry.get(),
                                     priority_entry.get(),
                                     start_date_entry.get(),
-                                    due_date_entry.get()
+                                    due_date_entry.get(),
+                                    task_window
                                 ))
         submit_button.pack()
         
@@ -175,12 +177,13 @@ class Cal:
                                     description_entry.get(),
                                     start_time_entry.get(),
                                     end_time_entry.get(),
-                                    location_entry.get()
+                                    location_entry.get(),
+                                    event_window
                                 ))
         submit_button.pack()
         Cal.event_num += 1
 
-    def add_task(self, name, description, priority, start_date, due_date):
+    def add_task(self, name, description, priority, start_date, due_date, task_window):
         # create task object
         new_task = tasks.Tasks(name, description, priority, None, None, "General", start_date, due_date, "not started", "N/A")
 
@@ -196,8 +199,10 @@ class Cal:
         # refresh the calendar
         self.show_date() 
 
+        task_window.destroy()
 
-    def add_event(self, name, description, start_time, end_time, location):
+
+    def add_event(self, name, description, start_time, end_time, location, event_window):
         # create event object
         new_event = event.Event(name, description, start_time, end_time, location)
 
@@ -212,6 +217,9 @@ class Cal:
 
         # Refresh the calendar display
         self.show_date()
+
+        # close the creation window
+        event_window.destroy()
 
 
     def save_tasks_to_file(self, filename="tasks.json"):
