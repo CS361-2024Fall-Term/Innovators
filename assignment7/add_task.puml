@@ -45,19 +45,12 @@ endif
 :Select "GET DATE";
 
 |System|
-:Select "GET TASK(S)";
 if (Select search type?) then (Date)
-  :Select "DATE" option;
-  :Select date on calendar;
-  :Select "GET DATE";
+  :Get all tasks with matching Date
 elseif (Select search type?) then (Category)
-  :Select "CATEGORY" option;
-  :Select a category;
-  :Select "GET CATEGORY";
+  :Get all tasks with matching Category
 elseif (Select search type?) then (Name)
-  :Select "NAME" option;
-  :Enter a valid task name;
-  :Select "GET NAME";
+  :Get all tasks with matching Name
 endif
 :Display tasks in the list;
 
