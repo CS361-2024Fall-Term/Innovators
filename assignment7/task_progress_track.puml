@@ -1,0 +1,56 @@
+@startuml Task_Progress_Track
+start
+
+:Open the app;
+:Navigate to main calendar;
+:Select "ADD TASK";
+:Fill out required task fields;
+:Select "CONFIRM";
+
+while (Tasks left?) is (Yes)
+  :Repeat for every test task;
+  :Complete tasks by marking them as done;
+endwhile
+
+:Navigate to main calendar;
+:Select "ANALYTICS";
+
+if (Completion time correct?) then (Yes)
+  :Verify completion time;
+else (No)
+  :Error: Incorrect completion time;
+endif
+
+if (Priority level correct?) then (Yes)
+  :Verify priority level;
+else (No)
+  :Error: Incorrect priority level;
+endif
+
+if (Average time correct?) then (Yes)
+  :Verify average time;
+else (No)
+  :Error: Incorrect average time;
+endif
+
+if (Task category correct?) then (Yes)
+  :Verify task category;
+else (No)
+  :Error: Incorrect task category;
+endif
+
+if (Completion rate correct?) then (Yes)
+  :Verify task completion rate;
+else (No)
+  :Error: Incorrect completion rate;
+endif
+
+if (Peak productivity correct?) then (Yes)
+  :Verify peak productivity times;
+else (No)
+  :Error: Incorrect peak productivity times;
+endif
+
+stop
+@enduml
+

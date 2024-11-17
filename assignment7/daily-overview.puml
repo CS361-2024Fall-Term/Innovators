@@ -1,0 +1,16 @@
+@startuml Daily_Overview
+start
+
+:Open the app;
+:Navigate to main screen;
+:Select "DAILY OVERVIEW";
+
+if (Tasks scheduled for today?) then (Yes)
+  :Display tasks for today;
+  :Sort by priority and due time;
+else (No)
+  :Display "No tasks scheduled for today";
+endif
+
+stop
+@enduml
