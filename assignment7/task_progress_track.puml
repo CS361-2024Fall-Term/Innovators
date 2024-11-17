@@ -1,56 +1,94 @@
 @startuml Task_Progress_Track
+|User|
 start
-
 :Open the app;
-:Navigate to main calendar;
+
+|System|
+:Ensure the program is installed;
+:Load user data and settings;
+
+|User|
+:Navigate to the main calendar;
 :Select "ADD TASK";
-:Fill out required task fields;
+
+|System|
+:Display task creation form;
+
+|User|
+:Fill out task fields;
+note right
+Task Fields:
+- Name
+- Priority
+- Due Date
+- Category
+- Description
+end note
+
 :Select "CONFIRM";
 
-while (Tasks left?) is (Yes)
-  :Repeat for every test task;
-  :Complete tasks by marking them as done;
-endwhile
+|System|
+:Validate task data;
+if (Is task data valid?) then (Yes)
+  :Save task to database;
+  :Add task to calendar;
+else (No)
+  :Show error message;
+  stop
+endif
 
-:Navigate to main calendar;
+|User|
+:Repeat the task creation process for all test tasks;
+:Complete each created task by marking it as done;
+
+|System|
+:Update task statuses;
+:Recalculate analytics data;
+
+|User|
+:Navigate to the main calendar;
 :Select "ANALYTICS";
 
-if (Completion time correct?) then (Yes)
-  :Verify completion time;
+|System|
+:Fetch analytics data;
+if (Completion time data correct?) then (Yes)
+  :Display completion time;
 else (No)
-  :Error: Incorrect completion time;
+  :Show error message for completion time;
 endif
 
-if (Priority level correct?) then (Yes)
-  :Verify priority level;
+if (Priority level data correct?) then (Yes)
+  :Display priority levels;
 else (No)
-  :Error: Incorrect priority level;
+  :Show error message for priority levels;
 endif
 
-if (Average time correct?) then (Yes)
-  :Verify average time;
+if (Average time data correct?) then (Yes)
+  :Display average time to complete tasks;
 else (No)
-  :Error: Incorrect average time;
+  :Show error message for average time;
 endif
 
-if (Task category correct?) then (Yes)
-  :Verify task category;
+if (Task category data correct?) then (Yes)
+  :Display task categories;
 else (No)
-  :Error: Incorrect task category;
+  :Show error message for task categories;
 endif
 
-if (Completion rate correct?) then (Yes)
-  :Verify task completion rate;
+if (Completion rate data correct?) then (Yes)
+  :Display task completion rate;
 else (No)
-  :Error: Incorrect completion rate;
+  :Show error message for completion rate;
 endif
 
-if (Peak productivity correct?) then (Yes)
-  :Verify peak productivity times;
+if (Peak productivity data correct?) then (Yes)
+  :Display peak productivity times;
 else (No)
-  :Error: Incorrect peak productivity times;
+  :Show error message for peak productivity times;
 endif
+
+|User|
+:Review analytics data;
 
 stop
 @enduml
-
