@@ -1,0 +1,56 @@
+@startuml
+|User|
+start
+
+|System|
+:Ensure program is installed;
+
+|User|
+:Open the program;
+:Navigate to main calendar (home page);
+
+|System|
+:Load tasks;
+:Display calendar;
+
+|User|
+:Select "GET TASKS";
+:Select "DATE" option;
+:Select current date on calendar;
+:Select "GET DATE";
+
+|System|
+if (Search type?) then (Date)
+  :Get all tasks with matching Date;
+elseif (Search type?) then (Category)
+  :Get all tasks with matching Category;
+elseif (Search type?) then (Name)
+  :Get all tasks with matching Name;
+endif
+:Display gathered tasks in a list;
+
+|User|
+:Verify that the valid tasks exist in the results;
+
+|User|
+:Select "GET TASKS";
+:Select "CATEGORY" option;
+:Select the "ACADEMIC" tag;
+:Select "GET CATEGORY";
+
+|System|
+if (Search type?) then (Date)
+  :Get all tasks with matching Date;
+elseif (Search type?) then (Category)
+  :Get all tasks with matching Category;
+elseif (Search type?) then (Name)
+  :Get all tasks with matching Name;
+endif
+:Display tasks in the list;
+
+|User|
+:Verify that the valid tasks exist in the results;
+
+stop
+
+@enduml

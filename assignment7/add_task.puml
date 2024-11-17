@@ -1,0 +1,61 @@
+@startuml
+|User|
+start
+
+|System|
+:Ensure program is installed;
+
+|User|
+:Open the program;
+:Navigate to main calendar (home page);
+
+|System|
+:Display calendar;
+
+|User|
+:Select "ADD TASK";
+
+|System|
+:Display task creation form;
+
+|User|
+:Fill out task fields:
+- Name: test task:
+- Priority: [empty]:
+- Date: [current date]:
+- Category: [empty]:
+- Description: This is a test task for test case 001!;
+:Select "CONFIRM";
+
+|System|
+:Validate task data;
+
+|System|
+if (Task data valid?) then (yes)
+  :Save task;
+  :Add task to calendar;
+else (no)
+  :Show error message;
+  stop
+endif
+
+|User|
+:Select "DATE" option;
+:Select current date on calendar;
+:Select "GET DATE";
+
+|System|
+if (Search type?) then (Date)
+  :Get all tasks with matching Date;
+elseif (Search type?) then (Category)
+  :Get all tasks with matching Category;
+elseif (Search type?) then (Name)
+  :Get all tasks with matching Name;
+endif
+:Display tasks in the list;
+
+|User|
+:Verify that "test task" appears in the results;
+stop
+
+@enduml
