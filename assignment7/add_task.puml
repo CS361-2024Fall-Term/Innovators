@@ -40,6 +40,11 @@ else (no)
 endif
 
 |User|
+:Select "DATE" option;
+:Select current date on calendar;
+:Select "GET DATE";
+
+|System|
 :Select "GET TASK(S)";
 if (Select search type?) then (Date)
   :Select "DATE" option;
@@ -49,17 +54,11 @@ elseif (Select search type?) then (Category)
   :Select "CATEGORY" option;
   :Select a category;
   :Select "GET CATEGORY";
-elseif (Select search type?) the (Name)
+elseif (Select search type?) then (Name)
   :Select "NAME" option;
   :Enter a valid task name;
   :Select "GET NAME";
 endif
-:Select "DATE" option;
-:Select current date on calendar;
-:Select "GET DATE";
-
-|System|
-:Fetch tasks for the selected date;
 :Display tasks in the list;
 
 |User|
