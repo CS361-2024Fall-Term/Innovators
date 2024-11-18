@@ -201,7 +201,6 @@ class Cal:
 
         task_window.destroy()
 
-
     def add_event(self, name, description, start_time, end_time, location, event_window):
         # create event object
         new_event = event.Event(name, description, start_time, end_time, location)
@@ -240,10 +239,12 @@ class Cal:
             
             # convert each dictionary back to a Tasks object
             self.tasks = [tasks.Tasks(**task_data) for task_data in tasks_data]  # Corrected here
-            print("Tasks loaded from file.")
+            self.set_task_num(len(self.tasks))
+            print(f"{len(self.tasks)} tasks loaded from file.")
         except FileNotFoundError:
             print("No saved tasks file found; starting with an empty list.")
             self.events = []
+
     def save_events_to_file(self, filename="events.json"):
         """Save all events to a JSON file."""
         # convert each event to a dictionary
@@ -262,11 +263,23 @@ class Cal:
             
             # convert each dictionary back to a Events object
             self.events = [event.Event(**event_data) for event_data in events_data]  # Corrected here
-            print("Events loaded from file.")
+            self.set_event_num(len(self.events))
+            print(f"{len(self.events)} events loaded from file.")
         except FileNotFoundError:
             print("No saved events file found; starting with an empty list.")
             self.events = []
 
+    def get_task_num(self):
+        return self.task_num
+
+    def get_event_num(self):
+        return self.event_num
+    
+    def set_task_num(self, new_task_num):
+        self.task_num = new_task_num
+
+    def set_event_num(self, new_event_num):
+        self.event_num = new_event_num
 
     # Show calendar
     def show(self):
