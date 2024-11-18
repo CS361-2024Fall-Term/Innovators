@@ -1,0 +1,59 @@
+@startuml
+|User|
+start
+
+|System|
+:Ensure program is installed;
+
+|User|
+:Open the program;
+:Navigate to main calendar (home page);
+
+|System|
+:Display calendar;
+
+|User|
+:Select "ADD EVENT";
+
+|System|
+:Display EVENT creation form;
+
+|User|
+:Fill out event fields:
+- Name: test Event:
+- Description: This is a test event for test case 005!;
+- Start Time: [current time]:
+- End Time: [current time + 5 minutes]:
+- Location: Corvallis
+:Select "CONFIRM";
+
+|System|
+:Validate event data;
+
+|System|
+if (Event data valid?) then (yes)
+  :Save event;
+  :Add Event to calendar;
+else (no)
+  :Show error message;
+  stop
+endif
+
+|User|
+:Select "DATE" option;
+:Select current date on calendar;
+:Select "GET DATE";
+
+|System|
+if (Search type?) then (Time)
+  :Get all events with matching time;
+elseif (Search type?) then (Name)
+  :Get all events with matching Name;
+endif
+:Display events in the list;
+
+|User|
+:Verify that "test event" appears in the results;
+stop
+
+@enduml
