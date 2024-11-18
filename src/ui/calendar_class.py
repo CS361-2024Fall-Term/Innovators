@@ -7,7 +7,7 @@ from models import tasks, event
 import json
 
 class Cal:
-    # fix
+    # Use the getters and setters
     task_num = 0
     event_num = 0
 
@@ -18,7 +18,7 @@ class Cal:
         self.events = events
         self.frame = tk.Frame(root)
 
-        # retrieve tasks/events from file
+        # Retrieve tasks/events from file
         self.load_tasks_from_file()
         self.load_events_from_file()
         
@@ -74,7 +74,6 @@ class Cal:
         self.root.deiconify()
 
     # Button setup for the calendar
-    # Need to add buttons for add tasks and events
     def _setup_widgets(self):
         # Button to save the selected date within `self.frame`
         save_date_button = tk.Button(self.frame, text="Get Date", command=self.save_selected_date, font="Arial 12")
@@ -103,7 +102,7 @@ class Cal:
         self.selected_date_label.config(text=f"Date: {selected_date}")
 
     def open_task_creation_form(self):
-        # pop up a new window for task input
+        # Pop up a new window for task input
         task_window = tk.Toplevel(self.root)
         task_window.title("Create New Task")
 
@@ -129,7 +128,7 @@ class Cal:
         due_date_entry = tk.Entry(task_window)
         due_date_entry.pack()
 
-        # submit button
+        # Submit button
         submit_button = tk.Button(task_window, text="Add Task", 
                                 command=lambda: self.add_task(
                                     name_entry.get(),
@@ -141,11 +140,11 @@ class Cal:
                                 ))
         submit_button.pack()
         
-        # increase number of tasks
+        # Increase number of tasks
         Cal.task_num += 1
 
     def open_event_creation_form(self):
-        # pop up a new window for task input
+        # Pop up a new window for task input
         event_window = tk.Toplevel(self.root)
         event_window.title("Create New Event")
 
@@ -170,7 +169,7 @@ class Cal:
         location_entry = tk.Entry(event_window)
         location_entry.pack()
 
-        # submit button
+        # Submit button
         submit_button = tk.Button(event_window, text="Add Event", 
                                 command=lambda: self.add_event(
                                     name_entry.get(),
@@ -181,28 +180,30 @@ class Cal:
                                     event_window
                                 ))
         submit_button.pack()
+        
         Cal.event_num += 1
 
     def add_task(self, name, description, priority, start_date, due_date, task_window):
-        # create task object
+        # Create task object
         new_task = tasks.Tasks(name, description, priority, None, None, "General", start_date, due_date, "not started", "N/A")
 
-        # add the new task to the tasks
+        # Add the new task to the tasks
         self.tasks.append(new_task) 
 
-        # save the task to JSON file (to be able to retrieve it later)
+        # Save the task to JSON file (to be able to retrieve it later)
         self.save_tasks_to_file()
 
-        # informing the user of the succeess 
+        # Informing the user of the succeess 
         print(f"Task '{name}' added with start date {start_date} and due date {due_date}.")
 
-        # refresh the calendar
+        # Refresh the calendar
         self.show_date() 
 
+        # At the end, close the window
         task_window.destroy()
 
     def add_event(self, name, description, start_time, end_time, location, event_window):
-        # create event object
+        # Create event object
         new_event = event.Event(name, description, start_time, end_time, location)
 
         # Add the new event to the events
@@ -217,56 +218,62 @@ class Cal:
         # Refresh the calendar display
         self.show_date()
 
-        # close the creation window
+        # Close the creation window
         event_window.destroy()
 
 
     def save_tasks_to_file(self, filename="tasks.json"):
-        """Save all tasks to a JSON file."""
-        # convert each task to a dictionary
+        # Save all tasks to a JSON file
+        # Convert each task to a dictionary
         tasks_data = [task.__dict__ for task in self.tasks]
         
-        # write data to a JSON file
+        # Write data to a JSON file
         with open(filename, 'w') as f:
             json.dump(tasks_data, f)
         print("Tasks saved to file.")
 
     def load_tasks_from_file(self, filename="tasks.json"):
-        """Load tasks from a JSON file."""
+        # Load tasks from a JSON file
         try:
             with open(filename, 'r') as f:
                 tasks_data = json.load(f)
             
-            # convert each dictionary back to a Tasks object
+            # Convert each dictionary back to a Tasks object
             self.tasks = [tasks.Tasks(**task_data) for task_data in tasks_data]  # Corrected here
             self.set_task_num(len(self.tasks))
             print(f"{len(self.tasks)} tasks loaded from file.")
         except FileNotFoundError:
             print("No saved tasks file found; starting with an empty list.")
             self.events = []
+        except json.JSONDecodeError:
+            print("The file contains invalid JSON. Starting with an empty list.")
+            self.events = []
 
     def save_events_to_file(self, filename="events.json"):
-        """Save all events to a JSON file."""
-        # convert each event to a dictionary
+        # Save all events to a JSON file
+        # Convert each event to a dictionary
         events_data = [event.__dict__ for event in self.events]
         
-        # write data to a JSON file
+        # Write data to a JSON file
         with open(filename, 'w') as f:
             json.dump(events_data, f)
         print("Events saved to file.")
 
     def load_events_from_file(self, filename="events.json"):
-        """Load events from a JSON file."""
+        # Load events from a JSON file
         try:
             with open(filename, 'r') as f:
                 events_data = json.load(f)
             
-            # convert each dictionary back to a Events object
+            # Convert each dictionary back to a Events object
             self.events = [event.Event(**event_data) for event_data in events_data]  # Corrected here
             self.set_event_num(len(self.events))
             print(f"{len(self.events)} events loaded from file.")
         except FileNotFoundError:
             print("No saved events file found; starting with an empty list.")
+            self.events = []
+        except json.JSONDecodeError:
+            print("The file contains invalid JSON. Starting with an empty list.")
             self.events = []
 
     def get_task_num(self):
