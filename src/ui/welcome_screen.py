@@ -8,7 +8,7 @@ class WelcomeScreen:
         self.frame = tk.Frame(root)
         self.frame.pack(fill="both", expand=True)
 
-        pil_image = Image.open("./image.png")
+        pil_image = Image.open("./src/image.png")
         
         # Resize the image to desired dimensions, e.g., 150x150 pixels
         pil_image = pil_image.resize((150, 150))
