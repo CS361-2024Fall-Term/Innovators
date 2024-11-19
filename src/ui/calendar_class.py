@@ -85,6 +85,9 @@ class Cal:
         create_event_button = tk.Button(self.frame, text="Add Event", command=self.open_event_creation_form, font="Arial 12")
         create_event_button.pack(padx=10, pady=5, anchor='nw')
 
+        delete_task_button = tk.Button(self.frame, text="Delete Task", command=self.open_task_delete_form, font="Arial 12")
+        delete_task_button.pack(padx=10, pady=5, anchor='nw')
+
         self.selected_date_label = tk.Label(self.frame, text="Date:", font="Arial 12 bold")
         self.selected_date_label.pack(padx=10, pady=5, anchor='nw')
 
@@ -229,6 +232,34 @@ class Cal:
         # Close the creation window
         event_window.destroy()
 
+    def delete_task(self, name, start_date, due_date, task_window):
+        matching_tasks = [task for task in self.tasks 
+                          if task.name.lower() == name.lower() and task.start_date == start_date and task.due_date == due_date]
+        
+        if matching_tasks:
+            for task in matching_tasks:
+                self.tasks.remove(task)
+                Cal.task_num -= 1
+            print(f"Deleted {len(matching_tasks)} task(s) with name '{name}', start date '{start_date}', and due date '{due_date}'.") 
+        else:
+            print(f"No tasks found with name '{name}', start date '{start_date}', and due date '{due_date}' to delete.")
+
+        # Save the task to JSON file (to be able to retrieve it later)
+        self.save_tasks_to_file()
+
+        # Informing the user of the succeess 
+        print(f"Task '{name}' removed with start date {start_date} and due date {due_date}.")
+
+        # Refresh the daily overview
+        if hasattr(self, "daily_overview"):
+            self.daily_overview.update_overview()
+
+        # Refresh the calendar
+        self.show_date() 
+
+        # At the end, close the window
+        task_window.destroy()
+
 
     def save_tasks_to_file(self, filename="src/tasks.json"):
         # Save all tasks to a JSON file
@@ -283,6 +314,34 @@ class Cal:
         except json.JSONDecodeError:
             print("The file contains invalid JSON. Starting with an empty list.")
             self.events = []
+
+    def open_task_delete_form(self):
+        # Pop up a new window for task deletion
+        task_window = tk.Toplevel(self.root)
+        task_window.title("Delete Task")
+
+        # Task identifying fields
+        tk.Label(task_window, text="Task Name:").pack()
+        name_entry = tk.Entry(task_window)
+        name_entry.pack()
+
+        tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
+        start_date_entry = tk.Entry(task_window)
+        start_date_entry.pack()
+
+        tk.Label(task_window, text="Due Date (YYYY-MM-DD):").pack()
+        due_date_entry = tk.Entry(task_window)
+        due_date_entry.pack()
+
+        # Submit button
+        submit_button = tk.Button(task_window, text="Delete Task", 
+                                command=lambda: self.delete_task(
+                                    name_entry.get(),
+                                    start_date_entry.get(),
+                                    due_date_entry.get(),
+                                    task_window
+                                ))
+        submit_button.pack()
 
     def get_task_num(self):
         return self.task_num
