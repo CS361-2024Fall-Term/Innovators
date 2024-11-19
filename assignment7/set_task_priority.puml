@@ -1,0 +1,46 @@
+@startuml
+|User|
+start
+
+|System|
+:Ensure program is installed;
+
+|User|
+:Open the program;
+:Navigate to main calendar (home page);
+
+|System|
+:Display calendar;
+
+|User|
+:Select the task you want to set the priority of from the task list;
+
+|System|
+:Display task update from;
+
+|User|
+:Select the Priority field:
+- Priority: [empty]:
+:Select High Priority
+:Select "CONFIRM";
+
+|System|
+:Validate updated task data;
+
+|System|
+if (Task data valid?) then (yes)
+  :Update task with new priority;
+  :Update displayed task priority;
+  :Update priority sorting of task in task list;
+else (no)
+  :Show error message;
+  stop
+endif
+
+
+|User|
+:Verify that the tasks priority has changed in the task list;
+:Verify that the tasks sorting in task list has updated;
+stop
+
+@enduml
