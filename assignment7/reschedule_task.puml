@@ -1,0 +1,48 @@
+@startuml
+|User|
+:Open the app; 
+
+|System|
+:Ensure the program is installed;
+:Load user data and settings; 
+
+|User|
+:Navigate to main calendar;
+
+|System|
+:Check for missed or incomplete tasks; 
+
+|User|
+:Click on the task on the calendar to reschedule;
+:Click "Reschedule" button; 
+
+|System|
+:Generate rescheduling suggestions; 
+:Display suggestions to user; 
+
+|User|
+if (Select reschedule option) then (Suggested date)
+
+else (Manual entry)
+
+
+  :Manually enter date;
+
+|System|
+:Validate date;
+if (Is date entered valid?) then (Yes)
+
+else (No)
+  stop
+ endif
+ endif
+
+|System|
+:Update task due date; 
+:Display task on main calendar;
+
+|User|
+: Verify that task appears in the rescheduled date in the calendar;
+
+
+@enduml
