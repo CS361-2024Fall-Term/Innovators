@@ -40,7 +40,7 @@ class DailyOverview:
         if today_tasks:
             overview_text += "Tasks:\n"
             for task in today_tasks:
-                overview_text += f"- {task.name}: {task.description} (Proproty: {task.priority})\n"
+                overview_text += f"- {task.name}: {task.description} (Priority: {task.priority})\n"
         else:
             overview_text += "\n"
 
