@@ -1,0 +1,21 @@
+@startuml
+|User|
+start
+
+
+|User|
+:Ensure there's a downloadable file;
+:Download the program;
+
+|System|
+:Install all files onto user's machine;
+
+|User|
+:Run Application;
+
+|System|
+:Display welcome screen;
+
+stop
+
+@enduml
