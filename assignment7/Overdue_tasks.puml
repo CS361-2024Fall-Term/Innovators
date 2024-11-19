@@ -1,0 +1,53 @@
+
+@startuml Daily_Overview
+|User|
+start
+:Open the app;
+
+|System|
+:Ensure the program is installed;
+:Load user data and settings;
+
+|User|
+:Navigate to the main screen;
+:Click "Add task";
+
+|System|
+:Display task creation form;
+
+|User|
+:Fill out task fields:
+- Name: test task 12A:
+- Priority: [empty]:
+- Due_Date: <current date plus 30 seconds>:
+- Category: [empty]:
+- Description: This is a test task for test case 012!;
+
+:Select "CONFIRM";
+
+|System|
+:Validate task data;
+
+|System|
+if (Task data valid?) then (yes)
+  :Save task;
+  :Add task to calendar;
+  :Update Daily Overview;
+else (no)
+  :Show error message;
+  stop
+endif
+
+|User|
+:Wait 31 seconds;
+
+|User|
+:Navigate to Daily Overview;
+
+|System|
+:Display Daily Overview;
+
+|User|
+:Verify that test task 12A is now appearing in the overdue part of Daily Overview;
+stop
+@enduml
