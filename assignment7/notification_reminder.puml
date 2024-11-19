@@ -1,0 +1,35 @@
+@startuml
+|User|
+start
+
+|System|
+:Ensure program is installed;
+
+|User|
+:Open the program;
+:Sign up for the app;
+
+|System|
+:Add your phone number;
+
+|User|
+:Navigate to main calendar (home page);
+
+|User|
+:Add the task or event I want with desired due date;
+:Select "CONFIRM";
+
+|System|
+:Validate new task or event data;
+
+|System|
+if (data valid?) then (yes)
+  :An SMS will be received 10 minutes before the due date;
+else (no)
+  :Show error message;
+stop
+endif
+ 
+stop
+
+@enduml
