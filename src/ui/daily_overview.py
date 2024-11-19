@@ -31,8 +31,8 @@ class DailyOverview:
         today = datetime.now().strftime("%Y-%m-%d")
 
         # FIlter tasks and events for today
-        today_tasks = [task for task in self.tasks if task.start_date == task.due_date == today]
-        today_events = [event for revent in self.events if event.start_time.startswith(today)]
+        today_tasks = [task for task in self.tasks if task.start_date.startswith(today)]
+        today_events = [event for event in self.events if event.start_time.startswith(today)]
 
         # Prepare the overview text
         overview_text = f"Date: {today}\n\n"
@@ -42,7 +42,7 @@ class DailyOverview:
             for task in today_tasks:
                 overview_text += f"- {task.name}: {task.description} (Priority: {task.priority})\n"
         else:
-            overview_text += "\n"
+            overview_text += "Nt tasks for today.\n"
 
         if today_events:
             overview_text += "Events:\n"

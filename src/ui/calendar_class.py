@@ -46,8 +46,8 @@ class Cal:
             selectforeground="white",
             headersbackground="lightgray",
             headersforeground="black",
-            daywidth=5,
-            dayheight=5
+            daywidth=10,
+            dayheight=10
         )
         self.cal.pack(padx=padx, pady=pady, anchor='nw')
         
@@ -88,7 +88,7 @@ class Cal:
         delete_task_button = tk.Button(self.frame, text="Delete Task", command=self.open_task_delete_form, font="Arial 12")
         delete_task_button.pack(padx=10, pady=5, anchor='nw')
 
-        delete_event_button = tk.Button(self.frame, text="Delete Evennt", command=self.open_event_delete_form, font="Arial 12")
+        delete_event_button = tk.Button(self.frame, text="Delete Event", command=self.open_event_delete_form, font="Arial 12")
         delete_event_button.pack(padx=10, pady=5, anchor='nw')
 
         self.selected_date_label = tk.Label(self.frame, text="Date:", font="Arial 12 bold")
@@ -347,7 +347,7 @@ class Cal:
 
 
 
-    def save_tasks_to_file(self, filename="src/tasks.json"):
+    def save_tasks_to_file(self, filename="./tasks.json"):
         # Save all tasks to a JSON file
         # Convert each task to a dictionary
         tasks_data = [task.__dict__ for task in self.tasks]
@@ -355,7 +355,7 @@ class Cal:
         # Write data to a JSON file
         with open(filename, 'w') as f:
             json.dump(tasks_data, f)
-        print("Tasks saved to file: {filename}")
+        print(f"Tasks saved to file: {filename}")
 
     def load_tasks_from_file(self, filename="src/tasks.json"):
         # Load tasks from a JSON file
@@ -374,7 +374,7 @@ class Cal:
             print("The file contains invalid JSON. Starting with an empty list.")
             self.events = []
 
-    def save_events_to_file(self, filename="src/events.json"):
+    def save_events_to_file(self, filename="./events.json"):
         # Save all events to a JSON file
         # Convert each event to a dictionary
         events_data = [event.__dict__ for event in self.events]
@@ -382,7 +382,7 @@ class Cal:
         # Write data to a JSON file
         with open(filename, 'w') as f:
             json.dump(events_data, f)
-        print("Events saved to file: {filename}")
+        print(f"Events saved to file: {filename}")
 
     def load_events_from_file(self, filename="src/events.json"):
         # Load events from a JSON file
