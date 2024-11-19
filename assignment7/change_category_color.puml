@@ -1,0 +1,47 @@
+@startuml
+|User|
+start
+
+|System|
+:Ensure program is installed;
+
+|User|
+:Open the program;
+:Navigate to the home page by clicking "Start Your Journey";
+
+|System|
+:Display home page;
+
+|User|
+:Select "Settings";
+
+|System|
+:Display settings form;
+
+|User|
+:Select "Categories";
+
+|System|
+:Display categories list;
+
+|User|
+:Select color;
+
+|System|
+:Display color dropdown;
+
+|User|
+:Select "RED" from dropdown;
+
+|System|
+:Update category color to red;
+
+|User|
+:Navigate to home page by clicking "back";
+
+|User|
+:Verify that "test task" appears as red in the task list;
+:verify that "test event" appears as red in the event list;
+stop
+
+@enduml
