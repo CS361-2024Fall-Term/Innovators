@@ -88,6 +88,9 @@ class Cal:
         delete_task_button = tk.Button(self.frame, text="Delete Task", command=self.open_task_delete_form, font="Arial 12")
         delete_task_button.pack(padx=10, pady=5, anchor='nw')
 
+        delete_event_button = tk.Button(self.frame, text="Delete Evennt", command=self.open_event_delete_form, font="Arial 12")
+        delete_event_button.pack(padx=10, pady=5, anchor='nw')
+
         self.selected_date_label = tk.Label(self.frame, text="Date:", font="Arial 12 bold")
         self.selected_date_label.pack(padx=10, pady=5, anchor='nw')
 
@@ -146,6 +149,34 @@ class Cal:
         # Increase number of tasks
         Cal.task_num += 1
 
+    def open_task_delete_form(self):
+        # Pop up a new window for task deletion
+        task_window = tk.Toplevel(self.root)
+        task_window.title("Delete Task")
+
+        # Task identifying fields
+        tk.Label(task_window, text="Task Name:").pack()
+        name_entry = tk.Entry(task_window)
+        name_entry.pack()
+
+        tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
+        start_date_entry = tk.Entry(task_window)
+        start_date_entry.pack()
+
+        tk.Label(task_window, text="Due Date (YYYY-MM-DD):").pack()
+        due_date_entry = tk.Entry(task_window)
+        due_date_entry.pack()
+
+        # Submit button
+        submit_button = tk.Button(task_window, text="Delete Task", 
+                                command=lambda: self.delete_task(
+                                    name_entry.get(),
+                                    start_date_entry.get(),
+                                    due_date_entry.get(),
+                                    task_window
+                                ))
+        submit_button.pack()
+
     def open_event_creation_form(self):
         # Pop up a new window for task input
         event_window = tk.Toplevel(self.root)
@@ -185,6 +216,34 @@ class Cal:
         submit_button.pack()
         
         Cal.event_num += 1
+
+    def open_event_delete_form(self):
+        # Pop up a new window for event deletion
+        task_window = tk.Toplevel(self.root)
+        task_window.title("Delete Event")
+
+        # Event identifying fields
+        tk.Label(task_window, text="Event Name:").pack()
+        name_entry = tk.Entry(task_window)
+        name_entry.pack()
+
+        tk.Label(task_window, text="Start Time (YYYY-MM-DD):").pack()
+        start_time_entry = tk.Entry(task_window)
+        start_time_entry.pack()
+
+        tk.Label(task_window, text="End Time (YYYY-MM-DD):").pack()
+        end_time_entry = tk.Entry(task_window)
+        end_time_entry.pack()
+
+        # Submit button
+        submit_button = tk.Button(task_window, text="Delete Event", 
+                                command=lambda: self.delete_event(
+                                    name_entry.get(),
+                                    start_time_entry.get(),
+                                    end_time_entry.get(),
+                                    task_window
+                                ))
+        submit_button.pack()
 
     def add_task(self, name, description, priority, start_date, due_date, task_window):
         # Create task object
@@ -233,9 +292,11 @@ class Cal:
         event_window.destroy()
 
     def delete_task(self, name, start_date, due_date, task_window):
+        #get a list of tasks that meet the criteria
         matching_tasks = [task for task in self.tasks 
                           if task.name.lower() == name.lower() and task.start_date == start_date and task.due_date == due_date]
         
+        #for every match delete them
         if matching_tasks:
             for task in matching_tasks:
                 self.tasks.remove(task)
@@ -247,8 +308,32 @@ class Cal:
         # Save the task to JSON file (to be able to retrieve it later)
         self.save_tasks_to_file()
 
-        # Informing the user of the succeess 
-        print(f"Task '{name}' removed with start date {start_date} and due date {due_date}.")
+        # Refresh the daily overview
+        if hasattr(self, "daily_overview"):
+            self.daily_overview.update_overview()
+
+        # Refresh the calendar
+        self.show_date() 
+
+        # At the end, close the window
+        task_window.destroy()
+
+    def delete_event(self, name, start_time, end_time, task_window):
+        #get a list of events that meet the criteria
+        matching_events = [event for event in self.events 
+                          if event.name.lower() == name.lower() and event.start_time == start_time and event.end_time == end_time]
+        
+         #for every match delete them
+        if matching_events:
+            for event in matching_events:
+                self.event.remove(event)
+                Cal.event_num -= 1
+            print(f"Deleted {len(matching_events)} event(s) with name '{name}', start time '{start_time}', and end time '{end_time}'.") 
+        else:
+            print(f"No evets found with name '{name}', start time '{start_time}', and end time '{end_time}' to delete.")
+
+        # Save the task to JSON file (to be able to retrieve it later)
+        self.save_events_to_file()
 
         # Refresh the daily overview
         if hasattr(self, "daily_overview"):
@@ -259,6 +344,7 @@ class Cal:
 
         # At the end, close the window
         task_window.destroy()
+
 
 
     def save_tasks_to_file(self, filename="src/tasks.json"):
@@ -315,33 +401,7 @@ class Cal:
             print("The file contains invalid JSON. Starting with an empty list.")
             self.events = []
 
-    def open_task_delete_form(self):
-        # Pop up a new window for task deletion
-        task_window = tk.Toplevel(self.root)
-        task_window.title("Delete Task")
 
-        # Task identifying fields
-        tk.Label(task_window, text="Task Name:").pack()
-        name_entry = tk.Entry(task_window)
-        name_entry.pack()
-
-        tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
-        start_date_entry = tk.Entry(task_window)
-        start_date_entry.pack()
-
-        tk.Label(task_window, text="Due Date (YYYY-MM-DD):").pack()
-        due_date_entry = tk.Entry(task_window)
-        due_date_entry.pack()
-
-        # Submit button
-        submit_button = tk.Button(task_window, text="Delete Task", 
-                                command=lambda: self.delete_task(
-                                    name_entry.get(),
-                                    start_date_entry.get(),
-                                    due_date_entry.get(),
-                                    task_window
-                                ))
-        submit_button.pack()
 
     def get_task_num(self):
         return self.task_num
