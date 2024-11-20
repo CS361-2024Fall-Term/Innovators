@@ -1,5 +1,6 @@
 @startuml
 |User|
+start
 :Open the app; 
 
 |System|
@@ -43,6 +44,7 @@ else (No)
 
 |User|
 : Verify that task appears in the rescheduled date in the calendar;
+stop
 
 
 @enduml
