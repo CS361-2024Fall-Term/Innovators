@@ -1,0 +1,58 @@
+@startuml
+|User|
+start
+:Open the app; 
+
+|System|
+:Ensure the program is installed;
+:Load user data and settings; 
+
+
+|User|
+:Navigate to main calendar;
+:Click task to edit reminder settings;
+
+|System|
+:Display task page;
+
+|User|
+:Click "Edit";
+:Click "Notification Settings"; 
+
+|System|
+:Display notification settings page to user;
+
+
+|User|
+if (Select notification option) then (Recurring)
+: Enter fields: 
+- Number of reminders: [empty] :
+- Time period between reminders: [empty];
+
+else (Standard)
+:Enter field:
+-Time before due date: [empty]; 
+
+endif
+
+:Click "Confirm";
+
+|System|
+:Validate data;
+if (Is data entered valid?) then (Yes)
+
+else (No)
+  stop
+ endif
+
+
+|System|
+:Update task notification settings; 
+:Display task on main calendar;
+
+|User|
+: Verify that notification appears according to the inputted notification time; 
+
+stop
+
+@enduml
