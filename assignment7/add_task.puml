@@ -9,13 +9,13 @@ start
 :Open the program;
 :Navigate to main calendar (home page);
 
-|System|
+|Calendar|
 :Display calendar;
 
 |User|
 :Select "ADD TASK";
 
-|System|
+|Calendar|
 :Display task creation form;
 
 |User|
@@ -27,15 +27,16 @@ start
 - Description: This is a test task for test case 001!;
 :Select "CONFIRM";
 
-|System|
+|Calendar|
 :Validate task data;
 
-|System|
+|Task|
 if (Task data valid?) then (yes)
   :Save task;
-  :Add task to calendar;
+  :Add task to calendar list;
 else (no)
   :Show error message;
+  :Return to main calendar;
   stop
 endif
 
@@ -44,7 +45,7 @@ endif
 :Select current date on calendar;
 :Select "GET DATE";
 
-|System|
+|Calendar|
 if (Search type?) then (Date)
   :Get all tasks with matching Date;
 elseif (Search type?) then (Category)
