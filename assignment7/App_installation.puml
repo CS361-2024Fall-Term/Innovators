@@ -13,7 +13,10 @@ start
 |User|
 :Run Application;
 
-|System|
+|Calendar|
+:Load tasks and events from JSON files;
+
+|Welcome Screen|
 :Display welcome screen;
 
 stop
