@@ -345,9 +345,7 @@ class Cal:
         # At the end, close the window
         task_window.destroy()
 
-
-
-    def save_tasks_to_file(self, filename="./tasks.json"):
+    def save_tasks_to_file(self, filename="./src/tasks.json"):
         # Save all tasks to a JSON file
         # Convert each task to a dictionary
         tasks_data = [task.__dict__ for task in self.tasks]
@@ -374,7 +372,7 @@ class Cal:
             print("The file contains invalid JSON. Starting with an empty list.")
             self.events = []
 
-    def save_events_to_file(self, filename="./events.json"):
+    def save_events_to_file(self, filename="./src/events.json"):
         # Save all events to a JSON file
         # Convert each event to a dictionary
         events_data = [event.__dict__ for event in self.events]
