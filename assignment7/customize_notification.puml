@@ -7,9 +7,13 @@ start
 :Ensure the program is installed;
 :Load user data and settings; 
 
+|User|
+:Hide Welcome Screen;
+
+|System|
+:Display homepage;
 
 |User|
-:Navigate to main calendar;
 :Click task to edit reminder settings;
 
 |System|
@@ -37,17 +41,19 @@ endif
 
 :Click "Confirm";
 
-|System|
+|Notification|
 :Validate data;
 if (Is data entered valid?) then (Yes)
 
 else (No)
+  :Display error message; 
+  :Return to homepage;
   stop
  endif
 
+:Update task notification settings; 
 
 |System|
-:Update task notification settings; 
 :Display task on main calendar;
 
 |User|
