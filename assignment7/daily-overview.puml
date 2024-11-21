@@ -4,55 +4,65 @@ start
 :Open the app;
 
 |System|
-:Ensure the program is installed;
-:Load user data and settings;
+:Verify that the app is installed;
+:Load user settings;
 
 |User|
 :Navigate to the main screen;
 :Select "DAILY OVERVIEW";
 
 |System|
+:Request task data from Tasks;
+
+|Tasks|
 :Fetch tasks for the current day;
 if (Are tasks scheduled for today?) then (Yes)
   :Sort tasks by priority and due time;
   :Prepare the list of tasks;
 else (No)
-  :Display "No tasks scheduled for today";
+  :Notify System to display "No tasks scheduled for today";
   stop
 endif
 
+|System|
 :Display the daily tasks list;
 
 |User|
 :Review the tasks for today;
 
 |System|
-if (User selects a task?) then (Yes)
-  :Display task details;
+if (Task selected?) then (Yes)
+  :Request task details from Tasks;
 else (No)
 endif
 
-if (Task details displayed correctly?) then (Yes)
-  :Allow editing or marking task as completed;
+|Tasks|
+if (Task details retrieved successfully?) then (Yes)
+  :Return task details to System;
 else (No)
-  :Show error message;
+  :Notify System to display error message;
 endif
+
+|System|
+:Display task details;
 
 |User|
 if (Mark task as completed?) then (Yes)
-  :Select "Complete Task";
+  :Click "Complete Task";
+
   |System|
+  :Request task status update from Tasks;
+
+  |Tasks|
   :Update task status to "Completed";
 else (No)
 endif
 
 |System|
 :Save task changes;
-:Update analytics data;
 
 |User|
 :Close the daily overview;
 
 stop
 @enduml
-

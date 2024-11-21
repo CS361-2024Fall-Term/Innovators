@@ -4,14 +4,17 @@ start
 :Open the app;
 
 |System|
-:Ensure the program is installed;
-:Load user data and settings;
+:Verify that the app is installed;
+:Load user settings;
 
 |User|
 :Navigate to the main calendar;
 :Select "ADD TASK";
 
 |System|
+:Request task creation form from Tasks;
+
+|Tasks|
 :Display task creation form;
 
 |User|
@@ -28,21 +31,40 @@ end note
 :Select "CONFIRM";
 
 |System|
+:Send task data to Tasks for validation;
+
+|Tasks|
 :Validate task data;
 if (Is task data valid?) then (Yes)
-  :Save task to database;
+  :Save task to the database;
   :Add task to calendar;
+  :Notify System of success;
 else (No)
-  :Show error message;
+  :Notify System of error;
   stop
 endif
 
+|System|
+if (Task creation successful?) then (Yes)
+  :Display success message;
+else (No)
+  :Display error message;
+endif
+
 |User|
-:Repeat the task creation process for all test tasks;
-:Complete each created task by marking it as done;
+:Repeat task creation for all test tasks;
+:Mark each task as completed;
 
 |System|
+:Notify Tasks to update task statuses;
+
+|Tasks|
 :Update task statuses;
+
+|System|
+:Notify Analytics to recalculate analytics;
+
+|Analytics|
 :Recalculate analytics data;
 
 |User|
@@ -50,33 +72,39 @@ endif
 :Select "ANALYTICS";
 
 |System|
+:Request analytics data from Tasks;
+
+|Tasks|
 :Fetch analytics data;
-if (Completion time data correct?) then (Yes)
+
+|System|
+:Display analytics data;
+if (Completion time correct?) then (Yes)
   :Display completion time;
 else (No)
   :Show error message for completion time;
 endif
 
-if (Priority level data correct?) then (Yes)
+if (Priority level correct?) then (Yes)
   :Display priority levels;
 else (No)
   :Show error message for priority levels;
 endif
 
-if (Average time data correct?) then (Yes)
-  :Display average time to complete tasks;
+if (Average time correct?) then (Yes)
+  :Display average completion time;
 else (No)
   :Show error message for average time;
 endif
 
-if (Task category data correct?) then (Yes)
+if (Task category correct?) then (Yes)
   :Display task categories;
 else (No)
   :Show error message for task categories;
 endif
 
-if (Completion rate data correct?) then (Yes)
-  :Display task completion rate;
+if (Completion rate correct?) then (Yes)
+  :Display completion rate;
 else (No)
   :Show error message for completion rate;
 endif
@@ -84,7 +112,7 @@ endif
 if (Peak productivity data correct?) then (Yes)
   :Display peak productivity times;
 else (No)
-  :Show error message for peak productivity times;
+  :Show error message for productivity times;
 endif
 
 |User|
