@@ -9,7 +9,7 @@ start
 :Open the program;
 :Navigate to main calendar (home page);
 
-|System|
+|Calendar|
 :Load tasks;
 :Display calendar;
 
@@ -19,7 +19,7 @@ start
 :Select current date on calendar;
 :Select "GET DATE";
 
-|System|
+|Calendar|
 if (Search type?) then (Date)
   :Get all tasks with matching Date;
 elseif (Search type?) then (Category)
@@ -31,14 +31,12 @@ endif
 
 |User|
 :Verify that the valid tasks exist in the results;
-
-|User|
 :Select "GET TASKS";
 :Select "CATEGORY" option;
 :Select the "ACADEMIC" tag;
 :Select "GET CATEGORY";
 
-|System|
+|Calendar|
 if (Search type?) then (Date)
   :Get all tasks with matching Date;
 elseif (Search type?) then (Category)
