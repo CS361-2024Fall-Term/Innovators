@@ -6,13 +6,15 @@ start
 
 |System|
 :Ensure the program is installed;
+
+|Calendar|
 :Load user data and settings;
 
 |User|
 :Navigate to the main screen;
 :Click "Add task";
 
-|System|
+|Calendar|
 :Display task creation form;
 
 |User|
@@ -31,12 +33,14 @@ start
 |System|
 if (Task data valid?) then (yes)
   :Save task;
-  :Add task to calendar;
-  :Update Daily Overview;
 else (no)
   :Show error message;
   stop
 endif
+
+|Calendar|
+:Add task to calendar;
+:Update Daily Overview;
 
 |User|
 :Wait 31 seconds;
@@ -44,7 +48,7 @@ endif
 |User|
 :Navigate to Daily Overview;
 
-|System|
+|Daily Overview|
 :Display Daily Overview;
 
 |User|
