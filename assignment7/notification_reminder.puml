@@ -7,26 +7,46 @@ start
 
 |User|
 :Open the program;
+
+|Settings|
 :Sign up for the app;
 
+note right
+Sign up Fields:
+- Name
+- Email
+- Date of birth
+- <color:red> Phone number </color>
+- Passowrd
+end note
+
 |System|
-:Add your phone number;
+:Validate sign up info;
 
 |User|
 :Navigate to main calendar (home page);
 
 |User|
-:Add the task or event I want with desired due date;
+:Add the task with desired due date;
 :Select "CONFIRM";
 
 |System|
-:Validate new task or event data;
+:Validate task data;
+
+note right
+- Name: test task:
+- Priority
+- Date
+- Category
+- Description
+end note
 
 |System|
 if (data valid?) then (yes)
   :An SMS will be received 10 minutes before the due date;
 else (no)
   :Show error message;
+  :Return to main calendar;
 stop
 endif
  

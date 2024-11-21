@@ -9,33 +9,34 @@ start
 :Open the program;
 :Navigate to main calendar (home page);
 
-|System|
+|Calendar|
 :Display calendar;
 
 |User|
 :Select "ADD EVENT";
 
-|System|
-:Display EVENT creation form;
+|Calendar|
+:Display event creation form;
 
 |User|
 :Fill out event fields:
 - Name: test Event:
-- Description: This is a test event for test case 005!;
+- Description: This is a test event for test case 005!
 - Start Time: [current time]:
 - End Time: [current time + 5 minutes]:
 - Location: Corvallis
 :Select "CONFIRM";
 
-|System|
+|Calendar|
 :Validate event data;
 
-|System|
+|Event|
 if (Event data valid?) then (yes)
   :Save event;
-  :Add Event to calendar;
+  :Add event to calendar list;
 else (no)
   :Show error message;
+  :Return to main calendar;
   stop
 endif
 
@@ -44,9 +45,9 @@ endif
 :Select current date on calendar;
 :Select "GET DATE";
 
-|System|
+|Calendar|
 if (Search type?) then (Time)
-  :Get all events with matching time;
+  :Get all events with matching Date;
 elseif (Search type?) then (Name)
   :Get all events with matching Name;
 endif
