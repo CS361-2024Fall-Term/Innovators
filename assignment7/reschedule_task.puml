@@ -8,17 +8,22 @@ start
 :Load user data and settings; 
 
 |User|
-:Navigate to main calendar;
+:Hide Welcome Screen;
 
 |System|
+:Display homepage;
+
+|Task|
 :Check for missed or incomplete tasks; 
 
 |User|
 :Click on the task on the calendar to reschedule;
 :Click "Reschedule" button; 
 
-|System|
+|Task|
 :Generate rescheduling suggestions; 
+
+|System|
 :Display suggestions to user; 
 
 |User|
@@ -34,12 +39,16 @@ else (Manual entry)
 if (Is date entered valid?) then (Yes)
 
 else (No)
+:Display error message; 
+:Return to homepage; 
   stop
  endif
  endif
 
-|System|
+|Task|
 :Update task due date; 
+
+|System|
 :Display task on main calendar;
 
 |User|
