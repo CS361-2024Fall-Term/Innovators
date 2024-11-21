@@ -42,7 +42,7 @@ class DailyOverview:
             for task in today_tasks:
                 overview_text += f"- {task.name}: {task.description} (Priority: {task.priority})\n"
         else:
-            overview_text += "Nt tasks for today.\n"
+            overview_text += "No tasks for today.\n"
 
         if today_events:
             overview_text += "Events:\n"
