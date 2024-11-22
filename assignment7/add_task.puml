@@ -1,12 +1,6 @@
 @startuml
 |User|
 start
-
-|System|
-:Ensure program is installed;
-
-|User|
-:Open the program;
 :Navigate to main calendar (home page);
 
 |Calendar|
@@ -40,18 +34,23 @@ else (no)
   stop
 endif
 
+|Calendar|
+:Update task list;
+
 |User|
 :Select "DATE" option;
 :Select current date on calendar;
 :Select "GET DATE";
 
 |Calendar|
-if (Search type?) then (Date)
+if (Search type) then (Date)
   :Get all tasks with matching Date;
-elseif (Search type?) then (Category)
-  :Get all tasks with matching Category;
-elseif (Search type?) then (Name)
-  :Get all tasks with matching Name;
+else (!Date)
+  if (Search type) then (Category)
+    :Get all tasks with matching Category;
+  else (!Category)
+    :Get all tasks with matching Name;
+  endif
 endif
 :Display tasks in the list;
 
