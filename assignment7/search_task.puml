@@ -1,4 +1,5 @@
 @startuml
+
 |User|
 start
 :Navigate to main calendar (home page);
