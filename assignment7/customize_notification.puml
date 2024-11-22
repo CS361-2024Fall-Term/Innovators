@@ -3,27 +3,27 @@
 start
 :Open the app; 
 
-|System|
+|Calendar|
 :Ensure the program is installed;
 :Load user data and settings; 
 
 |User|
 :Hide Welcome Screen;
 
-|System|
+|Calendar|
 :Display homepage;
 
 |User|
 :Click task to edit reminder settings;
 
-|System|
+|Calendar|
 :Display task page;
 
 |User|
 :Click "Edit";
 :Click "Notification Settings"; 
 
-|System|
+|Calendar|
 :Display notification settings page to user;
 
 
@@ -53,7 +53,7 @@ else (No)
 
 :Update task notification settings; 
 
-|System|
+|Calendar|
 :Display task on main calendar;
 
 |User|
