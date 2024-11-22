@@ -29,6 +29,11 @@ elseif (Search type?) then (Name)
 endif
 :Display gathered tasks in a list;
 
+note right
+If nothing was found
+a blank list is displayed
+end note
+
 |User|
 :Verify that the valid tasks exist in the results;
 :Select "GET TASKS";
