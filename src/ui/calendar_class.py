@@ -203,29 +203,29 @@ class Cal:
 
     def open_event_delete_form(self):
         # Pop up a new window for event deletion
-        task_window = tk.Toplevel(self.root)
-        task_window.title("Delete Event")
+        event_window = tk.Toplevel(self.root)
+        event_window.title("Delete Event")
 
         # Event identifying fields
-        tk.Label(task_window, text="Event Name:").pack()
-        name_entry = tk.Entry(task_window)
+        tk.Label(event_window, text="Event Name:").pack()
+        name_entry = tk.Entry(event_window)
         name_entry.pack()
 
-        tk.Label(task_window, text="Start Time (YYYY-MM-DD):").pack()
-        start_time_entry = tk.Entry(task_window)
+        tk.Label(event_window, text="Start Time (YYYY-MM-DD):").pack()
+        start_time_entry = tk.Entry(event_window)
         start_time_entry.pack()
 
-        tk.Label(task_window, text="End Time (YYYY-MM-DD):").pack()
-        end_time_entry = tk.Entry(task_window)
+        tk.Label(event_window, text="End Time (YYYY-MM-DD):").pack()
+        end_time_entry = tk.Entry(event_window)
         end_time_entry.pack()
 
         # Submit button
-        submit_button = tk.Button(task_window, text="Delete Event", 
+        submit_button = tk.Button(event_window, text="Delete Event", 
                                 command=lambda: self.delete_event(
                                     name_entry.get(),
                                     start_time_entry.get(),
                                     end_time_entry.get(),
-                                    task_window
+                                    event_window
                                 ))
         submit_button.pack()
 
@@ -310,7 +310,7 @@ class Cal:
          #for every match delete them
         if matching_events:
             for event in matching_events:
-                self.event.remove(event)
+                self.events.remove(event)
                 Cal.event_num -= 1
             print(f"Deleted {len(matching_events)} event(s) with name '{name}', start time '{start_time}', and end time '{end_time}'.") 
         else:
