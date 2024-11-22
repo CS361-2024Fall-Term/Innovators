@@ -1,5 +1,6 @@
 # calendar class
 import tkinter as tk
+import os
 import json
 from tkcalendar import Calendar
 from tkinter import ttk
@@ -340,21 +341,25 @@ class Cal:
         print(f"Tasks saved to file: {filename}")
 
     def load_tasks_from_file(self, filename="src/tasks.json"):
-        # Load tasks from a JSON file
+        # Ensure the directory exists
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+
         try:
             with open(filename, 'r') as f:
                 tasks_data = json.load(f)
-            
+
             # Convert each dictionary back to a Tasks object
-            self.tasks = [tasks.Tasks(**task_data) for task_data in tasks_data]  # Corrected here
+            self.tasks = [tasks.Tasks(**task_data) for task_data in tasks_data]  # Replace with your actual Tasks class
             self.set_task_num(len(self.tasks))
             print(f"{len(self.tasks)} tasks loaded from file.")
         except FileNotFoundError:
-            print("No saved tasks file found; starting with an empty list.")
-            self.events = []
+            print(f"File '{filename}' not found. Creating a new file.")
+            self.tasks = []
+            self.save_tasks_to_file(filename)  # Create the file with an empty list
         except json.JSONDecodeError:
-            print("The file contains invalid JSON. Starting with an empty list.")
-            self.events = []
+            print(f"The file '{filename}' contains invalid JSON. Starting with an empty list.")
+            self.tasks = []
+            self.save_tasks_to_file(filename)
 
     def save_events_to_file(self, filename="./src/events.json"):
         # Save all events to a JSON file
@@ -367,23 +372,25 @@ class Cal:
         print(f"Events saved to file: {filename}")
 
     def load_events_from_file(self, filename="src/events.json"):
-        # Load events from a JSON file
+        # Ensure the directory exists
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+
         try:
             with open(filename, 'r') as f:
                 events_data = json.load(f)
-            
-            # Convert each dictionary back to a Events object
-            self.events = [event.Event(**event_data) for event_data in events_data]  # Corrected here
+
+            # Convert each dictionary back to an Event object
+            self.events = [event.Event(**event_data) for event_data in events_data]  # Replace with your actual Event class
             self.set_event_num(len(self.events))
             print(f"{len(self.events)} events loaded from file.")
         except FileNotFoundError:
-            print("No saved events file found; starting with an empty list.")
+            print(f"File '{filename}' not found. Creating a new file.")
             self.events = []
+            self.save_events_to_file(filename)  # Create the file with an empty list
         except json.JSONDecodeError:
-            print("The file contains invalid JSON. Starting with an empty list.")
+            print(f"The file '{filename}' contains invalid JSON. Starting with an empty list.")
             self.events = []
-
-
+            self.save_events_to_file(filename)
 
     def get_task_num(self):
         return self.task_num
