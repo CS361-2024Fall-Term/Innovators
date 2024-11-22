@@ -2,42 +2,56 @@
 |User|
 start
 
-|System|
-:Ensure program is installed;
 
 |User|
-:Open the program;
-:Navigate to the home page by clicking "Start Your Journey";
+:Navigate to main calendar (home page);
 
-|System|
+|Calendar|
+:Load Tasks;
 :Display home page;
 
 |User|
-:Select "Settings";
+:Select "Preferences";
 
-|System|
-:Display settings form;
+|Calendar|
+:Hide Homepage;
+
+|Preferences|
+:Load Preferences from file;
+:Display Preferences page;
 
 |User|
 :Select "Categories";
 
-|System|
+|Preferences|
 :Display categories list;
 
 |User|
 :Select color;
 
-|System|
-:Display color dropdown;
+|Calendar|
+:Display color dropdown including:
+-RED:
+-GREEN:
+-BLUE:
+-PURPLE:
+-ORANGE;
 
 |User|
 :Select "RED" from dropdown;
 
-|System|
+|Preferences|
 :Update category color to red;
+:Write new category color to preferences file;
 
 |User|
-:Navigate to home page by clicking "back";
+:Select "Done";
+
+|Preferences|
+:Hide preferences page;
+
+|Calendar|
+:Show HomePage;
 
 |User|
 :Verify that "test task" appears as red in the task list;

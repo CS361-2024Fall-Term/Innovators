@@ -2,45 +2,49 @@
 |User|
 start
 
-|System|
-:Ensure program is installed;
-
 |User|
-:Open the program;
 :Navigate to main calendar (home page);
 
-|System|
-:Display calendar;
+|Calendar|
+:Load Tasks;
+:Display Calendar;
+:Display TaskList;
 
 |User|
-:Select the task you want to set the priority of from the task list;
+:Select the "TestTask" from task list;
 
-|System|
-:Display task update from;
+|Calendar|
+:Display option to edit task;
 
 |User|
-:Select the Priority field:
-- Priority: [empty]:
-:Select High Priority
-:Select "CONFIRM";
+:Select "edit task";
 
-|System|
-:Validate updated task data;
+|Calendar|
+:Display "Edit Task" form;
 
-|System|
-if (Task data valid?) then (yes)
-  :Update task with new priority;
-  :Update displayed task priority;
-  :Update priority sorting of task in task list;
-else (no)
-  :Show error message;
-  stop
-endif
+|User|
+:Select the field;
+- Priority: medium;
 
+|Calendar|
+:Display dropdown including:
+- Low Priority:
+- Medium Priority:
+- High Priority;
+
+|User|
+:Select High Priority;
+:Select "Done";
+
+|Calendar|
+:Hide "Edit Task" form;
+
+|Task|
+:Update "TestTask" priority to "High Priority;
 
 |User|
 :Verify that the tasks priority has changed in the task list;
-:Verify that the tasks sorting in task list has updated;
+:Verify that the tasks sorting in task list has updated so it appears first;
 stop
 
 @enduml
