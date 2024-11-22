@@ -21,7 +21,7 @@ class WelcomeScreen:
         image_label.pack(pady=(20, 10)) 
 
         # Empty frame for top padding
-        top_padding = tk.Frame(self.frame, height=170)  # Height for top padding
+        top_padding = tk.Frame(self.frame, height=70)  # Height for top padding
         top_padding.pack()
 
         # Welcome message and button
