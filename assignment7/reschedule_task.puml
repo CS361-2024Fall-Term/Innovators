@@ -3,14 +3,14 @@
 start
 :Open the app; 
 
-|System|
+|Calendar|
 :Ensure the program is installed;
 :Load user data and settings; 
 
 |User|
 :Hide Welcome Screen;
 
-|System|
+|Calendar|
 :Display homepage;
 
 |Task|
@@ -23,7 +23,7 @@ start
 |Task|
 :Generate rescheduling suggestions; 
 
-|System|
+|Calendar|
 :Display suggestions to user; 
 
 |User|
@@ -34,7 +34,7 @@ else (Manual entry)
 
   :Manually enter date;
 
-|System|
+|Calendar|
 :Validate date;
 if (Is date entered valid?) then (Yes)
 
@@ -48,7 +48,7 @@ else (No)
 |Task|
 :Update task due date; 
 
-|System|
+|Calendar|
 :Display task on main calendar;
 
 |User|
