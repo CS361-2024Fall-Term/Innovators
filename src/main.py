@@ -2,6 +2,7 @@ import tkinter as tk
 from ui.welcome_screen import WelcomeScreen
 from ui.calendar_class import Cal
 from ui.daily_overview import DailyOverview
+from ui.dynamic_sizing import DynamicSizing
 
 # Function that defines the continue function
 def continue_to_calendar():
@@ -12,6 +13,9 @@ def continue_to_calendar():
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("EasyCal")
+
+    # Dynamically size the window upon creation cause its cool
+    DynamicSizing.set_window_size(root)
 
     # Create welcome screen with continue button
     welcome_screen = WelcomeScreen(root, continue_to_calendar)

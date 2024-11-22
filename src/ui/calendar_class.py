@@ -1,10 +1,10 @@
 # calendar class
 import tkinter as tk
+import json
 from tkcalendar import Calendar
 from tkinter import ttk
 from datetime import datetime
 from models import tasks, event
-import json
 
 class Cal:
     # Use the getters and setters
@@ -13,24 +13,17 @@ class Cal:
 
     # Initalizer
     def __init__(self, root, tasks, events):
-        self.root = root
+        # self.root = root
         self.tasks = tasks if isinstance(tasks, list) else []  # Ensure tasks is a list
-        self.events = events
-        self.frame = tk.Frame(root)
+        self.events = events if isinstance(events, list) else []  # Ensure events is a list
+        
+        # Main calendar frame
+        self.frame = tk.Frame(root)     # bg="lightblue"
+        self.frame.pack(side="left", fill="both", expand=True)
 
         # Retrieve tasks/events from file
         self.load_tasks_from_file()
         self.load_events_from_file()
-        
-        # Set up device screen size
-        self.screen_width, self.screen_height = self._get_screen_size()
-        self._set_window_size()
-
-        # Calendar padding sizes
-        padx_percent = 0.015
-        pady_percent = 0.019
-        padx = int(self.screen_width * padx_percent)
-        pady = int(self.screen_height * pady_percent)
 
         # Create and customize the calendar widget within `self.frame`
         self.cal = Calendar(
@@ -49,53 +42,44 @@ class Cal:
             daywidth=10,
             dayheight=10
         )
-        self.cal.pack(padx=padx, pady=pady, anchor='nw')
+        self.cal.pack(padx=10, pady=10, anchor='nw')
         
         # Set up other UI components in `self.frame`
         self._setup_widgets()
         self.show_date()
 
-    # Helper function for the
-    def _get_screen_size(self):
-        return self.root.winfo_screenwidth(), self.root.winfo_screenheight()
-
-    # Window sizing
-    def _set_window_size(self):
-        # Center the window
-        self.root.withdraw()
-        
-        window_width = int(self.screen_width * 0.5)
-        window_height = int(self.screen_height * 0.5)
-        
-        position_right = int(self.screen_width / 2 - window_width / 2)
-        position_down = int(self.screen_height / 2 - window_height / 2)
-        
-        self.root.geometry(f"{window_width}x{window_height}+{position_right}+{position_down}")
-        self.root.deiconify()
-
     # Button setup for the calendar
     def _setup_widgets(self):
-        # Button to save the selected date within `self.frame`
-        save_date_button = tk.Button(self.frame, text="Get Date", command=self.save_selected_date, font="Arial 12")
-        save_date_button.pack(padx=10, pady=5, anchor='nw')
+        # Sub-frame for buttons (inside self.frame)
+        self.button_frame = tk.Frame(self.frame)
+        self.button_frame.pack(anchor="nw", padx=5, pady=5)
 
-        create_task_button = tk.Button(self.frame, text="Add Task", command=self.open_task_creation_form, font="Arial 12")
-        create_task_button.pack(padx=10, pady=5, anchor='nw')
+        # Button to save the selected date
+        save_date_button = tk.Button(self.button_frame, text="Get Date", command=self.save_selected_date, font="Arial 12")
+        save_date_button.pack(side="left", padx=5)
 
-        create_event_button = tk.Button(self.frame, text="Add Event", command=self.open_event_creation_form, font="Arial 12")
-        create_event_button.pack(padx=10, pady=5, anchor='nw')
+        # Button to create a task
+        create_task_button = tk.Button(self.button_frame, text="Add Task", command=self.open_task_creation_form, font="Arial 12")
+        create_task_button.pack(side="left", padx=5)
 
-        delete_task_button = tk.Button(self.frame, text="Delete Task", command=self.open_task_delete_form, font="Arial 12")
-        delete_task_button.pack(padx=10, pady=5, anchor='nw')
+        # Button to create an event
+        create_event_button = tk.Button(self.button_frame, text="Add Event", command=self.open_event_creation_form, font="Arial 12")
+        create_event_button.pack(side="left", padx=5)
 
-        delete_event_button = tk.Button(self.frame, text="Delete Event", command=self.open_event_delete_form, font="Arial 12")
-        delete_event_button.pack(padx=10, pady=5, anchor='nw')
+        # Button to delete a task
+        delete_task_button = tk.Button(self.button_frame, text="Delete Task", command=self.open_task_delete_form, font="Arial 12")
+        delete_task_button.pack(side="left", padx=5)
 
+        # Button to delete an event
+        delete_event_button = tk.Button(self.button_frame, text="Delete Event", command=self.open_event_delete_form, font="Arial 12")
+        delete_event_button.pack(side="left", padx=5)
+
+        # Labels for selected date
         self.selected_date_label = tk.Label(self.frame, text="Date:", font="Arial 12 bold")
-        self.selected_date_label.pack(padx=10, pady=5, anchor='nw')
+        self.selected_date_label.pack(anchor="nw", padx=5, pady=5)
 
         self.date_label = tk.Label(self.frame, text="", font="Arial 12 bold")
-        self.date_label.pack(padx=10, pady=5, anchor='nw')
+        self.date_label.pack(anchor="nw", padx=5, pady=5)
 
     # Show current date
     def show_date(self):
@@ -415,7 +399,7 @@ class Cal:
 
     # Show calendar
     def show(self):
-        self.frame.pack(fill="both", expand=True)
+        self.frame.pack(side="left", fill="both", expand=True)
 
     # Hide calendar
     def hide(self):

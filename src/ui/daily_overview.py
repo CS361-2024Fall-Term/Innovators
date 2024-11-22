@@ -4,14 +4,13 @@ from datetime import datetime
 class DailyOverview:
     def __init__(self, root, tasks, events):
         # Initialization of Daily Overview class
-
-        self.root = root
+        # self.root = root
         self.tasks = tasks
         self.events = events
 
         # Set the frame for daily overview
-        self.frame = tk.Frame(root)
-        self.frame.pack(side="right", fill="both", expand=True, padx=10, pady=10)
+        self.frame = tk.Frame(root)     # bg="lightgreen"
+        self.frame.pack(side="right", fill="both", expand=True)
 
         # Add a label to display today's overview
         self.title_label = tk.Label(self.frame, text="Today's Overview", font=("Arial", 16, "bold"))
@@ -61,7 +60,7 @@ class DailyOverview:
     
     # Show the daily overview
     def show(self):
-        self.frame.pack(fill="both", expand=True)
+        self.frame.pack(side="right", fill="both", expand=True)
 
     # Hide the daily overview
     def hide(self):
