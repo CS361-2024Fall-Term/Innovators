@@ -10,6 +10,7 @@ start
 :Select "ADD TASK";
 
 |Calendar|
+:Load tasks;
 :Display task creation form;
 
 |User|
