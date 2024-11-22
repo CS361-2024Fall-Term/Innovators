@@ -13,7 +13,7 @@ class Cal:
 
     # Initalizer
     def __init__(self, root, tasks, events):
-        # self.root = root
+        self.root = root
         self.tasks = tasks if isinstance(tasks, list) else []  # Ensure tasks is a list
         self.events = events if isinstance(events, list) else []  # Ensure events is a list
         

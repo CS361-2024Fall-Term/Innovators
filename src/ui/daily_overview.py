@@ -4,7 +4,7 @@ from datetime import datetime
 class DailyOverview:
     def __init__(self, root, tasks, events):
         # Initialization of Daily Overview class
-        # self.root = root
+        self.root = root
         self.tasks = tasks
         self.events = events
 
