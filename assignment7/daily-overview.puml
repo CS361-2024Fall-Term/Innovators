@@ -1,68 +1,48 @@
 @startuml Daily_Overview
 |User|
 start
-:Open the app;
-
-|System|
-:Verify that the app is installed;
-:Load user settings;
-
-|User|
-:Navigate to the main screen;
+:Navigate to main screen;
 :Select "DAILY OVERVIEW";
 
-|System|
-:Request task data from Tasks;
+|Calendar|
+:Fetch tasks for the current day;
 
 |Tasks|
-:Fetch tasks for the current day;
 if (Are tasks scheduled for today?) then (Yes)
   :Sort tasks by priority and due time;
-  :Prepare the list of tasks;
+  :Prepare task list;
 else (No)
-  :Notify System to display "No tasks scheduled for today";
+  :Return "No tasks scheduled";
   stop
 endif
 
-|System|
-:Display the daily tasks list;
+|Calendar|
+:Display task list;
 
 |User|
-:Review the tasks for today;
-
-|System|
-if (Task selected?) then (Yes)
-  :Request task details from Tasks;
-else (No)
-endif
+:Review the tasks;
 
 |Tasks|
-if (Task details retrieved successfully?) then (Yes)
-  :Return task details to System;
+if (Task selected?) then (Yes)
+  :Retrieve task details;
 else (No)
-  :Notify System to display error message;
 endif
 
-|System|
-:Display task details;
+|Calendar|
+if (Task details retrieved successfully?) then (Yes)
+  :Allow editing or marking task as completed;
+else (No)
+  :Display error message;
+endif
 
 |User|
 if (Mark task as completed?) then (Yes)
   :Click "Complete Task";
 
-  |System|
-  :Request task status update from Tasks;
-
   |Tasks|
   :Update task status to "Completed";
 else (No)
 endif
-
-|System|
-:Save task changes;
-
-|User|
-:Close the daily overview;
 
 stop
 @enduml
