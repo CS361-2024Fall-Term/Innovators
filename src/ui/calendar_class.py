@@ -116,6 +116,7 @@ class Cal:
               if event.start_time == formatted_date
         ]
 
+        # Add a frame for each task
         if day_tasks:
             tk.Label(task_window, text="Tasks:", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
 
@@ -132,8 +133,8 @@ class Cal:
                 edit_button.pack(side="right")
         else:
             tk.Label(task_window, text="No tasks for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
-            
 
+        # Add a frame for each event
         if day_events:
             tk.Label(task_window, text="Events:", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
 
@@ -149,7 +150,7 @@ class Cal:
                 edit_button = tk.Button(event_frame, text="Edit", command=lambda t=event: self.edit_event(t))
                 edit_button.pack(side="right")
         else:
-            tk.Label(task_window, text="No tasks for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            tk.Label(task_window, text="No events for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
     def open_task_creation_form(self):
         # Pop up a new window for task input
