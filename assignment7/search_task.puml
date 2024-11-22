@@ -1,12 +1,7 @@
 @startuml
+
 |User|
 start
-
-|System|
-:Ensure program is installed;
-
-|User|
-:Open the program;
 :Navigate to main calendar (home page);
 
 |Calendar|
@@ -20,14 +15,16 @@ start
 :Select "GET DATE";
 
 |Calendar|
-if (Search type?) then (Date)
+if (Search type) then (Date)
   :Get all tasks with matching Date;
-elseif (Search type?) then (Category)
-  :Get all tasks with matching Category;
-elseif (Search type?) then (Name)
-  :Get all tasks with matching Name;
+else (!Date)
+  if (Search type) then (Category)
+    :Get all tasks with matching Category;
+  else (!Category)
+    :Get all tasks with matching Name;
+  endif
 endif
-:Display gathered tasks in a list;
+:Display tasks in the list;
 
 note right
 If nothing was found
@@ -42,14 +39,21 @@ end note
 :Select "GET CATEGORY";
 
 |Calendar|
-if (Search type?) then (Date)
+if (Search type) then (Date)
   :Get all tasks with matching Date;
-elseif (Search type?) then (Category)
-  :Get all tasks with matching Category;
-elseif (Search type?) then (Name)
-  :Get all tasks with matching Name;
+else (!Date)
+  if (Search type) then (Category)
+    :Get all tasks with matching Category;
+  else (!Category)
+    :Get all tasks with matching Name;
+  endif
 endif
 :Display tasks in the list;
+
+note right
+If nothing was found
+a blank list is displayed
+end note
 
 |User|
 :Verify that the valid tasks exist in the results;
