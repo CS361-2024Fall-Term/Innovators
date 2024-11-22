@@ -75,6 +75,10 @@ class Cal:
         delete_event_button = tk.Button(self.button_frame, text="Delete Event", command=self.open_event_delete_form, font="Arial 12")
         delete_event_button.pack(side="left", padx=5)
 
+        # Button to list tasks/events for selected date
+        list_button = tk.Button(self.frame, text="List Tasks/Events", command=self.list_occurrences, font="Arial 12")
+        list_button.pack(padx=10, pady=5, anchor='nw')
+
         # Labels for selected date
         self.selected_date_label = tk.Label(self.frame, text="Date:", font="Arial 12 bold")
         self.selected_date_label.pack(anchor="nw", padx=5, pady=5)
@@ -91,6 +95,61 @@ class Cal:
     def save_selected_date(self):
         selected_date = self.cal.get_date()
         self.selected_date_label.config(text=f"Date: {selected_date}")
+
+    def list_occurrences(self):
+        self.load_tasks_from_file()
+        selected_date = self.cal.get_date()
+
+        # Pop up a new window 
+        task_window = tk.Toplevel(self.root)
+        task_window.title("Tasks and Events Happening On: " + selected_date)
+
+        # Convert selected_date from calendar to correct format
+        formatted_date = datetime.strptime(selected_date, "%m/%d/%y").strftime("%Y-%m-%d")
+
+        day_tasks = [
+            task for task in self.tasks 
+                if task.due_date == formatted_date
+        ]
+        day_events = [
+          event for event in self.events 
+              if event.start_time == formatted_date
+        ]
+
+        if day_tasks:
+            tk.Label(task_window, text="Tasks:", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
+
+            for task in day_tasks:
+                task_frame = tk.Frame(task_window, bd=2, relief="solid")
+                task_frame.pack(fill="x", padx=10, pady=5)
+
+                # Display task details
+                tk.Label(task_frame, text=f"Name: {task.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Description: {task.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+
+                # Edit button for each task
+                edit_button = tk.Button(task_frame, text="Edit", command=lambda t=task: self.edit_task(t))
+                edit_button.pack(side="right")
+        else:
+            tk.Label(task_window, text="No tasks for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            
+
+        if day_events:
+            tk.Label(task_window, text="Events:", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
+
+            for event in day_events:
+                event_frame = tk.Frame(task_window, bd=2, relief="solid")
+                event_frame.pack(fill="x", padx=10, pady=5)
+
+                # Display event details
+                tk.Label(event_frame, text=f"Name: {event.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(event_frame, text=f"Description: {event.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+
+                # Edit button for each event
+                edit_button = tk.Button(event_frame, text="Edit", command=lambda t=event: self.edit_event(t))
+                edit_button.pack(side="right")
+        else:
+            tk.Label(task_window, text="No tasks for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
     def open_task_creation_form(self):
         # Pop up a new window for task input
