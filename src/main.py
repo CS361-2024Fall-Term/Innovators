@@ -1,10 +1,20 @@
-import sys
 import os
+import sys
+import time
 import tkinter as tk
 from ui.welcome_screen import WelcomeScreen
 from ui.calendar_class import Cal
 from ui.daily_overview import DailyOverview
 from ui.dynamic_sizing import DynamicSizing
+
+# Redirect to a log file for compiled program testing
+# Ensure the log file is created if it doesn't exist
+log_file = "./src/app.log"
+os.makedirs(os.path.dirname(log_file), exist_ok=True)
+sys.stdout = open(log_file, "a")
+sys.stderr = sys.stdout
+print("\n")
+print(time.strftime("%Y-%m-%d %H:%M:%S"))
 
 # Function that defines the continue function
 def continue_to_calendar():
@@ -15,13 +25,6 @@ def continue_to_calendar():
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("EasyCal")
-
-    # # Ensure the 'log' directory exists
-    # log_dir = './log'
-    # os.makedirs(log_dir, exist_ok=True)  # Creates the directory if it doesn't exist 
-
-    # # Redirect to a log
-    # sys.stdout = open('./log/application.log', 'w')
 
     # Dynamically size the window upon creation cause its cool
     DynamicSizing.set_window_size(root)
