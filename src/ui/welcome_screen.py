@@ -1,6 +1,8 @@
 # welcome screen class
 from PIL import Image, ImageTk
 import tkinter as tk
+import os
+import sys
 
 class WelcomeScreen:
     def __init__(self, root, continue_callback):
@@ -8,11 +10,21 @@ class WelcomeScreen:
         self.frame = tk.Frame(root)
         self.frame.pack(fill="both", expand=True)
 
-        pil_image = Image.open("./src/image.png")
-        
+        # Determine the base path depending on the runtime context
+        if getattr(sys, 'frozen', False):  # If running as a PyInstaller bundle
+            base_path = sys._MEIPASS
+        else:  # If running from the source code
+            base_path = os.path.dirname(os.path.abspath(__file__))
+
+        # Construct the dynamic image path
+        image_path = os.path.join(base_path, 'image.png')
+
+        # Load the image
+        pil_image = Image.open(image_path)
+
         # Resize the image to desired dimensions, e.g., 150x150 pixels
         pil_image = pil_image.resize((150, 150))
-        
+
         # Convert to Tkinter-compatible image
         self.image = ImageTk.PhotoImage(pil_image)
 

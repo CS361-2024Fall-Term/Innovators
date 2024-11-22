@@ -19,5 +19,3 @@ class Event:
 
     def get_location(self):
         return self.location
-  
-

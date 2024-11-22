@@ -45,5 +45,3 @@ class Tasks:
 
     def set_locaiton(self, location):
         self.location = location
-
-    

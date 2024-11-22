@@ -1,3 +1,5 @@
+import sys
+import os
 import tkinter as tk
 from ui.welcome_screen import WelcomeScreen
 from ui.calendar_class import Cal
@@ -13,6 +15,13 @@ def continue_to_calendar():
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("EasyCal")
+
+    # # Ensure the 'log' directory exists
+    # log_dir = './log'
+    # os.makedirs(log_dir, exist_ok=True)  # Creates the directory if it doesn't exist 
+
+    # # Redirect to a log
+    # sys.stdout = open('./log/application.log', 'w')
 
     # Dynamically size the window upon creation cause its cool
     DynamicSizing.set_window_size(root)
