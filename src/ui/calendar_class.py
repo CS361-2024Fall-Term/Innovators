@@ -6,6 +6,7 @@ from tkcalendar import Calendar
 from tkinter import ttk
 from datetime import datetime
 from models import tasks, event
+from config.preferences import Preferences
 
 class Cal:
     # Use the getters and setters
@@ -13,11 +14,12 @@ class Cal:
     event_num = 0
 
     # Initalizer
-    def __init__(self, root, tasks, events):
+    def __init__(self, root, tasks, events, pref, open_preferences):
         self.root = root
         self.tasks = tasks if isinstance(tasks, list) else []  # Ensure tasks is a list
         self.events = events if isinstance(events, list) else []  # Ensure events is a list
-        
+        self.pref = pref
+        self.open_preferences = open_preferences
         # Main calendar frame
         self.frame = tk.Frame(root)     # bg="lightblue"
         self.frame.pack(side="left", fill="both", expand=True)
@@ -71,6 +73,10 @@ class Cal:
         delete_event_button = tk.Button(self.button_frame, text="Delete Event", command=self.open_event_delete_form, font="Arial 12")
         delete_event_button.pack(side="left", padx=5)
 
+        # Button to open preferences
+        preferences_button = tk.Button(self.button_frame, text="Preferences", command=self.open_preferences, font="Arial 12")
+        preferences_button.pack(side="left", padx=5)
+
         # Button to list tasks/events for selected date
         list_button = tk.Button(self.frame, text="List Tasks/Events", command=self.list_occurrences, font="Arial 12")
         list_button.pack(padx=10, pady=5, anchor='nw')
@@ -87,6 +93,8 @@ class Cal:
     # def save_selected_date(self):
     #     selected_date = self.cal.get_date()
     #     self.selected_date_label.config(text=f"Date: {selected_date}")
+
+
 
     def list_occurrences(self):
         self.load_tasks_from_file()

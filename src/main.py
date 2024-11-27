@@ -6,6 +6,7 @@ from ui.welcome_screen import WelcomeScreen
 from ui.calendar_class import Cal
 from ui.daily_overview import DailyOverview
 from ui.dynamic_sizing import DynamicSizing
+from config.preferences import Preferences
 
 # Redirect to a log file for compiled program testing
 # Ensure the log file is created if it doesn't exist
@@ -19,8 +20,16 @@ print(time.strftime("%Y-%m-%d %H:%M:%S"))
 # Function that defines the continue function
 def continue_to_calendar():
     welcome_screen.hide()
+    pref.hide()
     calendar_app.show()
     daily_overview.show()
+
+    
+def open_preferences():
+    pref.show()
+    # Hide the daily overview
+    daily_overview.hide()
+    calendar_app.hide()
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -29,11 +38,22 @@ if __name__ == "__main__":
     # Dynamically size the window upon creation cause its cool
     DynamicSizing.set_window_size(root)
 
+    # Load the custom icon (replace 'path/to/icon.png' with your actual file path)
+    root.iconbitmap("./src/icon32.ico")
+    
     # Create welcome screen with continue button
     welcome_screen = WelcomeScreen(root, continue_to_calendar)
     
+
+    #Create preferences
+    pref = Preferences(root, continue_to_calendar)
+
+
     # Create a calendar object with an empty list of tasks and events
-    calendar_app = Cal(root, 0, 0)
+    calendar_app = Cal(root, 0, 0, pref, open_preferences)
+
+
+    
 
     # Create a DailyOverview object to display today's tasks and events
     daily_overview = DailyOverview(root, calendar_app.tasks, calendar_app.events)
@@ -42,6 +62,7 @@ if __name__ == "__main__":
     # Show only the welcome screen
     calendar_app.hide()
     daily_overview.hide()
+    pref.hide()
     welcome_screen.show()
 
     root.mainloop()
