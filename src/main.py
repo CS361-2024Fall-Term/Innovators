@@ -40,7 +40,6 @@ if __name__ == "__main__":
 
     # Load the custom icon (replace 'path/to/icon.png' with your actual file path)
     root.iconbitmap("./src/icon32.ico")
-    
     # Create welcome screen with continue button
     welcome_screen = WelcomeScreen(root, continue_to_calendar)
     
