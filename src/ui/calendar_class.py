@@ -33,7 +33,6 @@ class Cal:
             year=datetime.now().year,
             month=datetime.now().month,
             day=datetime.now().day,
-            showothermonthdays=False,
             font="Arial 14",
             background="lightblue",
             foreground="black",
@@ -78,6 +77,16 @@ class Cal:
 
         self.date_label = tk.Label(self.frame, text="", font="Arial 12 bold")
         self.date_label.pack(anchor="nw", padx=5, pady=5)
+
+    # Show current date
+    def show_date(self):
+        current_date = datetime.now().strftime("%m/%d/%y")
+        # self.date_label.config(text=f"Current Date: {current_date}")
+
+    # Example for date selection
+    # def save_selected_date(self):
+    #     selected_date = self.cal.get_date()
+    #     self.selected_date_label.config(text=f"Date: {selected_date}")
 
     def list_occurrences(self):
         self.load_tasks_from_file()
