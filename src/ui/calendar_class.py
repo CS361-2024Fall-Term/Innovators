@@ -33,6 +33,7 @@ class Cal:
             year=datetime.now().year,
             month=datetime.now().month,
             day=datetime.now().day,
+            showothermonthdays=False,
             font="Arial 14",
             background="lightblue",
             foreground="black",
@@ -47,17 +48,13 @@ class Cal:
         
         # Set up other UI components in `self.frame`
         self._setup_widgets()
-        self.show_date()
+        #self.show_date()
 
     # Button setup for the calendar
     def _setup_widgets(self):
         # Sub-frame for buttons (inside self.frame)
         self.button_frame = tk.Frame(self.frame)
         self.button_frame.pack(anchor="nw", padx=5, pady=5)
-
-        # Button to save the selected date
-        save_date_button = tk.Button(self.button_frame, text="Get Date", command=self.save_selected_date, font="Arial 12")
-        save_date_button.pack(side="left", padx=5)
 
         # Button to create a task
         create_task_button = tk.Button(self.button_frame, text="Add Task", command=self.open_task_creation_form, font="Arial 12")
@@ -79,22 +76,8 @@ class Cal:
         list_button = tk.Button(self.frame, text="List Tasks/Events", command=self.list_occurrences, font="Arial 12")
         list_button.pack(padx=10, pady=5, anchor='nw')
 
-        # Labels for selected date
-        self.selected_date_label = tk.Label(self.frame, text="Date:", font="Arial 12 bold")
-        self.selected_date_label.pack(anchor="nw", padx=5, pady=5)
-
         self.date_label = tk.Label(self.frame, text="", font="Arial 12 bold")
         self.date_label.pack(anchor="nw", padx=5, pady=5)
-
-    # Show current date
-    def show_date(self):
-        current_date = datetime.now().strftime("%m/%d/%y")
-        self.date_label.config(text=f"Current Date: {current_date}")
-
-    # Example for date selection
-    def save_selected_date(self):
-        selected_date = self.cal.get_date()
-        self.selected_date_label.config(text=f"Date: {selected_date}")
 
     def list_occurrences(self):
         self.load_tasks_from_file()
