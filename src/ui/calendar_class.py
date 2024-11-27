@@ -47,7 +47,7 @@ class Cal:
         
         # Set up other UI components in `self.frame`
         self._setup_widgets()
-        #self.show_date()
+        self.show_date()
 
     # Button setup for the calendar
     def _setup_widgets(self):
