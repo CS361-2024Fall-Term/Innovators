@@ -43,16 +43,11 @@ if __name__ == "__main__":
     # Create welcome screen with continue button
     welcome_screen = WelcomeScreen(root, continue_to_calendar)
     
-
     #Create preferences
     pref = Preferences(root, continue_to_calendar)
 
-
     # Create a calendar object with an empty list of tasks and events
     calendar_app = Cal(root, 0, 0, pref, open_preferences)
-
-
-    
 
     # Create a DailyOverview object to display today's tasks and events
     daily_overview = DailyOverview(root, calendar_app.tasks, calendar_app.events)

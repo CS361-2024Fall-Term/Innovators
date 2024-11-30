@@ -54,49 +54,123 @@ class Cal:
     # Button setup for the calendar
     def _setup_widgets(self):
         # Sub-frame for buttons (inside self.frame)
-        self.button_frame = tk.Frame(self.frame)
-        self.button_frame.pack(anchor="nw", padx=5, pady=5)
+        self.crud_frame = tk.Frame(self.frame)
+        self.crud_frame.pack(anchor="nw", padx=5, pady=5)
+
+        # Button frame for search buttons
+        self.search_frame = tk.Frame(self.frame)
+        self.search_frame.pack(anchor='nw', padx=5, pady=5)
 
         # Button to create a task
-        create_task_button = tk.Button(self.button_frame, text="Add Task", command=self.open_task_creation_form, font="Arial 12")
+        create_task_button = tk.Button(self.crud_frame, text="Add Task", command=self.open_task_creation_form, font="Arial 12")
         create_task_button.pack(side="left", padx=5)
 
         # Button to create an event
-        create_event_button = tk.Button(self.button_frame, text="Add Event", command=self.open_event_creation_form, font="Arial 12")
+        create_event_button = tk.Button(self.crud_frame, text="Add Event", command=self.open_event_creation_form, font="Arial 12")
         create_event_button.pack(side="left", padx=5)
 
         # Button to delete a task
-        delete_task_button = tk.Button(self.button_frame, text="Delete Task", command=self.open_task_delete_form, font="Arial 12")
+        delete_task_button = tk.Button(self.crud_frame, text="Delete Task", command=self.open_task_delete_form, font="Arial 12")
         delete_task_button.pack(side="left", padx=5)
 
         # Button to delete an event
-        delete_event_button = tk.Button(self.button_frame, text="Delete Event", command=self.open_event_delete_form, font="Arial 12")
+        delete_event_button = tk.Button(self.crud_frame, text="Delete Event", command=self.open_event_delete_form, font="Arial 12")
         delete_event_button.pack(side="left", padx=5)
 
         # Button to open preferences
-        preferences_button = tk.Button(self.button_frame, text="Preferences", command=self.open_preferences, font="Arial 12")
+        preferences_button = tk.Button(self.crud_frame, text="Preferences", command=self.open_preferences, font="Arial 12")
         preferences_button.pack(side="left", padx=5)
 
         # Button to list tasks/events for selected date
-        list_button = tk.Button(self.frame, text="List Tasks/Events", command=self.list_occurrences, font="Arial 12")
-        list_button.pack(padx=10, pady=5, anchor='nw')
+        list_button = tk.Button(self.search_frame, text="Filter by Date", command=self.filter_by_date, font="Arial 12")
+        list_button.pack(side="left", padx=5)
 
-        self.date_label = tk.Label(self.frame, text="", font="Arial 12 bold")
-        self.date_label.pack(anchor="nw", padx=5, pady=5)
+        # Button to list tasks/events for selected category
+        list_button = tk.Button(self.search_frame, text="Filter by Category", command=self.filter_by_category_helper, font="Arial 12")
+        list_button.pack(side="left", padx=5)
 
     # Show current date
     def show_date(self):
         current_date = datetime.now().strftime("%m/%d/%y")
         # self.date_label.config(text=f"Current Date: {current_date}")
 
-    # Example for date selection
-    # def save_selected_date(self):
-    #     selected_date = self.cal.get_date()
-    #     self.selected_date_label.config(text=f"Date: {selected_date}")
+    def filter_by_category_helper(self):
+        # Need to create a window that has a single select
+        retrieve_category = tk.Toplevel(self.root)
+        retrieve_category.title("Select Category")
+
+        # Entry Field
+        tk.Label(retrieve_category, text="Category (School, Work, Personal, Other):").pack()
+        category_entry = ttk.Combobox(retrieve_category, values=["School", "Work", "Personal", "Other"])
+        category_entry.set("School")  # Set a default value
+        category_entry.pack()
+
+        # Submit button
+        submit_button = tk.Button(retrieve_category, text="Filter", 
+                                command=lambda: self.filter_by_category(
+                                    retrieve_category,
+                                    category_entry.get()
+                                    ))
+        submit_button.pack() 
+
+    # Filter by task category
+    def filter_by_category(self, retrieve_category, selected_category):
+        self.load_tasks_from_file()
+        retrieve_category.destroy()
+
+        # Pop up a new window 
+        task_window = tk.Toplevel(self.root)
+        task_window.title(selected_category + " Tasks and Events:")
 
 
+        day_tasks = [
+            task for task in self.tasks 
+                if task.category == selected_category
+        ]
 
-    def list_occurrences(self):
+        day_events = [
+        event for event in self.events 
+            if event.start_time == selected_category
+        ]
+
+        # Add a frame for each task
+        if day_tasks:
+            tk.Label(task_window, text="Tasks:", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
+
+            for task in day_tasks:
+                task_frame = tk.Frame(task_window, bd=2, relief="solid")
+                task_frame.pack(fill="x", padx=10, pady=5)
+
+                # Display task details
+                tk.Label(task_frame, text=f"Name: {task.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Description: {task.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+
+                # Edit button for each task
+                edit_button = tk.Button(task_frame, text="Edit", command=lambda t=task: self.edit_task(t))
+                edit_button.pack(side="right")
+        else:
+            tk.Label(task_window, text="No tasks for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+
+        # Add a frame for each event
+        if day_events:
+            tk.Label(task_window, text="Events:", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
+
+            for event in day_events:
+                event_frame = tk.Frame(task_window, bd=2, relief="solid")
+                event_frame.pack(fill="x", padx=10, pady=5)
+
+                # Display event details
+                tk.Label(event_frame, text=f"Name: {event.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(event_frame, text=f"Description: {event.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+
+                # Edit button for each event
+                edit_button = tk.Button(event_frame, text="Edit", command=lambda t=event: self.edit_event(t))
+                edit_button.pack(side="right")
+        else:
+            tk.Label(task_window, text="No events for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+
+
+    def filter_by_date(self):
         self.load_tasks_from_file()
         selected_date = self.cal.get_date()
 
@@ -171,6 +245,11 @@ class Cal:
         priority_entry.set("Medium")  # Set a default value
         priority_entry.pack()
 
+        tk.Label(task_window, text="Category (School, Work, Personal, Other):").pack()
+        category_entry = ttk.Combobox(task_window, values=["School", "Work", "Personal", "Other"])
+        category_entry.set("School")  # Set a default value
+        category_entry.pack()
+
         tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
         start_date_entry = tk.Entry(task_window)
         start_date_entry.pack()
@@ -185,6 +264,7 @@ class Cal:
                                     name_entry.get(),
                                     description_entry.get(),
                                     priority_entry.get(),
+                                    category_entry.get(),
                                     start_date_entry.get(),
                                     due_date_entry.get(),
                                     task_window
@@ -290,12 +370,12 @@ class Cal:
                                 ))
         submit_button.pack()
 
-    def add_task(self, name, description, priority, start_date, due_date, task_window):
+    def add_task(self, name, description, priority, category, start_date, due_date, task_window):
         # Create task object
-        new_task = tasks.Tasks(name, description, priority, None, None, "General", start_date, due_date, "not started", "N/A")
+        new_task = tasks.Tasks(name, description, priority, None, None, category, start_date, due_date, "not started", "N/A")
 
         # Add the new task to the tasks
-        self.tasks.append(new_task) 
+        self.tasks.append(new_task)
 
         # Save the task to JSON file (to be able to retrieve it later)
         self.save_tasks_to_file()
