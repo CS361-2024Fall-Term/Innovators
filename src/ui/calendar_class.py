@@ -385,6 +385,7 @@ class Cal:
 
         # Refresh the daily overview
         if hasattr(self, "daily_overview"):
+            self.daily_overview.tasks = self.tasks # Update daily overview
             self.daily_overview.update_overview()
 
         # Refresh the calendar
@@ -408,6 +409,7 @@ class Cal:
 
         # Refresh the daily overview
         if hasattr(self, "daily_overview"):
+            self.daily_overview.events = self.events # Update daily overview
             self.daily_overview.update_overview()
 
         # Refresh the calendar display
