@@ -32,6 +32,9 @@ class Cal:
         self.cal = Calendar(
             self.frame,
             selectmode="day",
+            firstweekday="sunday",
+            showothermonthdays=False,
+            showweeknumbers=False,
             year=datetime.now().year,
             month=datetime.now().month,
             day=datetime.now().day,
@@ -81,6 +84,10 @@ class Cal:
         preferences_button = tk.Button(self.crud_frame, text="Preferences", command=self.open_preferences, font="Arial 12")
         preferences_button.pack(side="left", padx=5)
 
+        # Button to list all tasks/events
+        list_button = tk.Button(self.search_frame, text="Get All Tasks/Events", command=self.get_all, font="Arial 12")
+        list_button.pack(side="left", padx=5)
+
         # Button to list tasks/events for selected date
         list_button = tk.Button(self.search_frame, text="Filter by Date", command=self.filter_by_date, font="Arial 12")
         list_button.pack(side="left", padx=5)
@@ -112,6 +119,53 @@ class Cal:
                                     category_entry.get()
                                     ))
         submit_button.pack() 
+
+    # Filter by task category
+    def get_all(self):
+        self.load_tasks_from_file()
+
+        # Pop up a new window 
+        task_window = tk.Toplevel(self.root)
+        task_window.title("All Tasks/Events")
+
+        day_tasks = [task for task in self.tasks]
+        day_events = [event for event in self.events]
+
+        # Add a frame for each task
+        if day_tasks:
+            tk.Label(task_window, text="Tasks:", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
+
+            for task in day_tasks:
+                task_frame = tk.Frame(task_window, bd=2, relief="solid")
+                task_frame.pack(fill="x", padx=10, pady=5)
+
+                # Display task details
+                tk.Label(task_frame, text=f"Name: {task.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Description: {task.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+
+                # Edit button for each task
+                edit_button = tk.Button(task_frame, text="Edit", command=lambda t=task: self.edit_task(t))
+                edit_button.pack(side="right")
+        else:
+            tk.Label(task_window, text="No tasks for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+
+        # Add a frame for each event
+        if day_events:
+            tk.Label(task_window, text="Events:", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
+
+            for event in day_events:
+                event_frame = tk.Frame(task_window, bd=2, relief="solid")
+                event_frame.pack(fill="x", padx=10, pady=5)
+
+                # Display event details
+                tk.Label(event_frame, text=f"Name: {event.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(event_frame, text=f"Description: {event.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+
+                # Edit button for each event
+                edit_button = tk.Button(event_frame, text="Edit", command=lambda t=event: self.edit_event(t))
+                edit_button.pack(side="right")
+        else:
+            tk.Label(task_window, text="No events for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
     # Filter by task category
     def filter_by_category(self, retrieve_category, selected_category):
@@ -168,7 +222,6 @@ class Cal:
                 edit_button.pack(side="right")
         else:
             tk.Label(task_window, text="No events for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
-
 
     def filter_by_date(self):
         self.load_tasks_from_file()
@@ -494,6 +547,7 @@ class Cal:
             self.tasks = [tasks.Tasks(**task_data) for task_data in tasks_data]  # Replace with your actual Tasks class
             self.set_task_num(len(self.tasks))
             print(f"{len(self.tasks)} tasks loaded from file.")
+            #self.daily_overview.update_overview()
         except FileNotFoundError:
             print(f"File '{filename}' not found. Creating a new file.")
             self.tasks = []
@@ -525,6 +579,7 @@ class Cal:
             self.events = [event.Event(**event_data) for event_data in events_data]  # Replace with your actual Event class
             self.set_event_num(len(self.events))
             print(f"{len(self.events)} events loaded from file.")
+            #self.daily_overview.update_overview()
         except FileNotFoundError:
             print(f"File '{filename}' not found. Creating a new file.")
             self.events = []

@@ -8,6 +8,7 @@ from ui.daily_overview import DailyOverview
 from ui.dynamic_sizing import DynamicSizing
 from config.preferences import Preferences
 
+
 # Redirect to a log file for compiled program testing
 # Ensure the log file is created if it doesn't exist
 log_file = "./src/app.log"
@@ -16,6 +17,7 @@ sys.stdout = open(log_file, "a")
 sys.stderr = sys.stdout
 print("\n")
 print(time.strftime("%Y-%m-%d %H:%M:%S"))
+
 
 # Function that defines the continue function
 def continue_to_calendar():
@@ -30,6 +32,7 @@ def open_preferences():
     # Hide the daily overview
     daily_overview.hide()
     calendar_app.hide()
+
 
 if __name__ == "__main__":
     root = tk.Tk()
