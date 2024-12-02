@@ -144,7 +144,7 @@ class Cal:
                 tk.Label(task_frame, text=f"Description: {task.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
                 # Edit button for each task
-                edit_button = tk.Button(task_frame, text="Edit", command=lambda t=task: self.edit_task(t))
+                edit_button = tk.Button(task_frame, text="Edit", command=lambda: self.edit_task_form(task))
                 edit_button.pack(side="right")
         else:
             tk.Label(task_window, text="No tasks for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
@@ -162,7 +162,7 @@ class Cal:
                 tk.Label(event_frame, text=f"Description: {event.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
                 # Edit button for each event
-                edit_button = tk.Button(event_frame, text="Edit", command=lambda t=event: self.edit_event(t))
+                edit_button = tk.Button(event_frame, text="Edit", command=lambda: self.edit_event_form(event))
                 edit_button.pack(side="right")
         else:
             tk.Label(task_window, text="No events for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
@@ -200,7 +200,7 @@ class Cal:
                 tk.Label(task_frame, text=f"Description: {task.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
                 # Edit button for each task
-                edit_button = tk.Button(task_frame, text="Edit", command=lambda t=task: self.edit_task(t))
+                edit_button = tk.Button(task_frame, text="Edit", command=lambda: self.edit_task_form(task))
                 edit_button.pack(side="right")
         else:
             tk.Label(task_window, text="No tasks for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
@@ -218,7 +218,7 @@ class Cal:
                 tk.Label(event_frame, text=f"Description: {event.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
                 # Edit button for each event
-                edit_button = tk.Button(event_frame, text="Edit", command=lambda t=event: self.edit_event(t))
+                edit_button = tk.Button(event_frame, text="Edit", command=lambda: self.edit_event_form(event))
                 edit_button.pack(side="right")
         else:
             tk.Label(task_window, text="No events for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
@@ -256,7 +256,7 @@ class Cal:
                 tk.Label(task_frame, text=f"Description: {task.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
                 # Edit button for each task
-                edit_button = tk.Button(task_frame, text="Edit", command=lambda t=task: self.edit_task(t))
+                edit_button = tk.Button(task_frame, text="Edit", command=lambda: self.edit_task_form(task))
                 edit_button.pack(side="right")
         else:
             tk.Label(task_window, text="No tasks for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
@@ -274,7 +274,7 @@ class Cal:
                 tk.Label(event_frame, text=f"Description: {event.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
                 # Edit button for each event
-                edit_button = tk.Button(event_frame, text="Edit", command=lambda t=event: self.edit_event(t))
+                edit_button = tk.Button(event_frame, text="Edit", command=lambda: self.edit_event_form(event))
                 edit_button.pack(side="right")
         else:
             tk.Label(task_window, text="No events for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
@@ -327,6 +327,52 @@ class Cal:
         # Increase number of tasks
         Cal.task_num += 1
 
+    def edit_task_form(self, task):
+        # Pop up a new window for task input
+        task_window = tk.Toplevel(self.root)
+        task_window.title("Edit Task")
+
+        #pre-populated entry fields with existing task/event info
+        tk.Label(task_window, text="Task Name:").pack()
+        name_entry = tk.Entry(task_window)
+        name_entry.pack()
+        name_entry.insert(0, task.name)
+
+        tk.Label(task_window, text="Description:").pack()
+        description_entry = tk.Entry(task_window)
+        description_entry.pack()
+        description_entry.insert(0, task.description)
+
+
+        tk.Label(task_window, text="Priority (High, Medium, Low):").pack()
+        priority_entry = ttk.Combobox(task_window, values=["High", "Medium", "Low"])
+        priority_entry.set(task.priority)  
+        priority_entry.pack()
+
+
+        tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
+        start_date_entry = tk.Entry(task_window)
+        start_date_entry.pack()
+        start_date_entry.insert(0, task.start_date)
+
+        tk.Label(task_window, text="Due Date (YYYY-MM-DD):").pack()
+        due_date_entry = tk.Entry(task_window)
+        due_date_entry.pack()
+        due_date_entry.insert(0, task.due_date)
+
+        # Submit button
+        submit_button = tk.Button(task_window, text="Submit", 
+                                command=lambda: self.edit_task(
+                                    task, 
+                                    name_entry.get(),
+                                    description_entry.get(),
+                                    priority_entry.get(),
+                                    start_date_entry.get(),
+                                    due_date_entry.get(),
+                                    task_window
+                                ))
+        submit_button.pack()
+    
     def open_task_delete_form(self):
         # Pop up a new window for task deletion
         task_window = tk.Toplevel(self.root)
@@ -394,6 +440,51 @@ class Cal:
         submit_button.pack()
         
         Cal.event_num += 1
+
+    def edit_event_form(self, e):
+        # Pop up a new window for task input
+        event_window = tk.Toplevel(self.root)
+        event_window.title("Edit Event")
+
+        #pre-populated entry fields with existing task/event info
+        tk.Label(event_window, text="Event Name:").pack()
+        name_entry = tk.Entry(event_window)
+        name_entry.pack()
+        name_entry.insert(0, e.name)
+
+        tk.Label(event_window, text="Description:").pack()
+        description_entry = tk.Entry(event_window)
+        description_entry.pack()
+        description_entry.insert(0, e.description)
+
+
+        tk.Label(event_window, text="Start Time (YYYY-MM-DD):").pack()
+        start_time_entry = tk.Entry(event_window)
+        start_time_entry.pack()
+        start_time_entry.insert(0, e.start_time)
+
+        tk.Label(event_window, text="End Time (YYYY-MM-DD):").pack()
+        end_time_entry = tk.Entry(event_window)
+        end_time_entry.pack()
+        end_time_entry.insert(0, e.end_time)
+
+        tk.Label(event_window, text="Location:").pack()
+        location_entry = tk.Entry(event_window)
+        location_entry.pack()
+        location_entry.insert(0, e.location)
+
+        # Submit button
+        submit_button = tk.Button(event_window, text="Submit", 
+                                command=lambda: self.edit_event(
+                                    e, 
+                                    name_entry.get(),
+                                    description_entry.get(),
+                                    start_time_entry.get(),
+                                    end_time_entry.get(),
+                                    location_entry.get(),
+                                    event_window
+                                ))
+        submit_button.pack()
 
     def open_event_delete_form(self):
         # Pop up a new window for event deletion
@@ -471,6 +562,47 @@ class Cal:
         # Close the creation window
         event_window.destroy()
 
+    def edit_task(self, task, name, description, priority, start_date, due_date, task_window):
+        task.set_name(name)
+        task.set_description(description)
+        task.set_priority(priority)
+        task.start_date = start_date
+        task.due_date = due_date
+
+        self.save_tasks_to_file()
+
+        # Refresh the daily overview
+        if hasattr(self, "daily_overview"):
+            self.daily_overview.tasks = self.tasks # Update daily overview
+            self.daily_overview.update_overview()
+
+        # Refresh the calendar
+        self.show_date() 
+
+        # At the end, close the window
+        task_window.destroy()
+
+    def edit_event(self, e, name, description, start_time, end_time, location, task_window):
+        e.set_name(name)
+        e.set_description(description)
+        e.start_time = start_time
+        e.end_time = end_time
+        e.set_location = location
+
+        self.save_events_to_file()
+
+        # Refresh the daily overview
+        if hasattr(self, "daily_overview"):
+            self.daily_overview.events = self.events # Update daily overview
+            self.daily_overview.update_overview()
+
+        # Refresh the calendar
+        self.show_date() 
+
+        # At the end, close the window
+        task_window.destroy()
+
+    
     def delete_task(self, name, start_date, due_date, task_window):
         #get a list of tasks that meet the criteria
         matching_tasks = [task for task in self.tasks 
@@ -490,6 +622,7 @@ class Cal:
 
         # Refresh the daily overview
         if hasattr(self, "daily_overview"):
+            self.daily_overview.tasks = self.tasks # Update daily overview
             self.daily_overview.update_overview()
 
         # Refresh the calendar
@@ -517,6 +650,7 @@ class Cal:
 
         # Refresh the daily overview
         if hasattr(self, "daily_overview"):
+            self.daily_overview.events = self.events # Update daily overview
             self.daily_overview.update_overview()
 
         # Refresh the calendar
