@@ -142,6 +142,8 @@ class Cal:
                 # Display task details
                 tk.Label(task_frame, text=f"Name: {task.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
                 tk.Label(task_frame, text=f"Description: {task.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Priority: {task.priority}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Category: {task.category}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
                 tk.Label(task_frame, text=f"Start Date: {task.start_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
                 tk.Label(task_frame, text=f"Due Date: {task.due_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
@@ -197,6 +199,7 @@ class Cal:
                 # Display task details
                 tk.Label(task_frame, text=f"Name: {task.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
                 tk.Label(task_frame, text=f"Description: {task.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Priority: {task.priority}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
                 tk.Label(task_frame, text=f"Start Date: {task.start_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
                 tk.Label(task_frame, text=f"Due Date: {task.due_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
@@ -213,7 +216,7 @@ class Cal:
 
         # Pop up a new window 
         task_window = tk.Toplevel(self.root)
-        task_window.title("Tasks and Events Happening On: " + selected_date)
+        task_window.title(selected_date)
 
         # Convert selected_date from calendar to correct format
         formatted_date = datetime.strptime(selected_date, "%m/%d/%y").strftime("%Y-%m-%d")
@@ -238,6 +241,8 @@ class Cal:
                 # Display task details
                 tk.Label(task_frame, text=f"Name: {task.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
                 tk.Label(task_frame, text=f"Description: {task.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Priority: {task.priority}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Category: {task.category}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
                 tk.Label(task_frame, text=f"Start Date: {task.start_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
                 tk.Label(task_frame, text=f"Due Date: {task.due_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
