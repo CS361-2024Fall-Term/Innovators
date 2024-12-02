@@ -1,0 +1,56 @@
+
+
+2024-11-26 20:04:43
+0 tasks loaded from file.
+0 events loaded from file.
+Tasks saved to file: ./src/tasks.json
+Task 'Go swimming' added with start date 2024-11-27 and due date 2024-11-27.
+1 tasks loaded from file.
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/tkinter/__init__.py", line 1968, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 124, in <lambda>
+    edit_button = tk.Button(task_frame, text="Edit", command=lambda t=task: self.edit_task(t))
+                                                                            ^^^^^^^^^^^^^^
+AttributeError: 'Cal' object has no attribute 'edit_task'. Did you mean: 'add_task'?
+Deleted 1 task(s) with name 'Go swimming', start date '2024-11-27', and due date '2024-11-27'.
+Tasks saved to file: ./src/tasks.json
+0 tasks loaded from file.
+
+
+2024-11-30 12:38:21
+File './src/config/preferences.json' not found. Creating a new file.
+Tasks saved to file: ./src/config/preferences.json
+0 tasks loaded from file.
+0 events loaded from file.
+Tasks saved to file: ./src/tasks.json
+Task 'Exam' added with start date 2024-11-30 and due date 2024-12-01.
+1 tasks loaded from file.
+Tasks saved to file: ./src/config/preferences.json
+Tasks saved to file: ./src/config/preferences.json
+Tasks saved to file: ./src/config/preferences.json
+Tasks saved to file: ./src/config/preferences.json
+Tasks saved to file: ./src/config/preferences.json
+Tasks saved to file: ./src/config/preferences.json
+
+
+2024-12-02 10:05:24
+1 tasks loaded from file.
+0 events loaded from file.
+1 tasks loaded from file.
+
+
+2024-12-02 10:18:30
+1 tasks loaded from file.
+0 events loaded from file.
+
+
+2024-12-02 10:29:46
+1 tasks loaded from file.
+0 events loaded from file.
+Events saved to file: ./src/events.json
+Event 'Career Fair' added with start time 2024-12-02 and end time 2024-12-02.
+1 tasks loaded from file.
+1 tasks loaded from file.

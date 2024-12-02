@@ -4,7 +4,7 @@ import os
 import json
 from tkcalendar import Calendar
 from tkinter import ttk
-from datetime import datetime
+from datetime import datetime, timedelta
 from models import tasks, event
 from config.preferences import Preferences
 
@@ -296,12 +296,14 @@ class Cal:
         category_entry.set("School")  # Set a default value
         category_entry.pack()
 
-        tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
+        tk.Label(task_window, text="Start Date (YYYY-MM-DD HH:MM AM/PM):").pack()
         start_date_entry = tk.Entry(task_window)
+        start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %I:%M %p')) # default start date is today's date
         start_date_entry.pack()
 
-        tk.Label(task_window, text="Due Date (YYYY-MM-DD):").pack()
+        tk.Label(task_window, text="Due Date (YYYY-MM-DD HH:MM AM/PM):").pack()
         due_date_entry = tk.Entry(task_window)
+        due_date_entry.insert(0, (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d %I:%M %p')) # default due date if after 24 hours?
         due_date_entry.pack()
 
         # Submit button
