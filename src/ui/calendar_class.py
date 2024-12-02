@@ -142,6 +142,8 @@ class Cal:
                 # Display task details
                 tk.Label(task_frame, text=f"Name: {task.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
                 tk.Label(task_frame, text=f"Description: {task.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Start Date: {task.start_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Due Date: {task.due_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
                 # Edit button for each task
                 edit_button = tk.Button(task_frame, text="Edit", command=lambda: self.edit_task_form(task))
@@ -160,6 +162,8 @@ class Cal:
                 # Display event details
                 tk.Label(event_frame, text=f"Name: {event.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
                 tk.Label(event_frame, text=f"Description: {event.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(event_frame, text=f"Start Date: {event.start_time}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)                
+                tk.Label(event_frame, text=f"End Date: {event.end_time}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
                 # Edit button for each event
                 edit_button = tk.Button(event_frame, text="Edit", command=lambda: self.edit_event_form(event))
@@ -174,17 +178,12 @@ class Cal:
 
         # Pop up a new window 
         task_window = tk.Toplevel(self.root)
-        task_window.title(selected_category + " Tasks and Events:")
+        task_window.title(selected_category + " Related Tasks:")
 
 
         day_tasks = [
             task for task in self.tasks 
                 if task.category == selected_category
-        ]
-
-        day_events = [
-        event for event in self.events 
-            if event.start_time == selected_category
         ]
 
         # Add a frame for each task
@@ -198,30 +197,15 @@ class Cal:
                 # Display task details
                 tk.Label(task_frame, text=f"Name: {task.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
                 tk.Label(task_frame, text=f"Description: {task.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Start Date: {task.start_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Due Date: {task.due_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
                 # Edit button for each task
                 edit_button = tk.Button(task_frame, text="Edit", command=lambda: self.edit_task_form(task))
                 edit_button.pack(side="right")
         else:
-            tk.Label(task_window, text="No tasks for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            tk.Label(task_window, text="No tasks for this category.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
-        # Add a frame for each event
-        if day_events:
-            tk.Label(task_window, text="Events:", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
-
-            for event in day_events:
-                event_frame = tk.Frame(task_window, bd=2, relief="solid")
-                event_frame.pack(fill="x", padx=10, pady=5)
-
-                # Display event details
-                tk.Label(event_frame, text=f"Name: {event.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
-                tk.Label(event_frame, text=f"Description: {event.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
-
-                # Edit button for each event
-                edit_button = tk.Button(event_frame, text="Edit", command=lambda: self.edit_event_form(event))
-                edit_button.pack(side="right")
-        else:
-            tk.Label(task_window, text="No events for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
     def filter_by_date(self):
         self.load_tasks_from_file()
@@ -254,6 +238,8 @@ class Cal:
                 # Display task details
                 tk.Label(task_frame, text=f"Name: {task.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
                 tk.Label(task_frame, text=f"Description: {task.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Start Date: {task.start_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Due Date: {task.due_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
                 # Edit button for each task
                 edit_button = tk.Button(task_frame, text="Edit", command=lambda: self.edit_task_form(task))
@@ -272,6 +258,8 @@ class Cal:
                 # Display event details
                 tk.Label(event_frame, text=f"Name: {event.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
                 tk.Label(event_frame, text=f"Description: {event.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(event_frame, text=f"Start Date: {event.start_time}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)                
+                tk.Label(event_frame, text=f"End Date: {event.end_time}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
                 # Edit button for each event
                 edit_button = tk.Button(event_frame, text="Edit", command=lambda: self.edit_event_form(event))
