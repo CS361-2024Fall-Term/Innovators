@@ -545,7 +545,7 @@ class Cal:
 
         # Add the new task to the tasks
 
-        if (self.task_num == 0):
+        if (len(self.tasks) == 0):
             self.tasks.append(new_task)
         else:
             match new_task.priority:
