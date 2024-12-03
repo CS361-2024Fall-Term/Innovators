@@ -51,12 +51,15 @@ class DailyOverview:
                 task_frame = tk.Frame(self.frame, bd=2, relief="solid")
                 task_frame.pack(fill="x", padx=10, pady=5)
 
-                # Use grid to align Name and Description in the same row
+                # Use grid to align Name, Description and Priority in the same row
                 tk.Label(task_frame, text="Name:", font=("Arial", 12, "bold")).grid(row=0, column=0, sticky="w", padx=10, pady=5)
                 tk.Label(task_frame, text=task.name, font=("Arial", 12)).grid(row=0, column=1, sticky="w", padx=10, pady=5)
 
                 tk.Label(task_frame, text="Description:", font=("Arial", 12, "bold")).grid(row=1, column=0, sticky="w", padx=10, pady=5)
                 tk.Label(task_frame, text=task.description, font=("Arial", 12), wraplength=360, justify="left").grid(row=1, column=1, sticky="w", padx=10, pady=5)
+
+                tk.Label(task_frame, text="Priority:", font=("Arial", 12, "bold")).grid(row=2, column=0, sticky="w", padx=10, pady=5)
+                tk.Label(task_frame, text=task.priority, font=("Arial", 12)).grid(row=2, column=1, sticky="w", padx=10, pady=5)
 
         else:
             tk.Label(self.frame, text="No Tasks", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)

@@ -43,5 +43,5 @@ class Tasks:
     def status_deleted(self):
         self.status = "deleted"
 
-    def set_locaiton(self, location):
+    def set_location(self, location):
         self.location = location
