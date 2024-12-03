@@ -400,14 +400,14 @@ class Cal:
         name_entry = tk.Entry(task_window)
         name_entry.pack()
 
-        tk.Label(task_window, text="Start Date (YYYY-MM-DD HH:MM):").pack()
+        tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
         start_date_entry = tk.Entry(task_window)
-        start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
+        #start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d')) # default start date is today's date
         start_date_entry.pack()
 
-        tk.Label(task_window, text="Due Date (YYYY-MM-DD 23:59'):").pack()
+        tk.Label(task_window, text="Due Date (YYYY-MM-DD'):").pack()
         due_date_entry = tk.Entry(task_window)
-        due_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
+        #due_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d)) # default start date is today's date
         due_date_entry.pack()
 
         # Submit button
@@ -521,12 +521,12 @@ class Cal:
 
         tk.Label(event_window, text="Start Time (YYYY-MM-DD):").pack()
         start_time_entry = tk.Entry(event_window)
-        start_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
+        #start_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d')) # default start date is today's date
         start_time_entry.pack()
 
         tk.Label(event_window, text="End Time (YYYY-MM-DD):").pack()
         end_time_entry = tk.Entry(event_window)
-        end_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d 23:59')) # default start date is today's date
+        #end_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d')) # default start date is today's date
         end_time_entry.pack()
 
         # Submit button
