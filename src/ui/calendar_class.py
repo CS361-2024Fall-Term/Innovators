@@ -592,7 +592,7 @@ class Cal:
         e.set_description(description)
         e.start_time = start_time
         e.end_time = end_time
-        e.set_location = location
+        e.set_location(location)
 
         self.save_events_to_file()
 
