@@ -219,16 +219,23 @@ class Cal:
         task_window.title(selected_date)
 
         # Convert selected_date from calendar to correct format
-        formatted_date = datetime.strptime(selected_date, "%m/%d/%y").strftime("%Y-%m-%d")
+        target_date = datetime.strptime(selected_date, "%m/%d/%y").strftime("%Y-%m-%d")
+        target_date = datetime.strptime(target_date, "%Y-%m-%d")
 
-        day_tasks = [
-            task for task in self.tasks 
-                if task.due_date == formatted_date
-        ]
-        day_events = [
-          event for event in self.events 
-              if event.start_time == formatted_date
-        ]
+        # Add Tasks and Events to the lists based on if they are in the range
+        day_tasks = []
+        for task in self.tasks:
+            start_date = datetime.strptime(task.start_date, "%Y-%m-%d")
+            due_date = datetime.strptime(task.due_date, "%Y-%m-%d")
+            if (start_date <= target_date <= due_date):
+                day_tasks.append(task)
+            
+        day_events = []
+        for event in self.events:
+            start_time = datetime.strptime(event.start_time, "%Y-%m-%d")
+            end_time = datetime.strptime(event.end_time, "%Y-%m-%d")
+            if (start_time <= target_date <= end_time):
+                day_events.append(event)
 
         # Add a frame for each task
         if day_tasks:

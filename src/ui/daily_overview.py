@@ -21,8 +21,21 @@ class DailyOverview:
 
     def update_overview(self):
         today = datetime.now().strftime("%Y-%m-%d")
-        today_tasks = [task for task in self.tasks if task.start_date.startswith(today)]
-        today_events = [event for event in self.events if event.start_time.startswith(today)]
+        today_date = datetime.strptime(today, "%Y-%m-%d")
+
+        today_tasks = []
+        for task in self.tasks:
+            start_date = datetime.strptime(task.start_date, "%Y-%m-%d")
+            due_date = datetime.strptime(task.due_date, "%Y-%m-%d")
+            if start_date <= today_date <= due_date:
+                today_tasks.append(task)
+            
+        today_events = []
+        for event in self.events:
+            start_time = datetime.strptime(event.start_time, "%Y-%m-%d")
+            end_time = datetime.strptime(event.end_time, "%Y-%m-%d")
+            if start_time <= today_date <= end_time:
+                today_events.append(event)
 
         # Clear the frame before updating with new content
         for widget in self.frame.winfo_children():
