@@ -74,7 +74,7 @@ if __name__ == "__main__":
     daily_overview = DailyOverview(root, calendar_app.tasks, calendar_app.events)
     calendar_app.daily_overview = daily_overview
 
-    schedule.every(500).seconds.do(calendar_app.reminder_for_events) # will run every 9 minutes
+    schedule.every(540).seconds.do(calendar_app.reminder_for_events) # will run every 9 minutes
     scheduler_thread = threading.Thread(target=run_scheduler, daemon=True)
     scheduler_thread.start()
 

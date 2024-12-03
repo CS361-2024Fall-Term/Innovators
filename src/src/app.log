@@ -18,3 +18,20 @@ Event 'OSU' added with start time 2024-12-02 17:48 and end time 2024-12-02 17:57
 3 tasks loaded from file.
 Tasks saved to file: ./src/tasks.json
 Task 'Kate' added with start date 2024-12-02 18:25 and due date 2024-12-02 18:30.
+
+
+2024-12-02 18:54:36
+4 tasks loaded from file.
+4 events loaded from file.
+Scheduler thread started.
+4 events loaded from file.
+4 tasks loaded from file.
+ERROR:root:ERROR parsing task due date: time data '2024-12-01' does not match format '%Y-%m-%d %H:%M'
+4 events loaded from file.
+4 tasks loaded from file.
+ERROR:root:ERROR parsing task due date: time data '2024-12-01' does not match format '%Y-%m-%d %H:%M'
+Tasks saved to file: ./src/tasks.json
+Task 'Hi' added with start date 2024-12-02 18:54 and due date 2024-12-02 18:57.
+4 events loaded from file.
+5 tasks loaded from file.
+ERROR:root:ERROR parsing task due date: time data '2024-12-01' does not match format '%Y-%m-%d %H:%M'
