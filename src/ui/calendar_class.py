@@ -544,7 +544,24 @@ class Cal:
         new_task = tasks.Tasks(name, description, priority, None, None, category, start_date, due_date, "not started", "N/A")
 
         # Add the new task to the tasks
-        self.tasks.append(new_task)
+
+        if (self.task_num == 0):
+            self.tasks.append(new_task)
+        else:
+            match new_task.priority:
+                case "Low":
+                    self.tasks.append(new_task)
+                case "Medium":
+                    if self.tasks[0].priority != "High":
+                        self.tasks.insert(0, new_task)
+                    else:
+                        for i in range (self.task_num):
+                            if self.tasks[i].priority != "High":
+                                self.tasks.insert(i, new_task)
+                                break
+
+                case "High":
+                    self.tasks.insert(0, new_task)
 
         # Save the task to JSON file (to be able to retrieve it later)
         self.save_tasks_to_file()
@@ -588,11 +605,30 @@ class Cal:
         event_window.destroy()
 
     def edit_task(self, task, name, description, priority, start_date, due_date, task_window):
-        task.set_name(name)
-        task.set_description(description)
-        task.set_priority(priority)
-        task.start_date = start_date
-        task.due_date = due_date
+        if (task.priority != priority):
+            sort_task = tasks.Tasks(name, description, priority, task.reminder, task.repetitiveness, task.category, start_date, due_date, task.status, task.location)
+            self.tasks.remove(task)
+            # Sort the new task to the tasks
+            match sort_task.priority:
+                case "Low":
+                    self.tasks.append(sort_task)
+                case "Medium":
+                    if self.tasks[0].priority != "High":
+                        self.tasks.insert(0, sort_task)
+                    else:
+                        for i in range (self.task_num):
+                            if self.tasks[i].priority != "High":
+                                self.tasks.insert(i, sort_task)
+                                break
+
+                case "High":
+                    self.tasks.insert(0, sort_task)
+        else:
+            task.set_name(name)
+            task.set_description(description)
+            task.set_priority(priority)
+            task.start_date = start_date
+            task.due_date = due_date
 
         self.save_tasks_to_file()
 
