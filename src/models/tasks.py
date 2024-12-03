@@ -10,6 +10,8 @@ class Tasks:
         self.category = category
         self.start_date = start_date
         self.due_date = due_date
+        #self.start_time = start_time
+        #self.due_time = due_time                 start_time, due_time,
         self.status = status
         self.location = location
 

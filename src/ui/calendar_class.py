@@ -21,6 +21,7 @@ class Cal:
         self.events = events if isinstance(events, list) else []  # Ensure events is a list
         self.pref = pref
         self.open_preferences = open_preferences
+
         # Main calendar frame
         self.frame = tk.Frame(root)     # bg="lightblue"
         self.frame.pack(side="left", fill="both", expand=True)
@@ -304,15 +305,26 @@ class Cal:
         category_entry.set("School")  # Set a default value
         category_entry.pack()
 
-        tk.Label(task_window, text="Start Date (YYYY-MM-DD HH:MM):").pack()
+        tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
         start_date_entry = tk.Entry(task_window)
-        start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
+        start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d')) # default start date is today's date
         start_date_entry.pack()
 
-        tk.Label(task_window, text="Due Date (YYYY-MM-DD HH:MM):").pack()
+        tk.Label(task_window, text="Due Date (YYYY-MM-DD):").pack()
         due_date_entry = tk.Entry(task_window)
-        due_date_entry.insert(0, (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d %H:%M')) # default due date if after 24 hours?
+        due_date_entry.insert(0, (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')) # default due date if after 24 hours?
         due_date_entry.pack()
+
+        # tk.Label(task_window, text="Start Time (HH-MM):").pack()
+        # start_date_entry = tk.Entry(task_window)
+        # start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
+        # start_date_entry.pack()
+
+        # tk.Label(task_window, text="Due Time (HH-MM):").pack()
+        # due_date_entry = tk.Entry(task_window)
+        # due_date_entry.insert(0, (datetime.now()).strftime('%Y-%m-%d %H:%M')) # default due date if after 24 hours?
+        # due_date_entry.pack()
+
 
         # Submit button
         submit_button = tk.Button(task_window, text="Add Task", 
