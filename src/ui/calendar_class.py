@@ -540,12 +540,12 @@ class Cal:
         submit_button.pack()
 
     def add_task(self, name, description, priority, category, start_date, due_date, task_window):
+        num = len(self.tasks)
         # Create task object
         new_task = tasks.Tasks(name, description, priority, None, None, category, start_date, due_date, "not started", "N/A")
 
         # Add the new task to the tasks
-
-        if (self.task_num == 0):
+        if (num == 0):
             self.tasks.append(new_task)
         else:
             match new_task.priority:
@@ -555,11 +555,14 @@ class Cal:
                     if self.tasks[0].priority != "High":
                         self.tasks.insert(0, new_task)
                     else:
-                        for i in range (self.task_num):
+                        ins = False
+                        for i in range (num):
                             if self.tasks[i].priority != "High":
                                 self.tasks.insert(i, new_task)
+                                ins = True
                                 break
-
+                        if (ins == False):
+                            self.tasks.append(new_task)
                 case "High":
                     self.tasks.insert(0, new_task)
 
