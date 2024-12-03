@@ -150,7 +150,7 @@ class Cal:
                 tk.Label(task_frame, text=f"Due Date: {task.due_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
                 # Edit button for each task
-                edit_button = tk.Button(task_frame, text="Edit", command=lambda: self.edit_task_form(task))
+                edit_button = tk.Button(task_frame, text="Edit", command=lambda task=task: self.edit_task_form(task))
                 edit_button.pack(side="right")
         else:
             tk.Label(task_window, text="No tasks for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
@@ -170,7 +170,7 @@ class Cal:
                 tk.Label(event_frame, text=f"End Date: {event.end_time}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
                 # Edit button for each event
-                edit_button = tk.Button(event_frame, text="Edit", command=lambda: self.edit_event_form(event))
+                edit_button = tk.Button(event_frame, text="Edit", command=lambda event=event: self.edit_event_form(event))
                 edit_button.pack(side="right")
         else:
             tk.Label(task_window, text="No events for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
@@ -206,7 +206,7 @@ class Cal:
                 tk.Label(task_frame, text=f"Due Date: {task.due_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
                 # Edit button for each task
-                edit_button = tk.Button(task_frame, text="Edit", command=lambda: self.edit_task_form(task))
+                edit_button = tk.Button(task_frame, text="Edit", command=lambda task=task: self.edit_task_form(task))
                 edit_button.pack(side="right")
         else:
             tk.Label(task_window, text="No tasks for this category.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
@@ -256,7 +256,7 @@ class Cal:
                 tk.Label(task_frame, text=f"Due Date: {task.due_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
                 # Edit button for each task
-                edit_button = tk.Button(task_frame, text="Edit", command=lambda: self.edit_task_form(task))
+                edit_button = tk.Button(task_frame, text="Edit", command=lambda task=task: self.edit_task_form(task))
                 edit_button.pack(side="right")
         else:
             tk.Label(task_window, text="No tasks for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
@@ -276,7 +276,7 @@ class Cal:
                 tk.Label(event_frame, text=f"End Date: {event.end_time}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
                 # Edit button for each event
-                edit_button = tk.Button(event_frame, text="Edit", command=lambda: self.edit_event_form(event))
+                edit_button = tk.Button(event_frame, text="Edit", command=lambda event=event: self.edit_event_form(event))
                 edit_button.pack(side="right")
         else:
             tk.Label(task_window, text="No events for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
@@ -364,16 +364,16 @@ class Cal:
         priority_entry.set(task.priority)  
         priority_entry.pack()
 
-
-        tk.Label(task_window, text="Start Date (YYYY-MM-DD HH:MM):").pack()
+        # Removed the time aspect of these 
+        tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
         start_date_entry = tk.Entry(task_window)
-        start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
+        # start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d')) # default start date is today's date
         start_date_entry.pack()
         start_date_entry.insert(0, task.start_date)
 
-        tk.Label(task_window, text="Due Date (YYYY-MM-DD HH:MM):").pack()
+        tk.Label(task_window, text="Due Date (YYYY-MM-DD):").pack()
         due_date_entry = tk.Entry(task_window)
-        due_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
+        # due_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d')) # default start date is today's date
         due_date_entry.pack()
         due_date_entry.insert(0, task.due_date)
 
@@ -400,14 +400,14 @@ class Cal:
         name_entry = tk.Entry(task_window)
         name_entry.pack()
 
-        tk.Label(task_window, text="Start Date (YYYY-MM-DD HH:MM):").pack()
+        tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
         start_date_entry = tk.Entry(task_window)
-        start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
+        #start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d')) # default start date is today's date
         start_date_entry.pack()
 
-        tk.Label(task_window, text="Due Date (YYYY-MM-DD 23:59'):").pack()
+        tk.Label(task_window, text="Due Date (YYYY-MM-DD'):").pack()
         due_date_entry = tk.Entry(task_window)
-        due_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
+        #due_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d)) # default start date is today's date
         due_date_entry.pack()
 
         # Submit button
@@ -434,14 +434,14 @@ class Cal:
         description_entry = tk.Entry(event_window)
         description_entry.pack()
 
-        tk.Label(event_window, text="Start Time (YYYY-MM-DD HH:MM):").pack()
+        tk.Label(event_window, text="Start Time (YYYY-MM-DD):").pack()
         start_time_entry = tk.Entry(event_window)
-        start_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
+        start_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d')) # default start date is today's date
         start_time_entry.pack()
 
-        tk.Label(event_window, text="End Time (YYYY-MM-DD HH:MM):").pack()
+        tk.Label(event_window, text="End Time (YYYY-MM-DD):").pack()
         end_time_entry = tk.Entry(event_window)
-        end_time_entry.insert(0, (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 23:59')) # default start date is today's date
+        end_time_entry.insert(0, (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')) # default start date is today's date
         end_time_entry.pack()
 
         tk.Label(event_window, text="Location").pack()
@@ -481,13 +481,13 @@ class Cal:
 
         tk.Label(event_window, text="Start Time (YYYY-MM-DD):").pack()
         start_time_entry = tk.Entry(event_window)
-        start_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
+        #start_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
         start_time_entry.pack()
         start_time_entry.insert(0, e.start_time)
 
         tk.Label(event_window, text="End Time (YYYY-MM-DD):").pack()
         end_time_entry = tk.Entry(event_window)
-        end_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d 23:59')) # default start date is today's date
+        #end_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d 23:59')) # default start date is today's date
         end_time_entry.pack()
         end_time_entry.insert(0, e.end_time)
 
@@ -521,12 +521,12 @@ class Cal:
 
         tk.Label(event_window, text="Start Time (YYYY-MM-DD):").pack()
         start_time_entry = tk.Entry(event_window)
-        start_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
+        #start_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d')) # default start date is today's date
         start_time_entry.pack()
 
         tk.Label(event_window, text="End Time (YYYY-MM-DD):").pack()
         end_time_entry = tk.Entry(event_window)
-        end_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d 23:59')) # default start date is today's date
+        #end_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d')) # default start date is today's date
         end_time_entry.pack()
 
         # Submit button

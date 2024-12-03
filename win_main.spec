@@ -6,7 +6,7 @@ from PyInstaller.utils.hooks import collect_submodules, collect_data_files
 hidden_imports = (
     collect_submodules('ui') + 
     collect_submodules('models') +
-    ['tkinter', 'Pillow', 'PIL._imagingtk', 'PIL._tkinter_finder']
+    ['tkinter', 'Pillow', 'PIL._imagingtk', 'PIL._tkinter_finder', 'schedule']
 )
 
 # Specify non-Python data files to include
