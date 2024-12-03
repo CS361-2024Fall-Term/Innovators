@@ -223,11 +223,11 @@ class Cal:
 
         day_tasks = [
             task for task in self.tasks 
-                if task.due_date == formatted_date
+                if task.due_date[:10] == formatted_date
         ]
         day_events = [
           event for event in self.events 
-              if event.start_time == formatted_date
+              if event.start_time[:10] == formatted_date
         ]
 
         # Add a frame for each task
@@ -467,7 +467,7 @@ class Cal:
 
         tk.Label(event_window, text="End Time (YYYY-MM-DD):").pack()
         end_time_entry = tk.Entry(event_window)
-        end_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
+        end_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d 23:59')) # default start date is today's date
         end_time_entry.pack()
         end_time_entry.insert(0, e.end_time)
 
@@ -506,7 +506,7 @@ class Cal:
 
         tk.Label(event_window, text="End Time (YYYY-MM-DD):").pack()
         end_time_entry = tk.Entry(event_window)
-        end_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
+        end_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d 23:59')) # default start date is today's date
         end_time_entry.pack()
 
         # Submit button
