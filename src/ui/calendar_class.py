@@ -754,6 +754,7 @@ class Cal:
 
     def reminder_for_events(self):
         self.load_events_from_file()
+        self.load_tasks_from_file()
         now = datetime.now()
 
         for event in self.events:
@@ -761,9 +762,20 @@ class Cal:
                 end_time = datetime.strptime(event.end_time, "%Y-%m-%d %H:%M")
                 time_difference = (end_time - now).total_seconds()
 
-                if 0 <= time_difference <= 600:  # check if there is a task within 10 minutes
+                if 0 <= time_difference <= 600:  # check if there is an event within 10 minutes
                     message = f"Reminder: Event '{event.name}' starts in 10 minutes!, HURRY UP, LOSER"
                     logging.info(message)
                     messagebox.showinfo("Event Reminder", message)
             except ValueError as e:
-                logging.error(f"ERROR parsing event start time: {e}")
+                logging.error(f"ERROR parsing event end time: {e}")
+        for task in self.tasks:
+            try:
+                due_date = datetime.strptime(task.due_date, "%Y-%m-%d %H:%M")
+                time_difference = (due_date - now).total_seconds()
+
+                if 0 <= time_difference <= 600:  # check if there is a task within 10 minutes
+                    message = f"Reminder: Task '{task.name}' starts in 10 minutes!, HURRY UP, LOSER"
+                    logging.info(message)
+                    messagebox.showinfo("Event Reminder", message)
+            except ValueError as e:
+                logging.error(f"ERROR parsing task due date: {e}")
