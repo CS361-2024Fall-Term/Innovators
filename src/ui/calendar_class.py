@@ -2,9 +2,10 @@
 import tkinter as tk
 import os
 import json
+import logging
 from tkcalendar import Calendar
-from tkinter import ttk
-from datetime import datetime
+from tkinter import ttk, messagebox
+from datetime import datetime, timedelta
 from models import tasks, event
 from config.preferences import Preferences
 
@@ -98,7 +99,7 @@ class Cal:
 
     # Show current date
     def show_date(self):
-        current_date = datetime.now().strftime("%m/%d/%y")
+        current_date = datetime.now().strftime("%m/%d/%y %H:%M:%S")
         # self.date_label.config(text=f"Current Date: {current_date}")
 
     def filter_by_category_helper(self):
@@ -303,12 +304,14 @@ class Cal:
         category_entry.set("School")  # Set a default value
         category_entry.pack()
 
-        tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
+        tk.Label(task_window, text="Start Date (YYYY-MM-DD HH:MM):").pack()
         start_date_entry = tk.Entry(task_window)
+        start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
         start_date_entry.pack()
 
-        tk.Label(task_window, text="Due Date (YYYY-MM-DD):").pack()
+        tk.Label(task_window, text="Due Date (YYYY-MM-DD HH:MM):").pack()
         due_date_entry = tk.Entry(task_window)
+        due_date_entry.insert(0, (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d %H:%M')) # default due date if after 24 hours?
         due_date_entry.pack()
 
         # Submit button
@@ -350,13 +353,15 @@ class Cal:
         priority_entry.pack()
 
 
-        tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
+        tk.Label(task_window, text="Start Date (YYYY-MM-DD HH:MM):").pack()
         start_date_entry = tk.Entry(task_window)
+        start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
         start_date_entry.pack()
         start_date_entry.insert(0, task.start_date)
 
-        tk.Label(task_window, text="Due Date (YYYY-MM-DD):").pack()
+        tk.Label(task_window, text="Due Date (YYYY-MM-DD HH:MM):").pack()
         due_date_entry = tk.Entry(task_window)
+        due_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
         due_date_entry.pack()
         due_date_entry.insert(0, task.due_date)
 
@@ -383,12 +388,14 @@ class Cal:
         name_entry = tk.Entry(task_window)
         name_entry.pack()
 
-        tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
+        tk.Label(task_window, text="Start Date (YYYY-MM-DD HH:MM):").pack()
         start_date_entry = tk.Entry(task_window)
+        start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
         start_date_entry.pack()
 
-        tk.Label(task_window, text="Due Date (YYYY-MM-DD):").pack()
+        tk.Label(task_window, text="Due Date (YYYY-MM-DD 23:59'):").pack()
         due_date_entry = tk.Entry(task_window)
+        due_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
         due_date_entry.pack()
 
         # Submit button
@@ -415,12 +422,14 @@ class Cal:
         description_entry = tk.Entry(event_window)
         description_entry.pack()
 
-        tk.Label(event_window, text="Start Time (YYYY-MM-DD):").pack()
+        tk.Label(event_window, text="Start Time (YYYY-MM-DD HH:MM):").pack()
         start_time_entry = tk.Entry(event_window)
+        start_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
         start_time_entry.pack()
 
-        tk.Label(event_window, text="End Time (YYYY-MM-DD):").pack()
+        tk.Label(event_window, text="End Time (YYYY-MM-DD HH:MM):").pack()
         end_time_entry = tk.Entry(event_window)
+        end_time_entry.insert(0, (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 23:59')) # default start date is today's date
         end_time_entry.pack()
 
         tk.Label(event_window, text="Location").pack()
@@ -460,11 +469,13 @@ class Cal:
 
         tk.Label(event_window, text="Start Time (YYYY-MM-DD):").pack()
         start_time_entry = tk.Entry(event_window)
+        start_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
         start_time_entry.pack()
         start_time_entry.insert(0, e.start_time)
 
         tk.Label(event_window, text="End Time (YYYY-MM-DD):").pack()
         end_time_entry = tk.Entry(event_window)
+        end_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d 23:59')) # default start date is today's date
         end_time_entry.pack()
         end_time_entry.insert(0, e.end_time)
 
@@ -498,10 +509,12 @@ class Cal:
 
         tk.Label(event_window, text="Start Time (YYYY-MM-DD):").pack()
         start_time_entry = tk.Entry(event_window)
+        start_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
         start_time_entry.pack()
 
         tk.Label(event_window, text="End Time (YYYY-MM-DD):").pack()
         end_time_entry = tk.Entry(event_window)
+        end_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d 23:59')) # default start date is today's date
         end_time_entry.pack()
 
         # Submit button
@@ -587,7 +600,7 @@ class Cal:
         e.set_description(description)
         e.start_time = start_time
         e.end_time = end_time
-        e.set_location = location
+        e.set_location(location)
 
         self.save_events_to_file()
 
@@ -742,3 +755,32 @@ class Cal:
     # Hide calendar
     def hide(self):
         self.frame.pack_forget()
+
+
+    def reminder_for_events(self):
+        self.load_events_from_file()
+        self.load_tasks_from_file()
+        now = datetime.now()
+
+        for event in self.events:
+            try:
+                end_time = datetime.strptime(event.end_time, "%Y-%m-%d %H:%M")
+                time_difference = (end_time - now).total_seconds()
+
+                if 0 <= time_difference <= 600:  # check if there is an event within 10 minutes
+                    message = f"Reminder: Event '{event.name}' starts in 10 minutes!, HURRY UP, LOSER"
+                    logging.info(message)
+                    messagebox.showinfo("Event Reminder", message)
+            except ValueError as e:
+                logging.error(f"ERROR parsing event end time: {e}")
+        for task in self.tasks:
+            try:
+                due_date = datetime.strptime(task.due_date, "%Y-%m-%d %H:%M")
+                time_difference = (due_date - now).total_seconds()
+
+                if 0 <= time_difference <= 600:  # check if there is a task within 10 minutes
+                    message = f"Reminder: Task '{task.name}' starts in 10 minutes!, HURRY UP, LOSER"
+                    logging.info(message)
+                    messagebox.showinfo("Event Reminder", message)
+            except ValueError as e:
+                logging.error(f"ERROR parsing task due date: {e}")
