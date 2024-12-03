@@ -2,11 +2,14 @@
 import tkinter as tk
 import os
 import json
+import logging
 from tkcalendar import Calendar
-from tkinter import ttk
+from tkinter import ttk, messagebox
 from datetime import datetime, timedelta
 from models import tasks, event
 from config.preferences import Preferences
+import threading
+import schedule
 
 class Cal:
     # Use the getters and setters
@@ -747,3 +750,20 @@ class Cal:
     # Hide calendar
     def hide(self):
         self.frame.pack_forget()
+
+
+    def reminder_for_events(self):
+        self.load_events_from_file()
+        now = datetime.now()
+
+        for event in self.events:
+            try:
+                end_time = datetime.strptime(event.end_time, "%Y-%m-%d %H:%M")
+                time_difference = (end_time - now).total_seconds()
+
+                if 0 <= time_difference <= 600:  # check if there is a task within 10 minutes
+                    message = f"Reminder: Event '{event.name}' starts in 10 minutes!, HURRY UP, LOSER"
+                    logging.info(message)
+                    messagebox.showinfo("Event Reminder", message)
+            except ValueError as e:
+                logging.error(f"ERROR parsing event start time: {e}")

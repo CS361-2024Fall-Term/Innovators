@@ -1,7 +1,10 @@
 import os
 import sys
 import time
+import schedule
+import json
 import tkinter as tk
+import threading
 from ui.welcome_screen import WelcomeScreen
 from ui.calendar_class import Cal
 from ui.daily_overview import DailyOverview
@@ -26,6 +29,12 @@ def continue_to_calendar():
     calendar_app.show()
     daily_overview.show()
 
+def run_scheduler():
+    print("Scheduler thread started.")  # debugging
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
     
 def open_preferences():
     pref.show()
@@ -33,6 +42,12 @@ def open_preferences():
     daily_overview.hide()
     calendar_app.hide()
 
+def load_initial_data(file_path):
+    try:
+        with open(file_path, "r") as file:
+            return json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -49,12 +64,19 @@ if __name__ == "__main__":
     #Create preferences
     pref = Preferences(root, continue_to_calendar)
 
+    tasks = load_initial_data("./src/tasks.json")
+    events = load_initial_data("./src/events.json")
+
     # Create a calendar object with an empty list of tasks and events
-    calendar_app = Cal(root, 0, 0, pref, open_preferences)
+    calendar_app = Cal(root, tasks, events, pref, open_preferences)
 
     # Create a DailyOverview object to display today's tasks and events
     daily_overview = DailyOverview(root, calendar_app.tasks, calendar_app.events)
     calendar_app.daily_overview = daily_overview
+
+    schedule.every(500).seconds.do(calendar_app.reminder_for_events) # will run every 9 minutes
+    scheduler_thread = threading.Thread(target=run_scheduler, daemon=True)
+    scheduler_thread.start()
 
     # Show only the welcome screen
     calendar_app.hide()

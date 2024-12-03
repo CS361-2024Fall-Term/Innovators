@@ -1,0 +1,146 @@
+
+
+2024-11-26 20:04:43
+0 tasks loaded from file.
+0 events loaded from file.
+Tasks saved to file: ./src/tasks.json
+Task 'Go swimming' added with start date 2024-11-27 and due date 2024-11-27.
+1 tasks loaded from file.
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/tkinter/__init__.py", line 1968, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 124, in <lambda>
+    edit_button = tk.Button(task_frame, text="Edit", command=lambda t=task: self.edit_task(t))
+                                                                            ^^^^^^^^^^^^^^
+AttributeError: 'Cal' object has no attribute 'edit_task'. Did you mean: 'add_task'?
+Deleted 1 task(s) with name 'Go swimming', start date '2024-11-27', and due date '2024-11-27'.
+Tasks saved to file: ./src/tasks.json
+0 tasks loaded from file.
+
+
+2024-11-30 12:38:21
+File './src/config/preferences.json' not found. Creating a new file.
+Tasks saved to file: ./src/config/preferences.json
+0 tasks loaded from file.
+0 events loaded from file.
+Tasks saved to file: ./src/tasks.json
+Task 'Exam' added with start date 2024-11-30 and due date 2024-12-01.
+1 tasks loaded from file.
+Tasks saved to file: ./src/config/preferences.json
+Tasks saved to file: ./src/config/preferences.json
+Tasks saved to file: ./src/config/preferences.json
+Tasks saved to file: ./src/config/preferences.json
+Tasks saved to file: ./src/config/preferences.json
+Tasks saved to file: ./src/config/preferences.json
+
+
+2024-12-02 10:05:24
+1 tasks loaded from file.
+0 events loaded from file.
+1 tasks loaded from file.
+
+
+2024-12-02 10:18:30
+1 tasks loaded from file.
+0 events loaded from file.
+
+
+2024-12-02 10:29:46
+1 tasks loaded from file.
+0 events loaded from file.
+Events saved to file: ./src/events.json
+Event 'Career Fair' added with start time 2024-12-02 and end time 2024-12-02.
+1 tasks loaded from file.
+1 tasks loaded from file.
+
+
+2024-12-02 16:51:59
+2 tasks loaded from file.
+1 events loaded from file.
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/main.py", line 71, in <module>
+    schedule.every(10).seconds.do(calendar_app.reminder_for_due_dates)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Cal' object has no attribute 'reminder_for_due_dates'. Did you mean: 'reminder_for_events'?
+
+
+2024-12-02 16:53:12
+2 tasks loaded from file.
+1 events loaded from file.
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/main.py", line 71, in <module>
+    schedule.every(10).seconds.do(calendar_app.reminder_for_due_dates)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Cal' object has no attribute 'reminder_for_due_dates'. Did you mean: 'reminder_for_events'?
+
+
+2024-12-02 17:00:14
+2 tasks loaded from file.
+2 events loaded from file.
+2 events loaded from file.
+ERROR parsing event start time for 'Career Fair': time data '2024-12-02' does not match format '%Y-%m-%d %H:%M'
+Reminder: Event 'SMS' starts in 10 minutes, LOSER!
+
+
+2024-12-02 17:02:15
+2 tasks loaded from file.
+2 events loaded from file.
+Scheduler thread started.
+Exception in thread Thread-1 (run_scheduler):
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/opt/anaconda3/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/nadir/workspace/CS361/src/main.py", line 34, in run_scheduler
+    schedule.run_pending()
+  File "/opt/anaconda3/lib/python3.12/site-packages/schedule/__init__.py", line 854, in run_pending
+    default_scheduler.run_pending()
+  File "/opt/anaconda3/lib/python3.12/site-packages/schedule/__init__.py", line 101, in run_pending
+    self._run_job(job)
+  File "/opt/anaconda3/lib/python3.12/site-packages/schedule/__init__.py", line 173, in _run_job
+    ret = job.run()
+          ^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/schedule/__init__.py", line 691, in run
+    ret = self.job_func()
+          ^^^^^^^^^^^^^^^
+TypeError: Cal.reminder_for_events() missing 1 required positional argument: 'self'
+
+
+2024-12-02 17:03:57
+2 tasks loaded from file.
+2 events loaded from file.
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/main.py", line 62, in <module>
+    tasks = Cal.load_initial_data("./src/tasks.json")
+            ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'Cal' has no attribute 'load_initial_data'
+
+
+2024-12-02 17:04:31
+2 tasks loaded from file.
+2 events loaded from file.
+2 tasks loaded from file.
+2 events loaded from file.
+Scheduler thread started.
+Exception in thread Thread-1 (run_scheduler):
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/opt/anaconda3/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/nadir/workspace/CS361/src/main.py", line 35, in run_scheduler
+    schedule.run_pending()
+  File "/opt/anaconda3/lib/python3.12/site-packages/schedule/__init__.py", line 854, in run_pending
+    default_scheduler.run_pending()
+  File "/opt/anaconda3/lib/python3.12/site-packages/schedule/__init__.py", line 101, in run_pending
+    self._run_job(job)
+  File "/opt/anaconda3/lib/python3.12/site-packages/schedule/__init__.py", line 173, in _run_job
+    ret = job.run()
+          ^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/schedule/__init__.py", line 691, in run
+    ret = self.job_func()
+          ^^^^^^^^^^^^^^^
+TypeError: Cal.reminder_for_events() missing 1 required positional argument: 'self'
