@@ -175,7 +175,7 @@ class Cal:
                 edit_button = tk.Button(task_frame, text="Edit", command=lambda task=task: self.edit_task_form(task))
                 edit_button.pack(side="right")
         else:
-            tk.Label(task_window, text="No tasks for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            tk.Label(task_window, text="No tasks.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
         # Add a frame for each event
         if day_events:
@@ -195,7 +195,7 @@ class Cal:
                 edit_button = tk.Button(event_frame, text="Edit", command=lambda event=event: self.edit_event_form(event))
                 edit_button.pack(side="right")
         else:
-            tk.Label(task_window, text="No events for this date.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            tk.Label(task_window, text="No events.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
     # Filter by task category
     def filter_by_category(self, retrieve_category, selected_category):
