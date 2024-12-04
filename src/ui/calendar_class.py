@@ -608,6 +608,8 @@ class Cal:
         event_window.destroy()
 
     def edit_task(self, task, name, description, priority, start_date, due_date, task_window):
+        num = len(self.tasks)
+
         if (task.priority != priority):
             sort_task = tasks.Tasks(name, description, priority, task.reminder, task.repetitiveness, task.category, start_date, due_date, task.status, task.location)
             self.tasks.remove(task)
@@ -619,11 +621,14 @@ class Cal:
                     if self.tasks[0].priority != "High":
                         self.tasks.insert(0, sort_task)
                     else:
-                        for i in range (self.task_num):
+                        ins = False
+                        for i in range (num):
                             if self.tasks[i].priority != "High":
                                 self.tasks.insert(i, sort_task)
+                                ins = True
                                 break
-
+                        if (ins == False):
+                            self.tasks.append(sort_task)
                 case "High":
                     self.tasks.insert(0, sort_task)
         else:
