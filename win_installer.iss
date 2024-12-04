@@ -20,7 +20,7 @@ Source: "dist\Innovators\src\*"; DestDir: "{app}\src"; Flags: ignoreversion recu
 Name: "{group}\EasyCal"; Filename: "{app}\EasyCal.exe"; IconFilename: "{app}\icon256.ico"
 Name: "{group}\Uninstall"; Filename: "{uninstallexe}"; IconFilename: "{app}\uninstall.ico"
 Name: "{userdesktop}\EasyCal"; Filename: "{app}\EasyCal.exe"; IconFilename: "{app}\icon256.ico"; WorkingDir: "{app}"; Tasks: desktopicon
-Name: "{userdesktop}\Uninstall EasyCal"; Filename: "{uninstallexe}"; IconFilename: "{app}\uninstall.ico"; WorkingDir: "{app}"; Tasks: desktopuninstall
+Name: "{userdesktop}\Uninstall"; Filename: "{uninstallexe}"; IconFilename: "{app}\uninstall.ico"; WorkingDir: "{app}"; Tasks: desktopuninstall
 
 [Tasks]
 Name: "desktopicon"; Description: "Create a desktop shortcut"; GroupDescription: "Additional icons"; Flags: unchecked
