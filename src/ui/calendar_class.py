@@ -98,6 +98,10 @@ class Cal:
         list_button = tk.Button(self.search_frame, text="Filter by Category", command=self.filter_by_category_helper, font="Arial 12")
         list_button.pack(side="left", padx=5)
 
+        # Button to search for tasks/events by name
+        list_button = tk.Button(self.search_frame, text="Search by Name", command=self.search_by_name_helper, font="Arial 12")
+        list_button.pack(side="left", padx=5)
+
     # Show current date
     def show_date(self):
         current_date = datetime.now().strftime("%m/%d/%y %H:%M:%S")
@@ -119,6 +123,24 @@ class Cal:
                                 command=lambda: self.filter_by_category(
                                     retrieve_category,
                                     category_entry.get()
+                                    ))
+        submit_button.pack() 
+
+    def search_by_name_helper(self):
+        # Need to create a window that has a single select
+        get_name = tk.Toplevel(self.root)
+        get_name.title("Enter name")
+
+        # Entry Field
+        tk.Label(get_name, text="Name:").pack()
+        name_entry = tk.Entry(get_name)
+        name_entry.pack()
+
+        # Submit button
+        submit_button = tk.Button(get_name, text="Search", 
+                                command=lambda: self.search_by_name(
+                                    get_name,
+                                    name_entry.get()
                                     ))
         submit_button.pack() 
 
@@ -210,6 +232,69 @@ class Cal:
                 edit_button.pack(side="right")
         else:
             tk.Label(task_window, text="No tasks for this category.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+
+    #logic behind search by name
+    def search_by_name(self, get_name, name_entry):
+        self.load_tasks_from_file()
+        self.load_events_from_file()
+        get_name.destroy()
+
+        # Pop up a new window 
+        task_window = tk.Toplevel(self.root)
+        task_window.title(name_entry)
+
+        # Add Tasks and Events to the lists based on if they have the correct name
+        matching_tasks = []
+        for task in self.tasks:
+            if (task.name == name_entry):
+                matching_tasks.append(task)
+            
+        matching_events = []
+        for event in self.events:
+            if (event.name == name_entry):
+                matching_events.append(event)
+
+        # Add a frame for each task
+        if matching_tasks:
+            tk.Label(task_window, text="Tasks:", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
+
+            for task in matching_tasks:
+                task_frame = tk.Frame(task_window, bd=2, relief="solid")
+                task_frame.pack(fill="x", padx=10, pady=5)
+
+                # Display task details
+                tk.Label(task_frame, text=f"Name: {task.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Description: {task.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Priority: {task.priority}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Category: {task.category}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Start Date: {task.start_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(task_frame, text=f"Due Date: {task.due_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+
+                # Edit button for each task
+                edit_button = tk.Button(task_frame, text="Edit", command=lambda task=task: self.edit_task_form(task))
+                edit_button.pack(side="right")
+        else:
+            tk.Label(task_window, text="No tasks with this name.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+
+        # Add a frame for each event
+        if matching_events:
+            tk.Label(task_window, text="Events:", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
+
+            for event in matching_events:
+                event_frame = tk.Frame(task_window, bd=2, relief="solid")
+                event_frame.pack(fill="x", padx=10, pady=5)
+
+                # Display event details
+                tk.Label(event_frame, text=f"Name: {event.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(event_frame, text=f"Description: {event.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+                tk.Label(event_frame, text=f"Start Date: {event.start_time}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)                
+                tk.Label(event_frame, text=f"End Date: {event.end_time}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+
+                # Edit button for each event
+                edit_button = tk.Button(event_frame, text="Edit", command=lambda event=event: self.edit_event_form(event))
+                edit_button.pack(side="right")
+        else:
+            tk.Label(task_window, text="No events with this name.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
 
     def filter_by_date(self):
