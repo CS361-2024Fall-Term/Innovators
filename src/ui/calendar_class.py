@@ -8,6 +8,7 @@ from tkinter import ttk, messagebox
 from datetime import datetime, timedelta
 from models import tasks, event
 from config.preferences import Preferences
+from config.profile import Profile
 
 class Cal:
     # Use the getters and setters
@@ -15,12 +16,15 @@ class Cal:
     event_num = 0
 
     # Initalizer
-    def __init__(self, root, tasks, events, pref, open_preferences):
+    def __init__(self, root, tasks, events, pref, open_preferences, profile, open_profile):
         self.root = root
         self.tasks = tasks if isinstance(tasks, list) else []  # Ensure tasks is a list
         self.events = events if isinstance(events, list) else []  # Ensure events is a list
         self.pref = pref
         self.open_preferences = open_preferences
+        self.profile = profile
+        self.open_profile = open_profile
+
 
         # Main calendar frame
         self.frame = tk.Frame(root)     # bg="lightblue"
@@ -79,6 +83,10 @@ class Cal:
         # Button to open preferences
         preferences_button = tk.Button(self.crud_frame, text="Preferences", command=self.open_preferences, font="Arial 12")
         preferences_button.pack(side="left", padx=5)
+
+        # Button to open profile
+        profile_button = tk.Button(self.crud_frame, text="Profile", command=self.open_profile, font="Arial 12")
+        profile_button.pack(side="left", padx=5)
 
         # Button to list all tasks/events
         list_button = tk.Button(self.search_frame, text="Get All Tasks/Events", command=self.get_all, font="Arial 12")

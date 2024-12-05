@@ -7,6 +7,7 @@ from ui.calendar_class import Cal
 from ui.daily_overview import DailyOverview
 from ui.dynamic_sizing import DynamicSizing
 from config.preferences import Preferences
+from config.profile import Profile
 
 
 # Redirect to a log file for compiled program testing
@@ -23,6 +24,7 @@ print(time.strftime("%Y-%m-%d %H:%M:%S"))
 def continue_to_calendar():
     welcome_screen.hide()
     pref.hide()
+    profile.hide()
     calendar_app.show()
     daily_overview.show()
 
@@ -30,6 +32,12 @@ def continue_to_calendar():
 def open_preferences():
     pref.show()
     # Hide the daily overview
+    daily_overview.hide()
+    calendar_app.hide()
+
+def open_profile():
+    profile.show()
+    # Hide the daily overview and calendar
     daily_overview.hide()
     calendar_app.hide()
 
@@ -50,8 +58,11 @@ if __name__ == "__main__":
     #Create preferences
     pref = Preferences(root, continue_to_calendar)
 
+    #Create profile
+    profile = Profile(root, continue_to_calendar)
+
     # Create a calendar object with an empty list of tasks and events
-    calendar_app = Cal(root, 0, 0, pref, open_preferences)
+    calendar_app = Cal(root, 0, 0, pref, open_preferences, profile, open_profile)
 
     # Create a DailyOverview object to display today's tasks and events
     daily_overview = DailyOverview(root, calendar_app.tasks, calendar_app.events)
@@ -61,6 +72,7 @@ if __name__ == "__main__":
     calendar_app.hide()
     daily_overview.hide()
     pref.hide()
+    profile.hide()
     welcome_screen.show()
 
     root.mainloop()
