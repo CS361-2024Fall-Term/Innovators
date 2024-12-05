@@ -3,9 +3,10 @@ from PIL import Image, ImageTk
 import tkinter as tk
 import os
 import sys
+from config.profile import Profile
 
 class WelcomeScreen:
-    def __init__(self, root, continue_callback):
+    def __init__(self, root, continue_callback, open_profile):
         self.root = root
         self.frame = tk.Frame(root, bg="white")
         self.frame.pack(fill="both", expand=True)
@@ -36,12 +37,27 @@ class WelcomeScreen:
         top_padding = tk.Frame(self.frame, height=50, bg="white")  # Height for top padding
         top_padding.pack()
 
+
         continue_button = tk.Button(
-            self.frame, text="Start Your Journey", font=("Helvetica", 16, "bold"), command=continue_callback,
+            self.frame, text="Start Your Journey", font=("Helvetica", 16, "bold"), command=lambda: self.next_screen(continue_callback,open_profile ),
             bg="#2F39CF", fg="white", activebackground="#010CA5", activeforeground="white",
             relief="flat", borderwidth=5, padx=30, pady=15 
         )
         continue_button.pack(pady=10)
+
+    def next_screen(self, calendar, profile):
+        profile_json = "./src/config/user_info.json"
+        try: 
+            file_size = os.path.getsize(profile_json)
+            if(file_size <= 38):
+                profile()
+            else:
+                print(f"file is {file_size} bytes")
+                calendar()
+        except FileNotFoundError as e:
+            print("profile.json not found")
+
+    
 
     def show(self):
         self.frame.pack(fill="both", expand=True)

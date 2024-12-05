@@ -40,6 +40,7 @@ def open_profile():
     # Hide the daily overview and calendar
     daily_overview.hide()
     calendar_app.hide()
+    welcome_screen.hide()
 
 
 if __name__ == "__main__":
@@ -53,7 +54,7 @@ if __name__ == "__main__":
     root.iconbitmap("./src/icon32.ico")
     
     # Create welcome screen with continue button
-    welcome_screen = WelcomeScreen(root, continue_to_calendar)
+    welcome_screen = WelcomeScreen(root, continue_to_calendar, open_profile)
     
     #Create preferences
     pref = Preferences(root, continue_to_calendar)
