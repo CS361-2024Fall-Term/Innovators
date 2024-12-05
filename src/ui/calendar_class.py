@@ -95,6 +95,17 @@ class Cal:
         # Button to search for tasks/events by name
         list_button = tk.Button(self.search_frame, text="Search by Name", command=self.search_by_name_helper, font="Arial 12")
         list_button.pack(side="left", padx=5)
+
+        # Overdue Tasks Button
+        overdue_tasks = self.check_overdue_tasks()
+        if overdue_tasks:
+            overdue_button = tk.Button(
+                self.crud_frame,
+                text="Overdue Tasks",
+                command=self.show_overdue_tasks,
+                font="Arial 12"
+            )
+            overdue_button.pack(side="left", padx=5)
     
     def show_tasks(self, window, task_list):
         for task in task_list:
@@ -821,3 +832,44 @@ class Cal:
                     messagebox.showinfo("Event Reminder", message)
             except ValueError as e:
                 logging.error(f"ERROR parsing task due date: {e}")
+
+
+    def check_overdue_tasks(self):
+        current_date = datetime.now().date()
+        overdue_tasks = [
+            task for task in self.tasks
+            if datetime.strptime(task.due_date, '%Y-%m-%d').date() < current_date
+        ]
+        return overdue_tasks
+    
+    def show_overdue_tasks(self):
+        overdue_tasks = self.check_overdue_tasks()
+        if overdue_tasks:
+            # Create a new window for overdue tasks
+            task_window = tk.Toplevel(self.root)
+            task_window.title("Overdue Tasks")
+
+            # Add a title label
+            tk.Label(task_window, text="Overdue Tasks:", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
+
+            # Display each overdue task in a frame
+            for task in overdue_tasks:
+                task_frame = tk.Frame(task_window, bd=2, relief="solid")
+                task_frame.pack(fill="x", padx=10, pady=5)
+
+                tk.Label(task_frame, text=f"Name: {task.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=2)
+                tk.Label(task_frame, text=f"Description: {task.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=2)
+                tk.Label(task_frame, text=f"Priority: {task.priority}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=2)
+                tk.Label(task_frame, text=f"Category: {task.category}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=2)
+                tk.Label(task_frame, text=f"Start Date: {task.start_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=2)
+                tk.Label(task_frame, text=f"Due Date: {task.due_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=2)
+
+                # Add edit and delete buttons for each task
+                tk.Button(task_frame, text="Edit", command=lambda t=task: self.edit_task_form(t)).pack(side="left", padx=5)
+                tk.Button(task_frame, text="Delete", command=lambda t=task: self.delete_task_check(t)).pack(side="right", padx=5)
+
+        else:
+            # If no overdue tasks, show a message
+            tk.Label(self.root, text="No overdue tasks!", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+
+
