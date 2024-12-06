@@ -39,11 +39,25 @@ class WelcomeScreen:
 
 
         continue_button = tk.Button(
-            self.frame, text="Start Your Journey", font=("Helvetica", 16, "bold"), command=lambda: self.next_screen(continue_callback,open_profile ),
+            self.frame, text=self.welcome_message(), font=("Helvetica", 16, "bold"), command=lambda: self.next_screen(continue_callback,open_profile ),
             bg="#2F39CF", fg="white", activebackground="#010CA5", activeforeground="white",
             relief="flat", borderwidth=5, padx=30, pady=15 
         )
         continue_button.pack(pady=10)
+
+    def welcome_message(self):
+        profile_json = "./src/config/user_info.json"
+        message = ""
+        try: 
+            file_size = os.path.getsize(profile_json)
+            if(file_size <= 38):
+                message = "Start Your Journey"
+            else:
+                print(f"file is {file_size} bytes")
+                message = "Continue Your Journey"
+        except FileNotFoundError as e:
+            print("profile.json not found")
+        return message
 
     def next_screen(self, calendar, profile):
         profile_json = "./src/config/user_info.json"
