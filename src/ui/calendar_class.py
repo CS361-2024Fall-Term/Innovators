@@ -116,6 +116,7 @@ class Cal:
             overdue_button.pack(side="left", padx=5)
     
     def show_tasks(self, window, task_list):
+        current_date = datetime.now().date()
         for task in task_list:
             task_frame = tk.Frame(window, bd=2, relief="solid")
             task_frame.pack(fill="x", padx=10, pady=5)
@@ -127,6 +128,11 @@ class Cal:
             tk.Label(task_frame, text=f"Category: {task.category}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
             tk.Label(task_frame, text=f"Start Date: {task.start_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
             tk.Label(task_frame, text=f"Due Date: {task.due_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+
+            # Check if the task is overdue
+            due_date = datetime.strptime(task.due_date, "%Y-%m-%d").date()
+            if due_date < current_date:
+                tk.Label(task_frame, text="OVERDUE", font=("Arial", 12, "bold"), fg="red").pack(anchor="w", padx=10, pady=5)
 
             # Edit button for each task
             edit_button = tk.Button(task_frame, text="Edit", command=lambda task=task: self.edit_task_form(task))
@@ -871,6 +877,9 @@ class Cal:
                 tk.Label(task_frame, text=f"Category: {task.category}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=2)
                 tk.Label(task_frame, text=f"Start Date: {task.start_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=2)
                 tk.Label(task_frame, text=f"Due Date: {task.due_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=2)
+
+                # Add "OVERDUE" label
+                tk.Label(task_frame, text="OVERDUE", font=("Arial", 12, "bold"), fg="red").pack(anchor="w", padx=10, pady=2)
 
                 # Add edit and delete buttons for each task
                 tk.Button(task_frame, text="Edit", command=lambda t=task: self.edit_task_form(t)).pack(side="left", padx=5)
