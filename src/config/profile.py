@@ -69,24 +69,20 @@ class Profile:
         self.credits_entry.pack()
 
         #dob
-        self.dob_label = tk.Label(self.frame, text="Birthday (yyyy-mm-dd)")
+        self.dob_label = tk.Label(self.frame, text="Birthday (MM-DD)")
         self.dob_entry = tk.Entry(self.frame)
         self.dob_entry.insert(0, str(self.dob))
         self.dob_label.pack()
         self.dob_entry.pack()
 
         #Button to save changes
-        save_button = tk.Button(self.frame, text="Save Changes",  
+        save_button = tk.Button(self.frame, text="Save & Continue",  
                                 command=lambda: self.update_profile(
                                     self.name_entry.get(),
                                     self.credits_entry.get(),
                                     self.dob_entry.get()
                                 ), font="Arial 12")
-        save_button.pack(side="right", padx=5)
-
-        #Button to return to calendar
-        preferences_button = tk.Button(self.frame, text="Return To Calendar", command=self.continue_to_calendar, font="Arial 12")
-        preferences_button.pack(side="left", padx=5)
+        save_button.pack(side="bottom", padx=5)
 
 
     def update_profile(self, name, credits, dob):
@@ -95,6 +91,7 @@ class Profile:
         self.dob = dob
 
         self.save_to_file(filename="./src/config/user_info.json")
+        self.continue_to_calendar()
 
     # Show calendar
     def show(self):
