@@ -25,7 +25,6 @@ class Cal:
         self.profile = profile
         self.open_profile = open_profile
 
-
         # Main calendar frame
         self.frame = tk.Frame(root)     # bg="lightblue"
         self.frame.pack(side="left", fill="both", expand=True)
@@ -78,8 +77,6 @@ class Cal:
         create_event_button = tk.Button(self.crud_frame, text="Add Event", command=self.open_event_creation_form, font="Arial 12")
         create_event_button.pack(side="left", padx=5)
 
-
-
         # Button to open preferences
         preferences_button = tk.Button(self.crud_frame, text="Preferences", command=self.open_preferences, font="Arial 12")
         preferences_button.pack(side="left", padx=5)
@@ -116,50 +113,86 @@ class Cal:
             overdue_button.pack(side="left", padx=5)
     
     def show_tasks(self, window, task_list):
+        # Create a canvas and a scrollbar
+        container = tk.Frame(window)
+        container.pack(fill="both", expand=True)
+
+        canvas = tk.Canvas(container)
+        scrollbar = ttk.Scrollbar(container, orient="vertical", command=canvas.yview)
+        scrollbar.pack(side="right", fill="y")
+        canvas.pack(side="left", fill="both", expand=True)
+
+        # Configure the canvas to work with the scrollbar
+        canvas.configure(yscrollcommand=scrollbar.set)
+        canvas.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+
+        # Add a frame inside the canvas
+        task_frame = tk.Frame(canvas)
+        canvas.create_window((0, 0), window=task_frame, anchor="nw")
+
+        # Add tasks to the frame
         current_date = datetime.now().date()
         for task in task_list:
-            task_frame = tk.Frame(window, bd=2, relief="solid")
-            task_frame.pack(fill="x", padx=10, pady=5)
+            single_task_frame = tk.Frame(task_frame, bd=2, relief="solid")
+            single_task_frame.pack(fill="x", padx=10, pady=5)
 
             # Display task details
-            tk.Label(task_frame, text=f"Name: {task.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
-            tk.Label(task_frame, text=f"Description: {task.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
-            tk.Label(task_frame, text=f"Priority: {task.priority}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
-            tk.Label(task_frame, text=f"Category: {task.category}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
-            tk.Label(task_frame, text=f"Start Date: {task.start_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
-            tk.Label(task_frame, text=f"Due Date: {task.due_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            tk.Label(single_task_frame, text=f"Name: {task.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            tk.Label(single_task_frame, text=f"Description: {task.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            tk.Label(single_task_frame, text=f"Priority: {task.priority}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            tk.Label(single_task_frame, text=f"Category: {task.category}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            tk.Label(single_task_frame, text=f"Start Date: {task.start_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            tk.Label(single_task_frame, text=f"Due Date: {task.due_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
             # Check if the task is overdue
             due_date = datetime.strptime(task.due_date, "%Y-%m-%d").date()
             if due_date < current_date:
-                tk.Label(task_frame, text="OVERDUE", font=("Arial", 12, "bold"), fg="red").pack(anchor="w", padx=10, pady=5)
+                tk.Label(single_task_frame, text="OVERDUE", font=("Arial", 12, "bold"), fg="red").pack(anchor="w", padx=10, pady=5)
 
             # Edit button for each task
-            edit_button = tk.Button(task_frame, text="Edit", command=lambda task=task: self.edit_task_form(task))
+            edit_button = tk.Button(single_task_frame, text="Edit", command=lambda task=task: self.edit_task_form(task))
             edit_button.pack(side="right")
 
-            # delete button for each task
-            delete_button = tk.Button(task_frame, text="Delete", command=lambda task=task: self.delete_task_check(task))
+            # Delete button for each task
+            delete_button = tk.Button(single_task_frame, text="Delete", command=lambda task=task: self.delete_task_check(task))
             delete_button.pack(side="left")
 
     def show_events(self, window, event_list):
+        # Create a canvas and a scrollbar
+        container = tk.Frame(window)
+        container.pack(fill="both", expand=True)
+
+        canvas = tk.Canvas(container)
+        scrollbar = ttk.Scrollbar(container, orient="vertical", command=canvas.yview)
+        scrollbar.pack(side="right", fill="y")
+        canvas.pack(side="left", fill="both", expand=True)
+
+        # Configure the canvas to work with the scrollbar
+        canvas.configure(yscrollcommand=scrollbar.set)
+        canvas.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+
+        # Add a frame inside the canvas
+        event_frame = tk.Frame(canvas)
+        canvas.create_window((0, 0), window=event_frame, anchor="nw")
+        
+        # Add event details inside the scrollable frame
         for event in event_list:
-                event_frame = tk.Frame(window, bd=2, relief="solid")
-                event_frame.pack(fill="x", padx=10, pady=5)
+            event_item_frame = tk.Frame(event_frame, bd=2, relief="solid")
+            event_item_frame.pack(fill="x", padx=10, pady=5)
 
-                # Display event details
-                tk.Label(event_frame, text=f"Name: {event.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
-                tk.Label(event_frame, text=f"Description: {event.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
-                tk.Label(event_frame, text=f"Start Date: {event.start_time}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)                
-                tk.Label(event_frame, text=f"End Date: {event.end_time}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            # Display event details
+            tk.Label(event_item_frame, text=f"Name: {event.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            tk.Label(event_item_frame, text=f"Description: {event.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            tk.Label(event_item_frame, text=f"Start Date: {event.start_time}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            tk.Label(event_item_frame, text=f"End Date: {event.end_time}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
-                # Edit button for each event
-                edit_button = tk.Button(event_frame, text="Edit", command=lambda event=event: self.edit_event_form(event))
-                edit_button.pack(side="right")
+            # Edit button for each event
+            edit_button = tk.Button(event_item_frame, text="Edit", command=lambda event=event: self.edit_event_form(event))
+            edit_button.pack(side="right")
 
-                # delete button for each event
-                delete_button = tk.Button(event_frame, text="Delete", command=lambda event=event: self.delete_event_check(event))
-                delete_button.pack(side="left")
+            # Delete button for each event
+            delete_button = tk.Button(event_item_frame, text="Delete", command=lambda event=event: self.delete_event_check(event))
+            delete_button.pack(side="left")
 
     # Show current date
     def show_date(self):
@@ -224,7 +257,7 @@ class Cal:
         # Add a frame for each event
         if day_events:
             tk.Label(task_window, text="Events:", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
-            self.show_events(task_window,day_events)
+            self.show_events(task_window, day_events)
         else:
             tk.Label(task_window, text="No events.", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
@@ -818,7 +851,7 @@ class Cal:
     def hide(self):
         self.frame.pack_forget()
 
-
+    # Reminder
     def reminder_for_events(self):
         self.load_events_from_file()
         self.load_tasks_from_file()
