@@ -86,15 +86,15 @@ class Cal:
         profile_button.pack(side="left", padx=5)
 
         # Button to list all tasks/events
-        list_button = tk.Button(self.search_frame, text="Get All Tasks/Events", command=self.get_all, font="Arial 12")
+        list_button = tk.Button(self.search_frame, text="Get All", command=self.get_all, font="Arial 12")
         list_button.pack(side="left", padx=5)
 
         # Button to list tasks/events for selected date
-        list_button = tk.Button(self.search_frame, text="Filter by Date", command=self.filter_by_date, font="Arial 12")
+        list_button = tk.Button(self.search_frame, text="Search by Date", command=self.filter_by_date, font="Arial 12")
         list_button.pack(side="left", padx=5)
 
         # Button to list tasks/events for selected category
-        list_button = tk.Button(self.search_frame, text="Filter by Category", command=self.filter_by_category_helper, font="Arial 12")
+        list_button = tk.Button(self.search_frame, text="Search by Category", command=self.filter_by_category_helper, font="Arial 12")
         list_button.pack(side="left", padx=5)
 
         # Button to search for tasks/events by name
