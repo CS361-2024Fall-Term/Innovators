@@ -163,6 +163,12 @@ class Cal:
                 reschedule_button = tk.Button(single_task_frame, text="Reschedule", command=lambda task=task: self.reschedule_task(task))
                 reschedule_button.pack(side="right")
 
+        # # Make the scrollable area responsive to mouse wheel scrolling
+        # def on_mouse_wheel(event):
+        #     canvas.yview_scroll(-1 * (event.delta // 120), "units")
+
+        # canvas.bind_all("<MouseWheel>", on_mouse_wheel)
+
     def show_events(self, window, event_list):
         # Create a canvas and a scrollbar
         container = tk.Frame(window)
@@ -199,6 +205,12 @@ class Cal:
             # Delete button for each event
             delete_button = tk.Button(event_item_frame, text="Delete", command=lambda event=event: self.delete_event_check(event))
             delete_button.pack(side="left")
+        
+        # # Make the scrollable area responsive to mouse wheel scrolling
+        # def on_mouse_wheel(event):
+        #     canvas.yview_scroll(-1 * (event.delta // 120), "units")
+
+        # canvas.bind_all("<MouseWheel>", on_mouse_wheel)
 
     # Show current date
     def show_date(self):
@@ -442,7 +454,6 @@ class Cal:
         description_entry.pack()
         description_entry.insert(0, task.description)
 
-
         tk.Label(task_window, text="Priority (High, Medium, Low):").pack()
         priority_entry = ttk.Combobox(task_window, values=["High", "Medium", "Low"])
         priority_entry.set(task.priority)  
@@ -505,6 +516,14 @@ class Cal:
         task.set_due_date(due_date)
 
         self.save_tasks_to_file()
+
+        # Refresh the daily overview
+        if hasattr(self, "daily_overview"):
+            self.daily_overview.tasks = self.tasks # Update daily overview
+            self.daily_overview.update_overview()
+
+        # Refresh the calendar
+        self.show_date() 
 
         window.destroy()
 
