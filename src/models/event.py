@@ -19,3 +19,9 @@ class Event:
 
     def get_location(self):
         return self.location
+    
+    def set_start_time(self, start_time):
+        self.start_time = start_time
+
+    def set_end_time(self, end_time):
+        self.end_time = end_time

@@ -150,16 +150,18 @@ class Cal:
                 tk.Label(single_task_frame, text="OVERDUE", font=("Arial", 12, "bold"), fg="red").pack(anchor="w", padx=10, pady=5)
 
             # Edit button for each task
-            edit_button = tk.Button(single_task_frame, text="Edit", command=lambda task=task: self.edit_task_form(task))
-            edit_button.pack(side="right")
+            if due_date > current_date:
+                edit_button = tk.Button(single_task_frame, text="Edit", command=lambda task=task: self.edit_task_form(task))
+                edit_button.pack(side="right")
 
             # Delete button for each task
             delete_button = tk.Button(single_task_frame, text="Delete", command=lambda task=task: self.delete_task_check(task))
             delete_button.pack(side="left")
 
-            # Reschedule button for each task
-            reschedule_button = tk.Button(single_task_frame, text="Reschedule", command=lambda task=task: self.reschedule_task(task))
-            reschedule_button.pack(side="left")
+            # Reschedule button for each task only if overdue
+            if due_date < current_date:
+                reschedule_button = tk.Button(single_task_frame, text="Reschedule", command=lambda task=task: self.reschedule_task(task))
+                reschedule_button.pack(side="right")
 
     def show_events(self, window, event_list):
         # Create a canvas and a scrollbar
@@ -407,7 +409,6 @@ class Cal:
         # due_date_entry = tk.Entry(task_window)
         # due_date_entry.insert(0, (datetime.now()).strftime('%Y-%m-%d %H:%M')) # default due date if after 24 hours?
         # due_date_entry.pack()
-
 
         # Submit button
         submit_button = tk.Button(task_window, text="Add Task", 
