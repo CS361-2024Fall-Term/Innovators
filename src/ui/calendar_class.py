@@ -141,6 +141,7 @@ class Cal:
             tk.Label(single_task_frame, text=f"Description: {task.description}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
             tk.Label(single_task_frame, text=f"Priority: {task.priority}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
             tk.Label(single_task_frame, text=f"Category: {task.category}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            tk.Label(single_task_frame, text=f"Status: {task.status}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
             tk.Label(single_task_frame, text=f"Start Date: {task.start_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
             tk.Label(single_task_frame, text=f"Due Date: {task.due_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
@@ -402,6 +403,11 @@ class Cal:
         category_entry.set("School")  # Set a default value
         category_entry.pack()
 
+        tk.Label(task_window, text="Status: ").pack()
+        status_entry = ttk.Combobox(task_window, values=["Not Started", "In Progress", "Completed"])
+        status_entry.set("Not Started")
+        status_entry.pack()
+
         tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
         start_date_entry = tk.Entry(task_window)
         start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d')) # default start date is today's date
@@ -429,6 +435,7 @@ class Cal:
                                     description_entry.get(),
                                     priority_entry.get(),
                                     category_entry.get(),
+                                    status_entry.get(),
                                     start_date_entry.get(),
                                     due_date_entry.get(),
                                     task_window
@@ -459,6 +466,16 @@ class Cal:
         priority_entry.set(task.priority)  
         priority_entry.pack()
 
+        tk.Label(task_window, text="Category (School, Work, Personal, Other):").pack()
+        category_entry = ttk.Combobox(task_window, values=["School", "Work", "Personal", "Other"])
+        category_entry.set(task.category)  # Set a default value
+        category_entry.pack()
+
+        tk.Label(task_window, text="Status: ").pack()
+        status_entry = ttk.Combobox(task_window, values=["Not Started", "In Progress", "Completed"])
+        status_entry.set(task.status)
+        status_entry.pack()
+
         # Removed the time aspect of these 
         tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
         start_date_entry = tk.Entry(task_window)
@@ -479,6 +496,8 @@ class Cal:
                                     name_entry.get(),
                                     description_entry.get(),
                                     priority_entry.get(),
+                                    category_entry.get(),
+                                    status_entry.get(),
                                     start_date_entry.get(),
                                     due_date_entry.get(),
                                     task_window
@@ -638,10 +657,10 @@ class Cal:
         submit_button.pack()
 
 
-    def add_task(self, name, description, priority, category, start_date, due_date, task_window):
+    def add_task(self, name, description, priority, category, status, start_date, due_date, task_window):
         num = len(self.tasks)
         # Create task object
-        new_task = tasks.Tasks(name, description, priority, None, None, category, start_date, due_date, "not started", "N/A")
+        new_task = tasks.Tasks(name, description, priority, None, None, category, start_date, due_date, status, "N/A")
 
         # Add the new task to the tasks
         if (num == 0):
@@ -706,7 +725,7 @@ class Cal:
         # Close the creation window
         event_window.destroy()
 
-    def edit_task(self, task, name, description, priority, start_date, due_date, task_window):
+    def edit_task(self, task, name, description, priority, category, status, start_date, due_date, task_window):
         num = len(self.tasks)
 
         if (task.priority != priority):
@@ -734,6 +753,8 @@ class Cal:
             task.set_name(name)
             task.set_description(description)
             task.set_priority(priority)
+            task.category = category
+            task.set_status(status)
             task.set_start_date(start_date)
             task.set_due_date(due_date)
 
