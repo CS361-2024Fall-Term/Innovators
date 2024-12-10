@@ -23,6 +23,12 @@ class Tasks:
 
     def set_priority(self, priority):
         self.priority = priority
+    
+    def set_start_date(self, start_date):
+        self.start_date = start_date
+
+    def set_due_date(self, due_date):
+        self.due_date = due_date
 
     def set_reminder(self, reminder):
         self.reminder = reminder

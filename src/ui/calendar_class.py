@@ -157,6 +157,10 @@ class Cal:
             delete_button = tk.Button(single_task_frame, text="Delete", command=lambda task=task: self.delete_task_check(task))
             delete_button.pack(side="left")
 
+            # Reschedule button for each task
+            reschedule_button = tk.Button(single_task_frame, text="Reschedule", command=lambda task=task: self.reschedule_task(task))
+            reschedule_button.pack(side="left")
+
     def show_events(self, window, event_list):
         # Create a canvas and a scrollbar
         container = tk.Frame(window)
@@ -487,7 +491,6 @@ class Cal:
         window = tk.Toplevel(self.root)
         window.title("Confirmation")
 
-
         tk.Label(window,text = "Are you sure you want to delete this task?").pack()
 
         yes_button = tk.Button(window, text="Yes", command=lambda: self.delete_task(window, t))
@@ -496,10 +499,34 @@ class Cal:
         no_button = tk.Button(window, text="No", command=lambda: window.destroy())
         no_button.pack(side="right")
 
+    def edit_task_date(self, task, window, start_date, due_date):
+        task.set_start_date(start_date)
+        task.set_due_date(due_date)
 
+        self.save_tasks_to_file()
 
+        window.destroy()
 
+    def reschedule_task(self, task):
+        # Open a new window to update the date of the task
+        window = tk.Toplevel(self.root)
+        window.title("Reschedule " + task.name)
 
+        tk.Label(window, text="Start Date (YYYY-MM-DD):").pack()
+        start_date_entry = tk.Entry(window)
+        start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d')) # default start date is today's date
+        start_date_entry.pack()
+
+        tk.Label(window, text="Due Date (YYYY-MM-DD):").pack()
+        due_date_entry = tk.Entry(window)
+        due_date_entry.insert(0, (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')) # default due date if after 24 hours?
+        due_date_entry.pack()
+
+        back_button = tk.Button(window, text="Back", command=lambda: window.destroy())
+        back_button.pack(side="left")
+
+        confirm_button = tk.Button(window, text="Confirm", command=lambda: self.edit_task_date(task, window, start_date_entry.get(), due_date_entry.get()))
+        confirm_button.pack(side="right")
 
     def open_event_creation_form(self):
         # Pop up a new window for task input
@@ -687,8 +714,8 @@ class Cal:
             task.set_name(name)
             task.set_description(description)
             task.set_priority(priority)
-            task.start_date = start_date
-            task.due_date = due_date
+            task.set_start_date(start_date)
+            task.set_due_date(due_date)
 
         self.save_tasks_to_file()
 
