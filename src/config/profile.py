@@ -13,21 +13,25 @@ class Profile:
         self.show()
         #Retrieve preferences from json
         self._setup_widgets()
+        self.user_name : self.user_name
+        self.credits : self.credits
+        self.dob : self.dob
 
 
-    def save_to_file(self, filename="./src/config/user_info.json"):
+    def save_to_file(self, filename="./config/user_info.json"):
         
         # Write data to a JSON file
         user_info = {
-            "name" : self.user_name,
-            "credits" : self.credits,
-            "DOB" : self.dob
+            "name": self.user_name,
+            "credits": self.credits,
+            "DOB": self.dob
         }
+
         with open(filename, 'w') as f:
             json.dump(user_info, f)
         print(f"user info saved in: {filename}")
 
-    def load_from_file(self, filename="./src/config/user_info.json"):
+    def load_from_file(self, filename="./config/user_info.json"):
         # Ensure the directory exists
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         
@@ -90,7 +94,7 @@ class Profile:
         self.credits = credits
         self.dob = dob
 
-        self.save_to_file(filename="./src/config/user_info.json")
+        self.save_to_file(filename="./config/user_info.json")
         self.continue_to_calendar()
 
     # Show calendar

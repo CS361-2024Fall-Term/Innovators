@@ -12,12 +12,12 @@ from config.profile import Profile
 
 # Redirect to a log file for compiled program testing
 # Ensure the log file is created if it doesn't exist
-log_file = "./src/app.log"
-os.makedirs(os.path.dirname(log_file), exist_ok=True)
-sys.stdout = open(log_file, "a")
-sys.stderr = sys.stdout
-print("\n")
-print(time.strftime("%Y-%m-%d %H:%M:%S"))
+# log_file = "./src/app.log"
+# os.makedirs(os.path.dirname(log_file), exist_ok=True)
+# sys.stdout = open(log_file, "a")
+# sys.stderr = sys.stdout
+# print("\n")
+# print(time.strftime("%Y-%m-%d %H:%M:%S"))
 
 
 # Function that defines the continue function

@@ -1,0 +1,378 @@
+
+
+2024-12-03 10:10:14
+File './src/config/preferences.json' not found. Creating a new file.
+Tasks saved to file: ./src/config/preferences.json
+File 'src/tasks.json' not found. Creating a new file.
+Tasks saved to file: src/tasks.json
+File 'src/events.json' not found. Creating a new file.
+Events saved to file: src/events.json
+0 tasks loaded from file.
+0 tasks loaded from file.
+0 tasks loaded from file.
+0 tasks loaded from file.
+
+
+2024-12-03 16:13:37
+0 tasks loaded from file.
+0 events loaded from file.
+
+
+2024-12-03 18:23:21
+5 tasks loaded from file.
+0 events loaded from file.
+
+
+2024-12-04 16:38:02
+5 tasks loaded from file.
+0 events loaded from file.
+
+
+2024-12-04 16:38:11
+5 tasks loaded from file.
+0 events loaded from file.
+5 tasks loaded from file.
+Deleteing task with name 'Hello'.
+Tasks saved to file: ./src/tasks.json
+Deleteing task with name 'Hello'.
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/tkinter/__init__.py", line 1968, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 435, in <lambda>
+    yes_button = tk.Button(window, text="Yes", command=lambda: self.delete_task(window, t))
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 695, in delete_task
+    self.tasks.remove(task)
+ValueError: list.remove(x): x not in list
+Deleteing task with name 'Hello'.
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/tkinter/__init__.py", line 1968, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 435, in <lambda>
+    yes_button = tk.Button(window, text="Yes", command=lambda: self.delete_task(window, t))
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 695, in delete_task
+    self.tasks.remove(task)
+ValueError: list.remove(x): x not in list
+Deleteing task with name 'Hello'.
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/tkinter/__init__.py", line 1968, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 435, in <lambda>
+    yes_button = tk.Button(window, text="Yes", command=lambda: self.delete_task(window, t))
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 695, in delete_task
+    self.tasks.remove(task)
+ValueError: list.remove(x): x not in list
+Deleteing task with name 'Hello'.
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/tkinter/__init__.py", line 1968, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 435, in <lambda>
+    yes_button = tk.Button(window, text="Yes", command=lambda: self.delete_task(window, t))
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 695, in delete_task
+    self.tasks.remove(task)
+ValueError: list.remove(x): x not in list
+Deleteing task with name 'Hello'.
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/tkinter/__init__.py", line 1968, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 435, in <lambda>
+    yes_button = tk.Button(window, text="Yes", command=lambda: self.delete_task(window, t))
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 695, in delete_task
+    self.tasks.remove(task)
+ValueError: list.remove(x): x not in list
+Deleteing task with name 'Hello'.
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/tkinter/__init__.py", line 1968, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 435, in <lambda>
+    yes_button = tk.Button(window, text="Yes", command=lambda: self.delete_task(window, t))
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 695, in delete_task
+    self.tasks.remove(task)
+ValueError: list.remove(x): x not in list
+Deleteing task with name 'Hello'.
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/tkinter/__init__.py", line 1968, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 435, in <lambda>
+    yes_button = tk.Button(window, text="Yes", command=lambda: self.delete_task(window, t))
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 695, in delete_task
+    self.tasks.remove(task)
+ValueError: list.remove(x): x not in list
+Deleteing task with name 'Hello'.
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/tkinter/__init__.py", line 1968, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 435, in <lambda>
+    yes_button = tk.Button(window, text="Yes", command=lambda: self.delete_task(window, t))
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 695, in delete_task
+    self.tasks.remove(task)
+ValueError: list.remove(x): x not in list
+Deleteing task with name 'Hello'.
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/tkinter/__init__.py", line 1968, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 435, in <lambda>
+    yes_button = tk.Button(window, text="Yes", command=lambda: self.delete_task(window, t))
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/ui/calendar_class.py", line 695, in delete_task
+    self.tasks.remove(task)
+ValueError: list.remove(x): x not in list
+
+
+2024-12-10 12:45:20
+profile.json not found
+File './src/config/user_info.json' not found. Creating a new file.
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 35, in load_from_file
+    with open(filename, 'r') as f:
+         ^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './src/config/user_info.json'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/main.py", line 63, in <module>
+    profile = Profile(root, continue_to_calendar)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 9, in __init__
+    self.load_from_file()
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 49, in load_from_file
+    self.save_to_file(filename)  # Create the file with an empty list
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 22, in save_to_file
+    "name" : self.user_name,
+             ^^^^^^^^^^^^^^
+AttributeError: 'Profile' object has no attribute 'user_name'
+
+
+2024-12-10 12:45:22
+profile.json not found
+File './src/config/user_info.json' not found. Creating a new file.
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 35, in load_from_file
+    with open(filename, 'r') as f:
+         ^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './src/config/user_info.json'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/main.py", line 63, in <module>
+    profile = Profile(root, continue_to_calendar)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 9, in __init__
+    self.load_from_file()
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 49, in load_from_file
+    self.save_to_file(filename)  # Create the file with an empty list
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 22, in save_to_file
+    "name" : self.user_name,
+             ^^^^^^^^^^^^^^
+AttributeError: 'Profile' object has no attribute 'user_name'
+
+
+2024-12-10 12:45:29
+profile.json not found
+File './src/config/user_info.json' not found. Creating a new file.
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 35, in load_from_file
+    with open(filename, 'r') as f:
+         ^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './src/config/user_info.json'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/main.py", line 63, in <module>
+    profile = Profile(root, continue_to_calendar)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 9, in __init__
+    self.load_from_file()
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 49, in load_from_file
+    self.save_to_file(filename)  # Create the file with an empty list
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 22, in save_to_file
+    "name" : self.user_name,
+             ^^^^^^^^^^^^^^
+AttributeError: 'Profile' object has no attribute 'user_name'
+
+
+2024-12-10 12:45:36
+profile.json not found
+File './src/config/user_info.json' not found. Creating a new file.
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 35, in load_from_file
+    with open(filename, 'r') as f:
+         ^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './src/config/user_info.json'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/main.py", line 63, in <module>
+    profile = Profile(root, continue_to_calendar)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 9, in __init__
+    self.load_from_file()
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 49, in load_from_file
+    self.save_to_file(filename)  # Create the file with an empty list
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 22, in save_to_file
+    "name" : self.user_name,
+             ^^^^^^^^^^^^^^
+AttributeError: 'Profile' object has no attribute 'user_name'
+
+
+2024-12-10 12:46:19
+profile.json not found
+File './src/config/user_info.json' not found. Creating a new file.
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 35, in load_from_file
+    with open(filename, 'r') as f:
+         ^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './src/config/user_info.json'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/main.py", line 63, in <module>
+    profile = Profile(root, continue_to_calendar)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 9, in __init__
+    self.load_from_file()
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 49, in load_from_file
+    self.save_to_file(filename)  # Create the file with an empty list
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 22, in save_to_file
+    "name" : self.user_name,
+             ^^^^^^^^^^^^^^
+AttributeError: 'Profile' object has no attribute 'user_name'
+
+
+2024-12-10 12:47:24
+profile.json not found
+File './src/config/user_info.json' not found. Creating a new file.
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 35, in load_from_file
+    with open(filename, 'r') as f:
+         ^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './src/config/user_info.json'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/main.py", line 63, in <module>
+    profile = Profile(root, continue_to_calendar)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 9, in __init__
+    self.load_from_file()
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 49, in load_from_file
+    self.save_to_file(filename)  # Create the file with an empty list
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 22, in save_to_file
+    "name" : self.user_name,
+             ^^^^^^^^^^^^^^
+AttributeError: 'Profile' object has no attribute 'user_name'
+
+
+2024-12-10 12:48:12
+profile.json not found
+File './src/config/user_info.json' not found. Creating a new file.
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 35, in load_from_file
+    with open(filename, 'r') as f:
+         ^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './src/config/user_info.json'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/main.py", line 63, in <module>
+    profile = Profile(root, continue_to_calendar)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 9, in __init__
+    self.load_from_file()
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 49, in load_from_file
+    self.save_to_file(filename)  # Create the file with an empty list
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 22, in save_to_file
+    "name" : self.user_name,
+             ^^^^^^^^^^^^^^
+AttributeError: 'Profile' object has no attribute 'user_name'
+
+
+2024-12-10 12:48:14
+profile.json not found
+File './src/config/user_info.json' not found. Creating a new file.
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 35, in load_from_file
+    with open(filename, 'r') as f:
+         ^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './src/config/user_info.json'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/main.py", line 63, in <module>
+    profile = Profile(root, continue_to_calendar)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 9, in __init__
+    self.load_from_file()
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 49, in load_from_file
+    self.save_to_file(filename)  # Create the file with an empty list
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 22, in save_to_file
+    "name" : self.user_name,
+             ^^^^^^^^^^^^^^
+AttributeError: 'Profile' object has no attribute 'user_name'
+
+
+2024-12-10 12:53:04
+profile.json not found
+File './src/config/user_info.json' not found. Creating a new file.
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 35, in load_from_file
+    with open(filename, 'r') as f:
+         ^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './src/config/user_info.json'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nadir/workspace/CS361/src/main.py", line 63, in <module>
+    profile = Profile(root, continue_to_calendar)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 9, in __init__
+    self.load_from_file()
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 49, in load_from_file
+    self.save_to_file(filename)  # Create the file with an empty list
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadir/workspace/CS361/src/config/profile.py", line 22, in save_to_file
+    "name" : self.user_name,
+             ^^^^^^^^^^^^^^
+AttributeError: 'Profile' object has no attribute 'user_name'

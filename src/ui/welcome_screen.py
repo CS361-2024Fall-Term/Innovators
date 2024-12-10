@@ -3,6 +3,7 @@ from PIL import Image, ImageTk
 import tkinter as tk
 import os
 import sys
+import json
 from config.profile import Profile
 
 class WelcomeScreen:
@@ -33,6 +34,10 @@ class WelcomeScreen:
         image_label = tk.Label(self.frame, image=self.image, bg="white", borderwidth=0, highlightthickness=0)
         image_label.pack(pady=(40, 10))
 
+        # checkf or profile json
+        self.profile_json_path = os.path.expanduser("~/config/user_info.json")
+        self.is_profile_complete = self.check_profile_status()
+
         # Empty frame for top padding
         top_padding = tk.Frame(self.frame, height=50, bg="white")  # Height for top padding
         top_padding.pack()
@@ -43,6 +48,7 @@ class WelcomeScreen:
             bg="#2F39CF", fg="white", activebackground="#010CA5", activeforeground="white",
             relief="flat", borderwidth=5, padx=30, pady=15 
         )
+
         continue_button.pack(pady=10)
 
     def welcome_message(self):
@@ -58,18 +64,26 @@ class WelcomeScreen:
         except FileNotFoundError as e:
             print("profile.json not found")
         return message
+    
+    def check_profile_status(self):
+
+        # Check if the profile json file exists and contains correct data.
+
+        try:
+            if os.path.exists(self.profile_json_path):
+                with open(self.profile_json_path, 'r') as f:
+                    data = json.load(f)
+                    # Consider the profile complete if all keys are present and non-empty
+                    return all(data.get(key) for key in ["name", "credits", "DOB"])
+        except (FileNotFoundError, json.JSONDecodeError) as e:
+            print(f"Error checking profile status: {e}")
+        return False
 
     def next_screen(self, calendar, profile):
-        profile_json = "./src/config/user_info.json"
-        try: 
-            file_size = os.path.getsize(profile_json)
-            if(file_size <= 38):
-                profile()
-            else:
-                print(f"file is {file_size} bytes")
-                calendar()
-        except FileNotFoundError as e:
-            print("profile.json not found")
+        if self.is_profile_complete:
+            calendar()
+        else:
+            profile()
 
     
 
