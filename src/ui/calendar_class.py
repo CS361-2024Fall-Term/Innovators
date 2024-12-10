@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 from models import tasks, event
 from config.preferences import Preferences
 from config.profile import Profile
+from services.notification import parse_date
 
 class Cal:
     # Use the getters and setters
@@ -146,12 +147,19 @@ class Cal:
             tk.Label(single_task_frame, text=f"Due Date: {task.due_date}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
             # Check if the task is overdue
-            due_date = datetime.strptime(task.due_date, "%Y-%m-%d").date()
-            if due_date < current_date:
+            #+  parse due_date
+            due_date = parse_date(task.due_date)
+            if due_date is None:
+                logging.error(f"Skipping task due to invalid date: {task.due_date}")
+                continue
+
+            # Check if the task is overdue
+            if due_date.date() < current_date:
                 tk.Label(single_task_frame, text="OVERDUE", font=("Arial", 12, "bold"), fg="red").pack(anchor="w", padx=10, pady=5)
 
+
             # Edit button for each task
-            if due_date > current_date:
+            if due_date.date() > current_date:
                 edit_button = tk.Button(single_task_frame, text="Edit", command=lambda task=task: self.edit_task_form(task))
                 edit_button.pack(side="right")
 
@@ -160,7 +168,7 @@ class Cal:
             delete_button.pack(side="left")
 
             # Reschedule button for each task only if overdue
-            if due_date < current_date:
+            if due_date.date() < current_date:
                 reschedule_button = tk.Button(single_task_frame, text="Reschedule", command=lambda task=task: self.reschedule_task(task))
                 reschedule_button.pack(side="right")
 
@@ -215,7 +223,7 @@ class Cal:
 
     # Show current date
     def show_date(self):
-        current_date = datetime.now().strftime("%m/%d/%y %H:%M:%S")
+        current_date = datetime.now().strftime("%Y-%m-%d %H:%M")
         # self.date_label.config(text=f"Current Date: {current_date}")
 
     def filter_by_category_helper(self):
@@ -347,21 +355,21 @@ class Cal:
         task_window.title(selected_date)
 
         # Convert selected_date from calendar to correct format
-        target_date = datetime.strptime(selected_date, "%m/%d/%y").strftime("%Y-%m-%d")
-        target_date = datetime.strptime(target_date, "%Y-%m-%d")
+        target_date = datetime.strptime(selected_date, "%Y-%m-%d %H:%M").strftime("%Y-%m-%d %H:%M")
+        target_date = datetime.strptime(target_date, "%Y-%m-%d %H:%M")
 
         # Add Tasks and Events to the lists based on if they are in the range
         day_tasks = []
         for task in self.tasks:
-            start_date = datetime.strptime(task.start_date, "%Y-%m-%d")
-            due_date = datetime.strptime(task.due_date, "%Y-%m-%d")
+            start_date = datetime.strptime(task.start_date, "%Y-%m-%d %H:%M")
+            due_date = datetime.strptime(task.due_date, "%Y-%m-%d %H:%M")
             if (start_date <= target_date <= due_date):
                 day_tasks.append(task)
             
         day_events = []
         for event in self.events:
-            start_time = datetime.strptime(event.start_time, "%Y-%m-%d")
-            end_time = datetime.strptime(event.end_time, "%Y-%m-%d")
+            start_time = datetime.strptime(event.start_time, "%Y-%m-%d %H:%M")
+            end_time = datetime.strptime(event.end_time, "%Y-%m-%d %H:%M")
             if (start_time <= target_date <= end_time):
                 day_events.append(event)
 
@@ -403,30 +411,23 @@ class Cal:
         category_entry.set("School")  # Set a default value
         category_entry.pack()
 
+        
         tk.Label(task_window, text="Status: ").pack()
         status_entry = ttk.Combobox(task_window, values=["Not Started", "In Progress", "Completed"])
         status_entry.set("Not Started")
         status_entry.pack()
 
-        tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
+        tk.Label(task_window, text="Start Date (YYYY-MM-DD HH:MM):").pack()
         start_date_entry = tk.Entry(task_window)
-        start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d')) # default start date is today's date
+        start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
         start_date_entry.pack()
 
-        tk.Label(task_window, text="Due Date (YYYY-MM-DD):").pack()
+        tk.Label(task_window, text="Due Date (YYYY-MM-DD HH:MM):").pack()
         due_date_entry = tk.Entry(task_window)
-        due_date_entry.insert(0, (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')) # default due date if after 24 hours?
+        due_date_entry.insert(0, (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d %H:%M')) # default due date if after 24 hours?
         due_date_entry.pack()
-
-        # tk.Label(task_window, text="Start Time (HH-MM):").pack()
-        # start_date_entry = tk.Entry(task_window)
-        # start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
-        # start_date_entry.pack()
-
-        # tk.Label(task_window, text="Due Time (HH-MM):").pack()
-        # due_date_entry = tk.Entry(task_window)
-        # due_date_entry.insert(0, (datetime.now()).strftime('%Y-%m-%d %H:%M')) # default due date if after 24 hours?
-        # due_date_entry.pack()
+        
+        due_date_entry.pack()
 
         # Submit button
         submit_button = tk.Button(task_window, text="Add Task", 
@@ -477,17 +478,15 @@ class Cal:
         status_entry.pack()
 
         # Removed the time aspect of these 
-        tk.Label(task_window, text="Start Date (YYYY-MM-DD):").pack()
+        tk.Label(task_window, text="Start Date (YYYY-MM-DD HH:MM):").pack()
         start_date_entry = tk.Entry(task_window)
-        # start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d')) # default start date is today's date
+        start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M'))
         start_date_entry.pack()
-        start_date_entry.insert(0, task.start_date)
 
-        tk.Label(task_window, text="Due Date (YYYY-MM-DD):").pack()
+        tk.Label(task_window, text="Due Date (YYYY-MM-DD HH:MM):").pack()
         due_date_entry = tk.Entry(task_window)
-        # due_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d')) # default start date is today's date
+        due_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
         due_date_entry.pack()
-        due_date_entry.insert(0, task.due_date)
 
         # Submit button
         submit_button = tk.Button(task_window, text="Submit", 
@@ -553,12 +552,12 @@ class Cal:
 
         tk.Label(window, text="Start Date (YYYY-MM-DD):").pack()
         start_date_entry = tk.Entry(window)
-        start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d')) # default start date is today's date
+        start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
         start_date_entry.pack()
 
         tk.Label(window, text="Due Date (YYYY-MM-DD):").pack()
         due_date_entry = tk.Entry(window)
-        due_date_entry.insert(0, (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')) # default due date if after 24 hours?
+        due_date_entry.insert(0, (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d %H:%M')) # default due date if after 24 hours?
         due_date_entry.pack()
 
         back_button = tk.Button(window, text="Back", command=lambda: window.destroy())
@@ -581,14 +580,14 @@ class Cal:
         description_entry = tk.Entry(event_window)
         description_entry.pack()
 
-        tk.Label(event_window, text="Start Time (YYYY-MM-DD):").pack()
+        tk.Label(event_window, text="Start Time (YYYY-MM-DD HH:MM):").pack()
         start_time_entry = tk.Entry(event_window)
-        start_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d')) # default start date is today's date
+        start_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
         start_time_entry.pack()
 
-        tk.Label(event_window, text="End Time (YYYY-MM-DD):").pack()
+        tk.Label(event_window, text="End Time (YYYY-MM-DD HH:MM):").pack()
         end_time_entry = tk.Entry(event_window)
-        end_time_entry.insert(0, (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')) # default start date is today's date
+        end_time_entry.insert(0, (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d %H:%M')) # default start date is today's date
         end_time_entry.pack()
 
         tk.Label(event_window, text="Location").pack()
@@ -626,17 +625,15 @@ class Cal:
         description_entry.insert(0, e.description)
 
 
-        tk.Label(event_window, text="Start Time (YYYY-MM-DD):").pack()
+        tk.Label(event_window, text="Start Time (YYYY-MM-DD HH:MM):").pack()
         start_time_entry = tk.Entry(event_window)
-        #start_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
+        start_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
         start_time_entry.pack()
-        start_time_entry.insert(0, e.start_time)
 
-        tk.Label(event_window, text="End Time (YYYY-MM-DD):").pack()
+        tk.Label(event_window, text="End Time (YYYY-MM-DD HH:MM):").pack()
         end_time_entry = tk.Entry(event_window)
-        #end_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d 23:59')) # default start date is today's date
+        end_time_entry.insert(0, datetime.now().strftime('%Y-%m-%d 23:59')) # default start date is today's date
         end_time_entry.pack()
-        end_time_entry.insert(0, e.end_time)
 
         tk.Label(event_window, text="Location:").pack()
         location_entry = tk.Entry(event_window)
@@ -846,26 +843,29 @@ class Cal:
         print(f"Tasks saved to file: {filename}")
 
     def load_tasks_from_file(self, filename="src/tasks.json"):
-        # Ensure the directory exists
         os.makedirs(os.path.dirname(filename), exist_ok=True)
 
         try:
             with open(filename, 'r') as f:
                 tasks_data = json.load(f)
 
-            # Convert each dictionary back to a Tasks object
-            self.tasks = [tasks.Tasks(**task_data) for task_data in tasks_data]  # Replace with your actual Tasks class
+            self.tasks = []
+            for task_data in tasks_data:
+                task_data['start_date'] = parse_date(task_data.get('start_date')).strftime("%Y-%m-%d %H:%M")
+                task_data['due_date'] = parse_date(task_data.get('due_date')).strftime("%Y-%m-%d %H:%M")
+                self.tasks.append(tasks.Tasks(**task_data))
+
             self.set_task_num(len(self.tasks))
             print(f"{len(self.tasks)} tasks loaded from file.")
-            #self.daily_overview.update_overview()
         except FileNotFoundError:
             print(f"File '{filename}' not found. Creating a new file.")
             self.tasks = []
-            self.save_tasks_to_file(filename)  # Create the file with an empty list
+            self.save_tasks_to_file(filename)
         except json.JSONDecodeError:
             print(f"The file '{filename}' contains invalid JSON. Starting with an empty list.")
             self.tasks = []
             self.save_tasks_to_file(filename)
+
 
     def save_events_to_file(self, filename="./src/events.json"):
         # Save all events to a JSON file
@@ -886,18 +886,36 @@ class Cal:
                 events_data = json.load(f)
 
             # Convert each dictionary back to an Event object
-            self.events = [event.Event(**event_data) for event_data in events_data]  # Replace with your actual Event class
+            self.events = []
+            for event_data in events_data:
+                # Ensure start_time and end_time are in the correct format
+                if 'start_time' in event_data:
+                    start_time = parse_date(event_data['start_time'])
+                    if start_time:
+                        event_data['start_time'] = start_time.strftime("%Y-%m-%d %H:%M")
+                    else:
+                        event_data['start_time'] += " 00:00"  # Append default time if missing
+
+                if 'end_time' in event_data:
+                    end_time = parse_date(event_data['end_time'])
+                    if end_time:
+                        event_data['end_time'] = end_time.strftime("%Y-%m-%d %H:%M")
+                    else:
+                        event_data['end_time'] += " 23:59"  # Append default time if missing
+
+                self.events.append(event.Event(**event_data))
+
             self.set_event_num(len(self.events))
             print(f"{len(self.events)} events loaded from file.")
-            #self.daily_overview.update_overview()
         except FileNotFoundError:
             print(f"File '{filename}' not found. Creating a new file.")
             self.events = []
-            self.save_events_to_file(filename)  # Create the file with an empty list
+            self.save_events_to_file(filename)
         except json.JSONDecodeError:
             print(f"The file '{filename}' contains invalid JSON. Starting with an empty list.")
             self.events = []
             self.save_events_to_file(filename)
+
 
     def get_task_num(self):
         return self.task_num
@@ -951,11 +969,14 @@ class Cal:
 
     def check_overdue_tasks(self):
         current_date = datetime.now().date()
-        overdue_tasks = [
-            task for task in self.tasks
-            if datetime.strptime(task.due_date, '%Y-%m-%d').date() < current_date
-        ]
+        overdue_tasks = []
+        for task in self.tasks:
+            due_date = parse_date(task.due_date)
+            if due_date and due_date.date() < current_date:
+                overdue_tasks.append(task)
         return overdue_tasks
+
+
     
     def show_overdue_tasks(self):
         overdue_tasks = self.check_overdue_tasks()

@@ -1,4 +1,5 @@
 import tkinter as tk
+from services.notification import parse_date
 from datetime import datetime
 
 class DailyOverview:
@@ -20,20 +21,24 @@ class DailyOverview:
         self.update_overview()
 
     def update_overview(self):
-        today = datetime.now().strftime("%Y-%m-%d")
-        today_date = datetime.strptime(today, "%Y-%m-%d")
+        today = datetime.now().strftime("%Y-%m-%d %H:%M")
+        today_date = datetime.strptime(today, "%Y-%m-%d %H:%M")
 
         today_tasks = []
         for task in self.tasks:
-            start_date = datetime.strptime(task.start_date, "%Y-%m-%d")
-            due_date = datetime.strptime(task.due_date, "%Y-%m-%d")
+            start_date = parse_date(task.start_date)
+            if not start_date:
+                continue
+            due_date = parse_date(task.due_date, "%Y-%m-%d %H:%M")
+            if not due_date:
+                continue
             if start_date <= today_date <= due_date:
                 today_tasks.append(task)
             
         today_events = []
         for event in self.events:
-            start_time = datetime.strptime(event.start_time, "%Y-%m-%d")
-            end_time = datetime.strptime(event.end_time, "%Y-%m-%d")
+            start_time = datetime.strptime(event.start_time, "%Y-%m-%d %H:%M")
+            end_time = datetime.strptime(event.end_time, "%Y-%m-%d %H:%M")
             if start_time <= today_date <= end_time:
                 today_events.append(event)
 
