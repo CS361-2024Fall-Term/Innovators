@@ -1,12 +1,15 @@
 import tkinter as tk
 from services.notification import parse_date
 from datetime import datetime
+from config.profile import Profile
+
 
 class DailyOverview:
-    def __init__(self, root, tasks, events):
+    def __init__(self, root, tasks, events, profile):
         self.root = root
         self.tasks = tasks
         self.events = events
+        self.profile = profile
 
         # Set the frame for daily overview
         self.frame = tk.Frame(root, bd=2, relief="solid")
@@ -23,6 +26,11 @@ class DailyOverview:
     def update_overview(self):
         today = datetime.now().strftime("%Y-%m-%d %H:%M")
         today_date = datetime.strptime(today, "%Y-%m-%d %H:%M")
+
+        birthday = Profile.get_bday(self.profile)
+        birthday_month, birthday_day = map(int, birthday.split('-'))
+        curr_month = today_date.month
+        curr_day = today_date.day
 
         today_tasks = []
         for task in self.tasks:
@@ -45,8 +53,9 @@ class DailyOverview:
         # Clear the frame before updating with new content
         for widget in self.frame.winfo_children():
             widget.destroy()
-
-        tk.Label(self.frame, text=f"Overview for {today}", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
+        if birthday_month == curr_month and birthday_day == curr_day:
+            tk.Label(self.frame, text="Happy Birthday!", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
+        tk.Label(self.frame, text=f"{Profile.get_name(self.profile)}'s overview for {today} \n Reccomended Weekly study hours: {(int(Profile.get_credits(self.profile))) * 2}", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
 
         # Add a section for tasks
         if today_tasks:

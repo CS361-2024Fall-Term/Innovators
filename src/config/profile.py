@@ -97,6 +97,18 @@ class Profile:
 
         self.save_to_file(filename=self.DEFAULT_JSON_PATH)
         self.continue_to_calendar()
+    
+    def get_name(self):
+        self.load_from_file()
+        return self.user_name
+    
+    def get_credits(self):
+        self.load_from_file()
+        return self.credits
+    
+    def get_bday(self):
+        self.load_from_file()
+        return self.dob
 
     # Show calendar
     def show(self):
