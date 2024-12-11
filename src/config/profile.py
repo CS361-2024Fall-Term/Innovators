@@ -94,21 +94,30 @@ class Profile:
         self.user_name = name
         self.credits = credits
         self.dob = dob
-
         self.save_to_file(filename=self.DEFAULT_JSON_PATH)
         self.continue_to_calendar()
     
     def get_name(self):
         self.load_from_file()
-        return self.user_name
+        if self.user_name != "":
+            return self.user_name
+        else:
+            return "User"
     
     def get_credits(self):
         self.load_from_file()
-        return self.credits
+        if self.credits != "":
+            return self.credits
+        else:
+            return 0
     
     def get_bday(self):
         self.load_from_file()
-        return self.dob
+        if self.dob != "":
+            return self.dob
+        else:
+            return "00-00"
+        
 
     # Show calendar
     def show(self):

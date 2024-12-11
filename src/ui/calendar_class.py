@@ -929,6 +929,7 @@ class Cal:
 
     # Show calendar
     def show(self):
+        self.daily_overview.update_overview()
         self.frame.pack(side="left", fill="both", expand=True)
 
     # Hide calendar
