@@ -5,54 +5,55 @@ from tkinter import ttk
 
 
 class Profile:
+    BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "config")
+    DEFAULT_JSON_PATH = os.path.join(BASE_DIR, "user_info.json")
+
     def __init__(self, root, continue_to_calendar):
+        # Initialize attributes with default values
+        self.user_name = "Guest"
+        self.credits = 0
+        self.dob = "01-01"
+
+        # Load from file or set defaults
         self.load_from_file()
+
         self.continue_to_calendar = continue_to_calendar
-        #Preferences Frame
-        self.frame = tk.Frame(root) 
+        self.frame = tk.Frame(root)
         self.show()
-        #Retrieve preferences from json
         self._setup_widgets()
-        self.user_name : self.user_name
-        self.credits : self.credits
-        self.dob : self.dob
 
-
-    def save_to_file(self, filename="./config/user_info.json"):
-        
+    def save_to_file(self, filename=DEFAULT_JSON_PATH):
         # Write data to a JSON file
         user_info = {
             "name": self.user_name,
             "credits": self.credits,
-            "DOB": self.dob
+            "DOB": self.dob,
         }
 
         with open(filename, 'w') as f:
             json.dump(user_info, f)
         print(f"user info saved in: {filename}")
 
-    def load_from_file(self, filename="./config/user_info.json"):
-        # Ensure the directory exists
-        os.makedirs(os.path.dirname(filename), exist_ok=True)
-        
+    def load_from_file(self, filename=DEFAULT_JSON_PATH):
+        dir_path = os.path.dirname(filename)
+        print(f"Ensuring directory exists for: {dir_path}")
+        if dir_path:
+            os.makedirs(dir_path, exist_ok=True)
+
         try:
             with open(filename, 'r') as f:
                 data = json.load(f)
 
-            # Convert each dictionary back to a Tasks object
-            self.user_name = data["name"]
-            self.credits = data["credits"]
-            self.dob = data["DOB"]
+            # Convert each dictionary back to an object
+            self.user_name = data.get("name", "Guest")
+            self.credits = data.get("credits", 0)
+            self.dob = data.get("DOB", "01-01")
         except FileNotFoundError:
-            self.font_size = 13
-            self.color_theme = "blue"
-            self.notifications = False
-            self.reminders = False
-            self.reminder_time = 13
             print(f"File '{filename}' not found. Creating a new file.")
-            self.save_to_file(filename)  # Create the file with an empty list
+            self.save_to_file(filename)
         except json.JSONDecodeError:
-            print(f"The file '{filename}' contains invalid JSON. Starting with an empty list.")
+            print(f"The file '{filename}' contains invalid JSON. Starting with defaults.")
+            self.save_to_file(filename)
 
 
     def _setup_widgets(self):
