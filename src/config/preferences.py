@@ -26,7 +26,8 @@ class Preferences:
             "reminder_time" : self.reminder_time,
             "school_category_color" : self.school_category_color,
             "work_category_color" : self.work_category_color,
-            "personal_category_color" : self.personal_category_color
+            "personal_category_color" : self.personal_category_color,
+            "other_category_color" : self.other_category_color,
         }
         with open(filename, 'w') as f:
             json.dump(pref_dict, f)
@@ -41,7 +42,7 @@ class Preferences:
             case "Personal":
                 return self.personal_category_color
             case _:
-                return "black"
+                return self.other_category_color
 
     # def __del__(self):
     #     self.save_to_file("src/config/preferences.json")
@@ -63,6 +64,7 @@ class Preferences:
             self.school_category_color = data["school_category_color"]
             self.work_category_color = data["work_category_color"]
             self.personal_category_color = data["personal_category_color"]
+            self.other_category_color = data["other_category_color"]
         except FileNotFoundError:
             self.font_size = 13
             self.color_theme = "blue"
@@ -72,6 +74,7 @@ class Preferences:
             self.school_category_color = "green",
             self.work_category_color = "purple" ,
             self.personal_category_color = "yellow",
+            self.other_category_color = "black",
             # print(f"File '{filename}' not found. Creating a new file.")
             self.save_to_file(filename)  # Create the file with an empty list
         except json.JSONDecodeError:
@@ -114,21 +117,27 @@ class Preferences:
 
         # Entry Field
         tk.Label(self.frame, text="School Category Color").pack()
-        self.school_category_color_entry = ttk.Combobox(self.frame, values=["red", "blue", "green", "yellow", "orange"])
+        self.school_category_color_entry = ttk.Combobox(self.frame, values=["blue", "green", "red", "purple", "yellow", "black", "pink", "white", "orange", "brown"])
         self.school_category_color_entry.set(self.school_category_color)  # Set a default value
         self.school_category_color_entry.pack()
         
         # Entry Field
         tk.Label(self.frame, text="Work Category Color").pack()
-        self.work_category_color_entry = ttk.Combobox(self.frame, values=["red", "blue", "green", "yellow", "orange"])
+        self.work_category_color_entry = ttk.Combobox(self.frame, values=["blue", "green", "red", "purple", "yellow", "black", "pink", "white", "orange", "brown"])
         self.work_category_color_entry.set(self.work_category_color)  # Set a default value
         self.work_category_color_entry.pack()
 
         # Entry Field
         tk.Label(self.frame, text="Personal Category Color").pack()
-        self.personal_category_color_entry = ttk.Combobox(self.frame, values=["red", "blue", "green", "yellow", "orange"])
+        self.personal_category_color_entry = ttk.Combobox(self.frame, values=["blue", "green", "red", "purple", "yellow", "black", "pink", "white", "orange", "brown"])
         self.personal_category_color_entry.set(self.personal_category_color)  # Set a default value
         self.personal_category_color_entry.pack()
+
+                # Entry Field
+        tk.Label(self.frame, text="Other Category Color").pack()
+        self.other_category_color_entry = ttk.Combobox(self.frame, values=["blue", "green", "red", "purple", "yellow", "black", "pink", "white", "orange", "brown"])
+        self.other_category_color_entry.set(self.other_category_color)  # Set a default value
+        self.other_category_color_entry.pack()
 
         #Button to save changes
         save_button = tk.Button(self.frame, text="Save Changes",  
@@ -141,6 +150,7 @@ class Preferences:
                                     self.school_category_color_entry.get(),
                                     self.work_category_color_entry.get(),
                                     self.personal_category_color_entry.get(),
+                                    self.other_category_color_entry.get(),
                                 ), font="Arial 12")
         save_button.pack(side="right", padx=5)
 
@@ -150,7 +160,7 @@ class Preferences:
         preferences_button.pack(side="left", padx=5)
 
 
-    def update_pref(self, font_size, color_theme, notifications, reminders, reminder_time, school_category_color, work_category_color, personal_category_color):
+    def update_pref(self, font_size, color_theme, notifications, reminders, reminder_time, school_category_color, work_category_color, personal_category_color, other_category_color):
         self.font_size =font_size
         self.color_theme = color_theme
         self.notifications = notifications
@@ -159,6 +169,7 @@ class Preferences:
         self.school_category_color = school_category_color
         self.work_category_color = work_category_color
         self.personal_category_color = personal_category_color
+        self.other_category_color = other_category_color
 
         self.save_to_file(filename="./config/preferences.json")
 
