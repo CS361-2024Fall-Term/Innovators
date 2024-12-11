@@ -479,12 +479,12 @@ class Cal:
         # Removed the time aspect of these 
         tk.Label(task_window, text="Start Date (YYYY-MM-DD HH:MM):").pack()
         start_date_entry = tk.Entry(task_window)
-        start_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M'))
+        start_date_entry.insert(0, task.start_date)
         start_date_entry.pack()
 
         tk.Label(task_window, text="Due Date (YYYY-MM-DD HH:MM):").pack()
         due_date_entry = tk.Entry(task_window)
-        due_date_entry.insert(0, datetime.now().strftime('%Y-%m-%d %H:%M')) # default start date is today's date
+        due_date_entry.insert(0, task.due_date) 
         due_date_entry.pack()
 
         # Submit button
