@@ -10,6 +10,8 @@ from models import tasks, event
 from config.preferences import Preferences
 from config.profile import Profile
 from services.notification import parse_date
+import threading
+import schedule
 
 class Cal:
     # Use the getters and setters
@@ -906,7 +908,6 @@ class Cal:
                 self.events.append(event.Event(**event_data))
 
             self.set_event_num(len(self.events))
-            print(f"{len(self.events)} events loaded from file.")
         except FileNotFoundError:
             print(f"File '{filename}' not found. Creating a new file.")
             self.events = []
@@ -949,7 +950,7 @@ class Cal:
                 time_difference = (end_time - now).total_seconds()
 
                 if 0 <= time_difference <= 600:  # check if there is an event within 10 minutes
-                    message = f"Reminder: Event '{event.name}' starts in 10 minutes!, HURRY UP, LOSER"
+                    message = f"Reminder: Event '{event.name}' starts in 10 minutes, HURRY UP!"
                     logging.info(message)
                     messagebox.showinfo("Event Reminder", message)
             except ValueError as e:
@@ -960,7 +961,7 @@ class Cal:
                 time_difference = (due_date - now).total_seconds()
 
                 if 0 <= time_difference <= 600:  # check if there is a task within 10 minutes
-                    message = f"Reminder: Task '{task.name}' starts in 10 minutes!, HURRY UP, LOSER"
+                    message = f"Reminder: Task '{task.name}' starts in 10 minutes, HURRY UP!"
                     logging.info(message)
                     messagebox.showinfo("Event Reminder", message)
             except ValueError as e:
@@ -1012,3 +1013,26 @@ class Cal:
             tk.Label(self.root, text="No overdue tasks!", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
 
+    def reminder_for_events(self):
+        self.load_events_from_file()
+        now = datetime.now()
+        for event in self.events:
+            try:
+                end_time = datetime.strptime(event.end_time, "%Y-%m-%d %H:%M")
+                time_difference = (end_time - now).total_seconds()
+                if 0 <= time_difference <= 600:  # check if there is a task within 10 minutes
+                    message = f"Reminder: Event '{event.name}' starts in 10 minutes, HURRY UP!"
+                    logging.info(message)
+                    messagebox.showinfo("Event Reminder", message)
+            except ValueError as e:
+                logging.error(f"ERROR parsing event end time: {e}")
+        for task in self.tasks:
+            try:
+                due_date = datetime.strptime(task.due_date, "%Y-%m-%d %H:%M")
+                time_difference = (due_date - now).total_seconds()
+                if 0 <= time_difference <= 600:  # check if there is a task within 10 minutes
+                    message = f"Reminder: Task '{task.name}' starts in 10 minutes, HURRY UP!"
+                    logging.info(message)
+                    messagebox.showinfo("Event Reminder", message)
+            except ValueError as e:
+                logging.error(f"ERROR parsing task due date: {e}")
