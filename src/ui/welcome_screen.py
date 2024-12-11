@@ -52,7 +52,7 @@ class WelcomeScreen:
         continue_button.pack(pady=10)
 
     def welcome_message(self):
-        profile_json = "./src/config/user_info.json"
+        profile_json = "./config/user_info.json"
         message = ""
         try: 
             file_size = os.path.getsize(profile_json)
@@ -80,10 +80,20 @@ class WelcomeScreen:
         return False
 
     def next_screen(self, calendar, profile):
-        if self.is_profile_complete:
-            calendar()
-        else:
-            profile()
+
+        profile_json = "./config/user_info.json"
+        message = ""
+        try: 
+            file_size = os.path.getsize(profile_json)
+            if(file_size <= 38):
+                profile()
+            else:
+                print(f"file is {file_size} bytes")
+                calendar()
+        except FileNotFoundError as e:
+            print("profile.json not found")
+        return message
+    
 
     
 
