@@ -158,7 +158,7 @@ class Cal:
 
 
             # Edit button for each task
-            if due_date.date() > current_date:
+            if due_date.date() >= current_date:
                 edit_button = tk.Button(single_task_frame, text="Edit", command=lambda task=task: self.edit_task_form(task))
                 edit_button.pack(side="right")
 
