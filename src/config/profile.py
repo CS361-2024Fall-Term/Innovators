@@ -95,7 +95,7 @@ class Profile:
         self.credits = credits
         self.dob = dob
 
-        self.save_to_file(filename="./config/user_info.json")
+        self.save_to_file(filename=self.DEFAULT_JSON_PATH)
         self.continue_to_calendar()
 
     # Show calendar
