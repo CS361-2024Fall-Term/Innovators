@@ -80,6 +80,10 @@ class Cal:
         create_event_button = tk.Button(self.crud_frame, text="Add Event", command=self.open_event_creation_form, font="Arial 12")
         create_event_button.pack(side="left", padx=5)
 
+        # Button to show feedback
+        feedback_button = tk.Button(self.crud_frame, text="Feedback", command=self.feedback, font="Arial 12")
+        feedback_button.pack (side="left", padx=5)
+
         # Button to open preferences
         preferences_button = tk.Button(self.crud_frame, text="Preferences", command=self.open_preferences, font="Arial 12")
         preferences_button.pack(side="left", padx=5)
@@ -105,15 +109,8 @@ class Cal:
         list_button.pack(side="left", padx=5)
 
         # Overdue Tasks Button
-        overdue_tasks = self.check_overdue_tasks()
-        if overdue_tasks:
-            overdue_button = tk.Button(
-                self.crud_frame,
-                text="Overdue Tasks",
-                command=self.show_overdue_tasks,
-                font="Arial 12"
-            )
-            overdue_button.pack(side="left", padx=5)
+        overdue_button = tk.Button(self.crud_frame, text="Overdue Tasks", command=self.show_overdue_tasks, font="Arial 12")
+        overdue_button.pack(side="left", padx=5)
     
     def show_tasks(self, window, task_list):
         # Create a canvas and a scrollbar
@@ -156,7 +153,7 @@ class Cal:
                 continue
 
             # Check if the task is overdue
-            if due_date.date() < current_date:
+            if due_date.date() < current_date and task.status != "Completed":
                 tk.Label(single_task_frame, text="OVERDUE", font=("Arial", 12, "bold"), fg="red").pack(anchor="w", padx=10, pady=5)
 
 
@@ -973,7 +970,7 @@ class Cal:
         overdue_tasks = []
         for task in self.tasks:
             due_date = parse_date(task.due_date)
-            if due_date and due_date.date() < current_date:
+            if due_date and due_date.date() < current_date and task.status != "Completed":
                 overdue_tasks.append(task)
         return overdue_tasks
 
@@ -1010,7 +1007,38 @@ class Cal:
 
         else:
             # If no overdue tasks, show a message
-            tk.Label(self.root, text="No overdue tasks!", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            #tk.Label(self.root, text="No overdue tasks!", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+            print("No overdue tasks!")
+
+
+    def feedback(self):
+        #open new window
+        task_window = tk.Toplevel(self.root)
+        task_window.title("Feedback")
+
+        current_date = datetime.now().date()
+
+        past_tasks = []
+
+        for task in self.tasks:
+            due_date = parse_date(task.due_date)
+            if due_date and due_date.date() < current_date:
+                past_tasks.append(task)
+
+        
+        overdue_tasks = self.check_overdue_tasks()
+
+        num_past_tasks = len(past_tasks)
+        num_overdue_tasks = len(overdue_tasks)        
+
+        #calculate percentages
+        p_completed = round(((num_past_tasks - num_overdue_tasks)/num_past_tasks)*100)
+        p_overdue = round((num_overdue_tasks/num_past_tasks)*100)
+
+
+        tk.Label(task_window, text="Task Feedback", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
+        tk.Label(task_window, text=f"Percentage of completed tasks: {p_completed}%", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
+        tk.Label(task_window, text=f"Percentage of overdue tasks: {p_overdue}%", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
 
 
     def reminder_for_events(self):
