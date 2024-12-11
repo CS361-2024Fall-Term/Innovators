@@ -116,7 +116,7 @@ class Cal:
         # Create a canvas and a scrollbar
         container = tk.Frame(window)
         container.pack(fill="both", expand=True)
-
+        
         canvas = tk.Canvas(container)
         scrollbar = ttk.Scrollbar(container, orient="vertical", command=canvas.yview)
         scrollbar.pack(side="right", fill="y")
@@ -133,8 +133,11 @@ class Cal:
         # Add tasks to the frame
         current_date = datetime.now().date()
         for task in task_list:
-            single_task_frame = tk.Frame(task_frame, bd=2, relief="solid")
+            border_color = tk.Frame(task_frame, background=self.pref.color(task.category))
+            single_task_frame = tk.Frame(border_color, bd=2, relief="solid")
             single_task_frame.pack(fill="x", padx=10, pady=5)
+            border_color.pack(fill = "x", padx = 5, pady = 5)
+
 
             # Display task details
             tk.Label(single_task_frame, text=f"Name: {task.name}", font=("Arial", 12)).pack(anchor="w", padx=10, pady=5)
@@ -267,6 +270,7 @@ class Cal:
         self.load_tasks_from_file()
 
         # Pop up a new window 
+        
         task_window = tk.Toplevel(self.root)
         task_window.title("All Tasks/Events")
 
@@ -447,6 +451,7 @@ class Cal:
 
     def edit_task_form(self, task):
         # Pop up a new window for task input
+        
         task_window = tk.Toplevel(self.root)
         task_window.title("Edit Task")
 

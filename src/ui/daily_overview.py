@@ -5,11 +5,12 @@ from config.profile import Profile
 
 
 class DailyOverview:
-    def __init__(self, root, tasks, events, profile):
+    def __init__(self, root, tasks, events, profile, pref):
         self.root = root
         self.tasks = tasks
         self.events = events
         self.profile = profile
+        self.pref = pref
 
         # Set the frame for daily overview
         self.frame = tk.Frame(root, bd=2, relief="solid")
@@ -62,8 +63,11 @@ class DailyOverview:
             tk.Label(self.frame, text="Tasks:", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=5)
 
             for task in today_tasks:
-                task_frame = tk.Frame(self.frame, bd=2, relief="solid")
+                # Create a Frame for border
+                border_color = tk.Frame(self.frame, background=self.pref.color(task.category))
+                task_frame = tk.Frame(border_color, bd=2, relief="solid")
                 task_frame.pack(fill="x", padx=10, pady=5)
+                border_color.pack(fill = "x", padx = 5, pady = 5)
 
                 # Use grid to align Name, Description, Priority, and Status in the same row
                 tk.Label(task_frame, text="Name:", font=("Arial", 12, "bold")).grid(row=0, column=0, sticky="w", padx=10, pady=5)

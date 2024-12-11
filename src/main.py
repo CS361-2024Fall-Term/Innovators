@@ -83,7 +83,7 @@ if __name__ == "__main__":
     calendar_app = Cal(root, tasks, events, pref, open_preferences, profile, open_profile)
 
     # Create a DailyOverview object to display today's tasks and events
-    daily_overview = DailyOverview(root, calendar_app.tasks, calendar_app.events, calendar_app.profile)
+    daily_overview = DailyOverview(root, calendar_app.tasks, calendar_app.events, calendar_app.profile, pref)
     calendar_app.daily_overview = daily_overview
 
     schedule.every(60).seconds.do(calendar_app.reminder_for_events) # will run every 9 minutes
